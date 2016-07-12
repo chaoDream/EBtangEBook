@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/spacing_nomarl"
+    android:layout_width="match_parent"
+    android:background="@drawable/tab_bg"
+    android:layout_height="50dp">
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        >
+        <ImageView
+            android:id="@+id/image"
+            android:src="@drawable/main_tab_bookcity_checked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/spacing_nomarl"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+   
+
+    <TextView
+        android:id="@+id/title"
+        android:text="首页"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:textColor="@drawable/tab_title_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
