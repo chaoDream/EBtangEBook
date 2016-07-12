@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/top_title_bar_main"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_size_25"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您注册的手机号为"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_xlarge"
+            android:textColor="@color/primary_red"
+            android:text="135******55"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/db_gray"
+        android:layout_marginTop="@dimen/dip_size_5"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:text="请设置您的密码"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_input_bg"
+        android:padding="@dimen/dip_size_5"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:layout_marginTop="@dimen/dip_size_15"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:singleLine="true"
+            android:padding="@dimen/dip_size_5"
+            android:inputType="number"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_input_bg"
+        android:padding="@dimen/dip_size_5"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:layout_marginTop="@dimen/dip_size_15"
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:singleLine="true"
+            android:padding="@dimen/dip_size_5"
+            android:inputType="number"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/registe_four_bt"
+        android:background="@drawable/login_bt"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_large"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:layout_marginTop="@dimen/dip_size_35"/>
+
+</LinearLayout>

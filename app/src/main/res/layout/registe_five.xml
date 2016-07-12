@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/top_title_bar_main"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/registe_logo"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dip_size_50"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/primary_red"
+        android:layout_marginTop="@dimen/dip_size_15"
+        android:text="恭喜您  账号注册成功"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/registe_five_bt"
+        android:background="@drawable/login_bt"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_large"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:layout_marginTop="@dimen/dip_size_35"/>
+
+</LinearLayout>

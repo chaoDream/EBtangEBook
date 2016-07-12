@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/top_title_bar_main"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/registe_logo"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dip_size_50"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dip_size_10">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请使用安全手机"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_red"
+            android:text="135******55"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dip_size_25"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:layout_marginRight="@dimen/dip_size_15">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_input_bg"
+            android:padding="@dimen/dip_size_5"
+            android:layout_marginRight="@dimen/dip_size_15"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:singleLine="true"
+                android:padding="@dimen/dip_size_5"
+                android:inputType="number"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/registe_send_valid"
+            android:padding="@dimen/dip_size_15"
+            android:gravity="center"
+            android:text="发送验证码"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/registe_three_bt"
+        android:background="@drawable/login_bt"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_large"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:layout_marginTop="@dimen/dip_size_35"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dip_size_15"
+        android:textSize="@dimen/font_size_small"
+        android:textColor="@color/db_gray"
+        android:gravity="center|bottom"
+        android:text="雁北堂中文网  版权所有  京ICP备14032472号"/>
+
+</LinearLayout>

@@ -103,6 +103,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/login_registe_bt"
         android:background="@drawable/login_resigt_bt"
         android:text="手机号码快速注册"
         android:textColor="@color/primary_red"

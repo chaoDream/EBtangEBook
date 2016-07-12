@@ -58,7 +58,7 @@
     <dimen name="dip_size_25">25.0dip</dimen>
 
     <dimen name="dip_size_30">30.0dip</dimen>
-
+    <dimen name="dip_size_35">35.0dip</dimen>
     <dimen name="dip_size_44">44.0dip</dimen>
 
     <dimen name="dip_size_50">50.0dip</dimen>

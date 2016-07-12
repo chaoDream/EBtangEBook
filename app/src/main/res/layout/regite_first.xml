@@ -11,9 +11,9 @@
         android:layout_marginTop="@dimen/dip_size_15"
         android:layout_marginLeft="@dimen/dip_size_15"
         android:layout_marginRight="@dimen/dip_size_15"
-        android:background="@drawable/login_input_bg"
-        android:gravity="center"
         android:padding="@dimen/dip_size_10"
+        android:gravity="center"
+        android:background="@drawable/login_input_bg"
         android:orientation="horizontal">
 
         <ImageView
@@ -35,8 +35,69 @@
             android:background="@null"
             android:singleLine="true"
             android:padding="@dimen/dip_size_5"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dip_size_15"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/dip_size_10"
+            android:layout_marginRight="@dimen/dip_size_10"
+            android:gravity="center"
+            android:background="@drawable/login_input_bg">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/regist_validcode"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/login_line"
+                android:layout_marginLeft="@dimen/dip_size_10"
+                android:layout_marginRight="@dimen/dip_size_10"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:singleLine="true"
+                android:padding="@dimen/dip_size_5"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:id="@+id/registe_first_valid_img"/>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/registe_first_hint_tv"
+        android:singleLine="true"
+        android:layout_marginTop="@dimen/dip_size_5"
+        android:layout_marginLeft="@dimen/dip_size_15"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/registe_first_bt"
+        android:background="@drawable/login_bt"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_large"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:layout_marginTop="@dimen/dip_size_15"/>
 
 </LinearLayout>
