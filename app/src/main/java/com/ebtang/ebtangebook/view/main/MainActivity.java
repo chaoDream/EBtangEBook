@@ -23,6 +23,7 @@ import com.ebtang.ebtangebook.view.main.fragment.BookCityFragment;
 import com.ebtang.ebtangebook.view.main.fragment.BookShelfFragment;
 import com.ebtang.ebtangebook.view.main.fragment.FoundFragment;
 import com.ebtang.ebtangebook.view.main.fragment.PersenalFragment;
+import com.ebtang.ebtangebook.widget.MyViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,8 @@ import java.util.List;
 public class MainActivity extends BaseFragmentActivity {
 
     private FragmentTabHost mTabHost;
-    private ViewPager mViewPager;
+//    private ViewPager mViewPager;
+    private MyViewPager mViewPager;
     private List<Fragment> mFragmentList;
 
     private String mTitles[] = {"书架", "书城", "发现", "我的"};
@@ -52,7 +54,8 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     public void initView() {
         mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+//        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mViewPager = (MyViewPager) findViewById(R.id.view_pager);
         mFragmentList = new ArrayList<Fragment>();
         mFragmentList.add(new BookShelfFragment());
         mFragmentList.add(new BookCityFragment());

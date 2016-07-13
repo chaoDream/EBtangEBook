@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    >
 
     <android.support.v4.app.FragmentTabHost
         android:id="@android:id/tabhost"
@@ -19,7 +20,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"/>
 
-            <android.support.v4.view.ViewPager
+            <com.ebtang.ebtangebook.widget.MyViewPager
                 android:id="@+id/view_pager"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
