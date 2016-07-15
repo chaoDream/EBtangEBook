@@ -27,4 +27,11 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
     </style>
 
+    <style name="x_page">
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@color/x_bg</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
 </resources>

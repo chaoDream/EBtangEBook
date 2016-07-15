@@ -6,4 +6,7 @@ package com.ebtang.ebtangebook.constants;
  */
 public class Constants {
 
+    public static final String APP_WEBVIEW_TITLE = "app_webview_title"; //显示的名称
+    public static final String APP_WEBVIEW_URL = "app_webview_url"; //要加载的url
+
 }
