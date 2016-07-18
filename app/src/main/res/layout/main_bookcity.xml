@@ -3,9 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <include layout="@layout/top_title_bar_bookcity"/>
+
+    <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="这是书城fragment"/>
+        android:id="@+id/main_bookcity_vp">
+    </android.support.v4.view.ViewPager>
 
 </LinearLayout>

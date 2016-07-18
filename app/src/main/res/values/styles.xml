@@ -29,7 +29,7 @@
 
     <style name="x_page">
         <item name="android:orientation">vertical</item>
-        <item name="android:background">@color/x_bg</item>
+        <item name="android:background">@color/white</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">fill_parent</item>
     </style>

@@ -3,9 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <include layout="@layout/top_title_bar_main"/>
+
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="这是发现fragment"/>
+        android:id="@+id/main_found_lv"
+        android:dividerHeight="@dimen/dip_size_10"
+        android:divider="@color/db_gray"></ListView>
 
 </LinearLayout>

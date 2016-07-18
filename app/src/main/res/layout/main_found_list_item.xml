@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dip_size_15"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_red"
+            android:textSize="@dimen/font_size_large"
+            android:text="雁北堂推荐"
+            android:id="@+id/main_found_list_item_bookRecomm"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/font_size_small"
+            android:layout_marginLeft="@dimen/dip_size_5"
+            android:layout_marginRight="@dimen/dip_size_5"
+            android:id="@+id/main_found_list_item_bookdesc"
+            android:text="大宗师/因果路/猫魔鬼记/闪婚"
+            android:textColor="@color/text_color_primary_gray"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/main_found_item_icon_right"/>
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dip_size_5"
+        android:background="@drawable/main_found_list_item_img_bg"
+        android:scaleType="fitXY"
+        android:id="@+id/main_found_list_item_img"/>
+
+</LinearLayout>

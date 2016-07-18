@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dip_size_10"
+        android:paddingBottom="@dimen/dip_size_10"
+        android:paddingLeft="@dimen/dip_size_10"
+        android:paddingRight="@dimen/dip_size_10"
+        android:layout_marginTop="@dimen/dip_size_5">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_book_img"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dip_size_10">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="武魂古树"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="一次偶然的遭遇让我成了鼓师,"
+                android:layout_marginTop="@dimen/dip_size_10"
+                android:layout_marginBottom="@dimen/dip_size_10"
+                android:ellipsize="end"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_editor_touxiang"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="绕指柔"
+                    android:layout_marginLeft="@dimen/dip_size_5"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_lianzai"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dip_size_3"
+                    android:src="@drawable/icon_vip"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

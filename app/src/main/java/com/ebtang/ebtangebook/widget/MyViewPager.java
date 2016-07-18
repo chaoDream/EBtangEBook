@@ -10,38 +10,51 @@ import android.view.MotionEvent;
  */
 public class MyViewPager extends ViewPager {
 
-    private boolean scollble = false;
+    private boolean noScroll = true;
 
-    public MyViewPager(Context context){
+    public MyViewPager(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        // TODO Auto-generated constructor stub
+    }
+
+    public MyViewPager(Context context) {
         super(context);
     }
 
-
-    public MyViewPager(Context context, AttributeSet attributeSet){
-        super(context,attributeSet);
+    public void setNoScroll(boolean noScroll) {
+        this.noScroll = noScroll;
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        if(!scollble){
-            return  true;
-        }
-        return super.onTouchEvent(ev);
+    public void scrollTo(int x, int y) {
+        super.scrollTo(x, y);
     }
 
     @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if(scollble)
-            return  false;
-        return super.onInterceptTouchEvent(ev);
+    public boolean onTouchEvent(MotionEvent arg0) {
+        /* return false;//super.onTouchEvent(arg0); */
+        if (noScroll)
+            return false;
+        else
+            return super.onTouchEvent(arg0);
     }
 
-    public void setScollble(boolean scollble){
-        this.scollble = scollble;
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent arg0) {
+        if (noScroll)
+            return false;
+        else
+            return super.onInterceptTouchEvent(arg0);
     }
 
-    public boolean getScollBle(){
-        return scollble;
+    @Override
+    public void setCurrentItem(int item, boolean smoothScroll) {
+        super.setCurrentItem(item, smoothScroll);
+    }
+
+    @Override
+    public void setCurrentItem(int item) {
+        super.setCurrentItem(item);
     }
 
 }

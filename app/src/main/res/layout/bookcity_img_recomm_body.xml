@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dip_size_10"
+    android:padding="@dimen/dip_size_10"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_large"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text=" 肯定-我是美好的 雁北堂男频精品推荐"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/db_gray"
+        android:layout_marginTop="@dimen/dip_size_5"
+        android:text="每个行业都有自己供奉的祖师爷,就像铜匠的祖师是李老君"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_marginTop="@dimen/dip_size_5"
+        android:src="@drawable/bookcity_shizishan_tuijan"/>
+
+
+</LinearLayout>

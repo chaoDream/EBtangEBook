@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/gray_back">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/bookcity_shizishan_banner_bg"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dip_size_10">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/bookcity_shizishan_free"
+                android:src="@drawable/bookcity_shizishan_recomm"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/bookcity_shizishan_banjia"
+                android:src="@drawable/bookcity_shizishan_banjia"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/bookcity_shizishan_recomm"
+                android:src="@drawable/bookcity_shizishan_recomm"/>
+
+        </LinearLayout>
+
+        <!--com.ebtang.ebtangebook.widget.MyScrollGridView-->
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/book_city_shizishan_gv1"
+            android:layout_marginTop="@dimen/dip_size_15"
+            android:background="@color/white"
+            android:numColumns="3">
+        </GridView>
+
+        <include layout="@layout/bookcity_tuijian_body"
+            android:id="@+id/book_city_shizicheng_tuijian_man"/>
+        <include layout="@layout/bookcity_img_recomm_body"
+            android:id="@+id/book_city_shizicheng_tuijian_img"/>
+        <include layout="@layout/bookcity_tuijian_body"
+            android:id="@+id/book_city_shizicheng_tuijian_women"/>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:divider="@color/db_gray"
+            android:dividerHeight="@dimen/dip_size_8"
+            android:layout_marginTop="@dimen/dip_size_10"
+            android:id="@+id/bookcity_shizishan_lv"></ListView>
+
+    </LinearLayout>
+
+
+
+
+</ScrollView>
