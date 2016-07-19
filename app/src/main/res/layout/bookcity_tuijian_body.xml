@@ -94,10 +94,13 @@
     </LinearLayout>
 
 
-    <GridView
+    <com.ebtang.ebtangebook.widget.MyScrollGridView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/book_city_shizishan_gv2"
+        android:paddingTop="@dimen/dip_size_10"
+        android:verticalSpacing="@dimen/dip_size_5"
+        android:paddingBottom="@dimen/dip_size_10"
+        android:id="@+id/book_tuijian_gv"
         android:layout_marginTop="@dimen/dip_size_15"
         android:background="@color/white"
         android:numColumns="3"/>

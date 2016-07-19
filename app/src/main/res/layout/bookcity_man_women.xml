@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/gray_back">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/bookcity_shizishan_banner_bg"/>
+
+        <include layout="@layout/bookcity_tuijian_body"
+            android:id="@+id/bookcity_man_tuijian_body"/>
+
+        <include layout="@layout/bookcity_img_recomm_body"/>
+
+        <com.ebtang.ebtangebook.widget.MyScrollListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bookcity_man_lv"
+            android:paddingBottom="@dimen/dip_size_10"
+            android:background="@color/white"
+            android:divider="@color/db_gray"
+            android:dividerHeight="@dimen/dip_size_8"
+            android:layout_marginTop="@dimen/dip_size_10">
+        </com.ebtang.ebtangebook.widget.MyScrollListView>
+    </LinearLayout>
+
+
+</ScrollView>

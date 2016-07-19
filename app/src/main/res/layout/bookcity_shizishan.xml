@@ -20,38 +20,78 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center"
             android:layout_marginTop="@dimen/dip_size_10">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/bookcity_shizishan_free"
-                android:src="@drawable/bookcity_shizishan_recomm"/>
-            <ImageView
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bookcity_shizishan_free"
+                    android:src="@drawable/bookcity_shizishan_recomm"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dip_size_3"
+                    android:text="限时免费"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/bookcity_shizishan_banjia"
-                android:src="@drawable/bookcity_shizishan_banjia"/>
-            <ImageView
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bookcity_shizishan_banjia"
+                    android:src="@drawable/bookcity_shizishan_banjia"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dip_size_3"
+                    android:text="限时免费"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/bookcity_shizishan_recomm"
-                android:src="@drawable/bookcity_shizishan_recomm"/>
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bookcity_shizishan_recomm"
+                    android:src="@drawable/bookcity_shizishan_recomm"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dip_size_3"
+                    android:text="限时免费"/>
+            </LinearLayout>
+
 
         </LinearLayout>
 
         <!--com.ebtang.ebtangebook.widget.MyScrollGridView-->
-        <GridView
+        <com.ebtang.ebtangebook.widget.MyScrollGridView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dip_size_10"
+            android:paddingBottom="@dimen/dip_size_10"
+            android:verticalSpacing="@dimen/dip_size_5"
             android:id="@+id/book_city_shizishan_gv1"
             android:layout_marginTop="@dimen/dip_size_15"
             android:background="@color/white"
             android:numColumns="3">
-        </GridView>
+        </com.ebtang.ebtangebook.widget.MyScrollGridView>
 
         <include layout="@layout/bookcity_tuijian_body"
             android:id="@+id/book_city_shizicheng_tuijian_man"/>
@@ -60,14 +100,15 @@
         <include layout="@layout/bookcity_tuijian_body"
             android:id="@+id/book_city_shizicheng_tuijian_women"/>
 
-        <ListView
+        <com.ebtang.ebtangebook.widget.MyScrollListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dip_size_10"
             android:background="@color/white"
             android:divider="@color/db_gray"
             android:dividerHeight="@dimen/dip_size_8"
             android:layout_marginTop="@dimen/dip_size_10"
-            android:id="@+id/bookcity_shizishan_lv"></ListView>
+            android:id="@+id/bookcity_shizishan_lv"></com.ebtang.ebtangebook.widget.MyScrollListView>
 
     </LinearLayout>
 
