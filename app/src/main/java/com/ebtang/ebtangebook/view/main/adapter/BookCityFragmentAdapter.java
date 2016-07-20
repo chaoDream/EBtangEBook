@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.ebtang.ebtangebook.view.bookcity.fragment.FreeFragment;
 import com.ebtang.ebtangebook.view.bookcity.fragment.ManFragment;
 import com.ebtang.ebtangebook.view.bookcity.fragment.ShizishanFragment;
 import com.ebtang.ebtangebook.view.bookcity.fragment.WomenFragment;
@@ -22,8 +23,8 @@ public class BookCityFragmentAdapter extends FragmentPagerAdapter {
         fragmentList.add(new ShizishanFragment());
         fragmentList.add(new ManFragment());
         fragmentList.add(new WomenFragment());
-        fragmentList.add(new ShizishanFragment());
-        fragmentList.add(new ShizishanFragment());
+        fragmentList.add(new FreeFragment());
+        fragmentList.add(new FreeFragment());
     }
 
     @Override

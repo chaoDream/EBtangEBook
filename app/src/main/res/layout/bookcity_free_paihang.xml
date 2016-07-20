@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/db_gray">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.ebtang.ebtangebook.widget.MyScrollListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/db_gray"
+            android:background="@color/white"
+            android:dividerHeight="@dimen/dip_size_10"
+            android:paddingTop="@dimen/dip_size_10"
+            android:id="@+id/bookcity_free_paihang_lv">
+        </com.ebtang.ebtangebook.widget.MyScrollListView>
+
+        <include layout="@layout/bookcity_free_item_bottom"
+            android:id="@+id/bookcity_free_item_bottom_new"/>
+
+        <include layout="@layout/bookcity_free_item_bottom"
+            android:id="@+id/bookcity_free_item_bottom_fans"/>
+
+    </LinearLayout>
+
+
+
+</ScrollView>
