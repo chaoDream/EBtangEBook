@@ -9,4 +9,8 @@ public class Constants {
     public static final String APP_WEBVIEW_TITLE = "app_webview_title"; //显示的名称
     public static final String APP_WEBVIEW_URL = "app_webview_url"; //要加载的url
 
+    public static final int SETTING_EDIT_MODE_NICHENG = 1;//设置昵称
+    public static final int SETTING_EDIT_MODE_QIANMING = 2;//设置签名
+    public static final int SETTING_EDIT_MODE_XINGMING = 3;//设置实名认证
+
 }

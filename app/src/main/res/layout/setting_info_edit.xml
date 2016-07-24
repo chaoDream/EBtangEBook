@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include layout="@layout/top_title_bar_main"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="top"
+        android:id="@+id/setting_info_edit_et"
+        android:layout_marginLeft="@dimen/dip_size_10"
+        android:layout_marginRight="@dimen/dip_size_10"
+        android:layout_marginTop="@dimen/dip_size_15"
+        android:background="@drawable/setting_info_edit_et_shape"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dip_size_5"
+        android:gravity="right"
+        android:layout_marginRight="@dimen/dip_size_10"
+        android:layout_marginTop="@dimen/dip_size_5"
+        android:text="16字"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_large"
+        android:background="@drawable/login_bt"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/dip_size_15"
+        android:text="完成"/>
+
+</LinearLayout>
