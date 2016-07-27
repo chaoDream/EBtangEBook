@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/top_title_bar_main"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/db_gray">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/persenal_message_center_title_left"
+            android:textSize="@dimen/font_size_large"
+            android:padding="@dimen/dip_size_15"
+            android:layout_marginLeft="@dimen/dip_size_25"
+            android:textColor="@color/primary_red"
+            android:text="消息"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/persenal_message_center_title_right"
+            android:textSize="@dimen/font_size_large"
+            android:padding="@dimen/dip_size_15"
+            android:gravity="right"
+            android:layout_marginRight="@dimen/dip_size_25"
+            android:text="站短"/>
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/persenal_message_center_vp"/>
+
+</LinearLayout>

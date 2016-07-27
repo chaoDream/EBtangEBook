@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dip_size_15">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_about"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/dip_size_10"
+        android:layout_marginRight="@dimen/dip_size_10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/persenal_message_item_name"
+                android:textColor="@color/primary_red"
+                android:text="周杰伦"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="在评论"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/dip_size_5"
+                android:layout_marginRight="@dimen/dip_size_5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/persenal_message_item_title"
+                android:textColor="@color/primary_red"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="哎呦不错哦！小丰是个好小伙，李智你得懂得你找到了一个很好的男人！！！"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/dip_size_5"
+            android:text="中回应了您的回复"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dip_size_5"
+            android:id="@+id/persenal_message_item_content"
+            android:text="回复@周杰伦：小丰的确是一个非常非常好的男生，谁能跟他在一起真的是上辈子积德了啊！跟他在一起的女生好幸运！"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
