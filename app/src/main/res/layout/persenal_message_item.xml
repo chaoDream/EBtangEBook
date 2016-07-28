@@ -50,13 +50,51 @@
             android:text="中回应了您的回复"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dip_size_5"
+                android:id="@+id/persenal_message_item_content"
+                android:text="回复@周杰伦：小丰的确是一个非常非常好的男生，谁能跟他在一起真的是上辈子积德了啊！跟他在一起的女生好幸运！"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="@dimen/dip_size_5"
-            android:id="@+id/persenal_message_item_content"
-            android:text="回复@周杰伦：小丰的确是一个非常非常好的男生，谁能跟他在一起真的是上辈子积德了啊！跟他在一起的女生好幸运！"
-            />
+            android:gravity="center_vertical">
+            <EditText
+                android:layout_width="0dp"
+                android:padding="@dimen/dip_size_5"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:id="@+id/persenal_message_item_et"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:paddingLeft="@dimen/dip_size_10"
+                android:paddingRight="@dimen/dip_size_10"
+                android:paddingTop="@dimen/dip_size_2"
+                android:paddingBottom="@dimen/dip_size_2"
+                android:layout_marginLeft="@dimen/dip_size_5"
+                android:id="@+id/persenal_message_item_confirm"
+                android:background="@drawable/persenal_message_item_confirm"
+                android:text="回复"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/persenal_message_item_time"
+            android:text="2016-07-25  22:22"/>
 
     </LinearLayout>
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dip_size_15">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_about"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dip_size_10"
+            android:layout_marginRight="@dimen/dip_size_10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:text="雁北堂中文网客服"
+                    android:textColor="@color/black"
+                    android:id="@+id/persenal_zhanduan_item_title"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="2016-07-25 20:22"
+                    android:id="@+id/persenal_zhanduan_item_time"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/persenal_zhanduan_item_content"
+                android:lines="2"
+                android:ellipsize="end"
+                android:layout_marginTop="@dimen/dip_size_5"
+                android:text="一次偶然的遭遇让我成了我成了蛊惑师，寻遍千山万水千山万水，寻遍了千山万水，卷入一场恶斗异常恶斗，卷入了异常恶斗"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_delete"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

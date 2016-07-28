@@ -11,9 +11,11 @@ import android.widget.ImageView;
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.view.login.LoginActivity;
+import com.ebtang.ebtangebook.view.setting.MessageCenterActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by fengzongwei on 2016/7/11 0011.
@@ -46,6 +48,12 @@ public class PersenalFragment extends BaseFragment {
     public void initData() {
 
     }
+
+    @OnClick(R.id.persenal_message_item) void message(){
+        Intent intent = new Intent(getActivity(), MessageCenterActivity.class);
+        getActivity().startActivity(intent);
+    }
+
 
     @Override
     public void onClick(View v) {
