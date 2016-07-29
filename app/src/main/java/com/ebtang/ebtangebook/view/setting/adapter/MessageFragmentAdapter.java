@@ -15,12 +15,19 @@ import java.util.List;
  */
 public class MessageFragmentAdapter extends FragmentPagerAdapter{
 
+    private String[] titles = new String[]{"消息","站短"};
+
     private List<MyListFragment> listFragments = new ArrayList<>();
 
     public MessageFragmentAdapter(FragmentManager fragmentManager){
         super(fragmentManager);
         listFragments.add(new MyListFragment());
         listFragments.add(new MyListFragment());
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titles[position];
     }
 
     @Override

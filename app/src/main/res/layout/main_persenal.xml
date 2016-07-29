@@ -173,6 +173,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:layout_marginTop="@dimen/dip_size_1"
+                    android:id="@+id/persenal_qiandao_item"
                     >
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -203,18 +204,23 @@
                         android:layout_centerVertical="true"/>
                 </RelativeLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:layout_marginTop="@dimen/dip_size_10"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:id="@+id/persenal_wodeyinhao_item"
                     >
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="@dimen/dip_size_15"
                         android:gravity="center_vertical"
+                        android:id="@+id/persenal_wodeyinhao_body"
                         >
                         <ImageView
                             android:layout_width="wrap_content"
@@ -222,21 +228,34 @@
                             android:src="@drawable/icon_dollar"
                             />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/text_size_15"
                             android:layout_marginLeft="@dimen/dip_size_10"
                             android:paddingRight="@dimen/dip_size_50"
                             android:text="我的银号"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/persenal_chongzhi_bt"
+                            android:paddingTop="@dimen/dip_size_5"
+                            android:paddingBottom="@dimen/dip_size_5"
+                            android:paddingLeft="@dimen/dip_size_10"
+                            android:paddingRight="@dimen/dip_size_10"
+                            android:text="充值"
+                            android:textColor="@color/white"
+                            android:background="@drawable/red_bt"
+                            android:layout_marginRight="@dimen/dip_size_5"/>
                     </LinearLayout>
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/main_found_item_icon_right"
-                        android:layout_alignParentRight="true"
+                        android:layout_toRightOf="@+id/persenal_wodeyinhao_body"
                         android:layout_marginRight="@dimen/dip_size_10"
                         android:layout_centerVertical="true"/>
-                </RelativeLayout>
+                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"

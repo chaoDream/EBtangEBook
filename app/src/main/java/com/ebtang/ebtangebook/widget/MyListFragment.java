@@ -40,6 +40,7 @@ public class MyListFragment extends BaseFragment{
         list.add(new Object());
         type = getArguments().getInt("type");
         messageAdapter = new MessageAdapter(getActivity(),list,type);
+        listView.setAdapter(messageAdapter);
         return listView;
     }
 

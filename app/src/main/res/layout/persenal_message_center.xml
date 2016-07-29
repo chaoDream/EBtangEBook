@@ -5,34 +5,23 @@
 
     <include layout="@layout/top_title_bar_main"/>
 
-
-    <LinearLayout
+    <com.ogaclejapan.smarttablayout.SmartTabLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/persenal_message_center_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@color/db_gray">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/persenal_message_center_title_left"
-            android:textSize="@dimen/font_size_large"
-            android:padding="@dimen/dip_size_15"
-            android:layout_marginLeft="@dimen/dip_size_25"
-            android:textColor="@color/primary_red"
-            android:text="消息"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/persenal_message_center_title_right"
-            android:textSize="@dimen/font_size_large"
-            android:padding="@dimen/dip_size_15"
-            android:gravity="right"
-            android:layout_marginRight="@dimen/dip_size_25"
-            android:text="站短"/>
-    </LinearLayout>
+        android:layout_height="42dp"
+        app:stl_customTabTextLayoutId="@layout/main_custom_tab"
+        app:stl_customTabTextViewId="@+id/custom_text"
+        app:stl_indicatorColor="@color/primary_red"
+        app:stl_indicatorInterpolation="linear"
+        app:stl_indicatorThickness="3dp"
+        app:stl_underlineThickness="1dp"
+        app:stl_distributeEvenly="true"
+        app:stl_dividerColor="@color/transparent"
+        app:stl_dividerThickness="0dp"
+        android:background="@color/db_gray"
+        />
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
