@@ -41,6 +41,18 @@
         <activity android:name=".view.setting.MessageCenterActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
+        <activity android:name=".view.setting.MyYinHaoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.setting.ChongzhiActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.setting.SettingActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.setting.AboutActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

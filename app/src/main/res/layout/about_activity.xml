@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent"
+    >
+
+    <include layout="@layout/top_title_bar_main"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/registe_logo"
+        android:layout_marginTop="@dimen/dip_size_44"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="雁北堂中文网"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/dip_size_10"
+        android:textSize="@dimen/font_size_large"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dip_size_20"
+        android:layout_marginTop="@dimen/dip_size_25"
+        android:text="雁北堂中文网是雁北堂(北京)文化宠魅有限公司旗下的原创文学网站旨在为所有人提供最新锐最便捷的网络阅读和写作平台."/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dip_size_30"
+        android:gravity="center|bottom"
+        android:textColor="@color/db_gray"
+        android:text="雁北堂中文网 版权所有 京ICP备14032472号"/>
+
+</LinearLayout>

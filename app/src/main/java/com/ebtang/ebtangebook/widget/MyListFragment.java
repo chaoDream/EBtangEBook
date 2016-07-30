@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.view.setting.adapter.MessageAdapter;
+import com.ebtang.ebtangebook.view.setting.adapter.YInHaoDataAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class MyListFragment extends BaseFragment{
     private List<Object> list = new ArrayList<>();
 
     private MessageAdapter messageAdapter;
+    private YInHaoDataAdapter yInHaoDataAdapter;
 
     private int type;
 
@@ -39,8 +41,13 @@ public class MyListFragment extends BaseFragment{
         list.add(new Object());
         list.add(new Object());
         type = getArguments().getInt("type");
-        messageAdapter = new MessageAdapter(getActivity(),list,type);
-        listView.setAdapter(messageAdapter);
+        if(type == 1 || type == 2){
+            messageAdapter = new MessageAdapter(getActivity(),list,type);
+            listView.setAdapter(messageAdapter);
+        }else{
+            yInHaoDataAdapter = new YInHaoDataAdapter(getActivity(),list,type);
+            listView.setAdapter(yInHaoDataAdapter);
+        }
         return listView;
     }
 

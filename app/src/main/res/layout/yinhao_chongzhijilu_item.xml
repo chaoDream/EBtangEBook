@@ -4,6 +4,7 @@
     android:paddingRight="@dimen/dip_size_10"
     android:paddingTop="@dimen/dip_size_10"
     android:paddingLeft="@dimen/dip_size_10"
+    android:paddingBottom="@dimen/dip_size_10"
     android:layout_height="match_parent">
 
     <LinearLayout
