@@ -39,6 +39,11 @@ public class SharedPrefHelper {
     private static final String ACCESSTOKEN = "AccessToken";
     private static final String LOGIN_USERID = "Login_Userid";
 
+	private static final String WIFI_DOWANLOAD = "wifi_download";//wifi下可以下载/上传
+	private static final String WIFI_GENGXIN = "wifi_gengxin";//wifi下更新
+
+	private static final String YINLIANG_FANYE = "yinliang_fanye";//音量翻页
+
 	public static synchronized SharedPrefHelper getInstance(Context context) {
 		if (null == sharedPrefHelper) {
 			sharedPrefHelper = new SharedPrefHelper(context);
@@ -51,6 +56,38 @@ public class SharedPrefHelper {
                 SP_FILE_NAME, Context.MODE_PRIVATE);
 	}
 
+	/**
+	 * wifi下,下载/上穿图书
+	 * @param flag
+     */
+	public void setWifiDowanload(boolean flag){
+		sharedPreferences.edit().putBoolean(WIFI_DOWANLOAD, flag).commit();
+	}
+	public boolean isWifiDownLoad(){
+		return sharedPreferences.getBoolean(WIFI_DOWANLOAD, true);
+	}
+
+	/**
+	 * wifi下,更新
+	 * @param flag
+	 */
+	public void setWifiGengxin(boolean flag){
+		sharedPreferences.edit().putBoolean(WIFI_GENGXIN, flag).commit();
+	}
+	public boolean isWifiGengXin(){
+		return sharedPreferences.getBoolean(WIFI_GENGXIN, true);
+	}
+
+	/**
+	 * 音量翻页
+	 * @param flag
+	 */
+	public void setYinliangFanye(boolean flag){
+		sharedPreferences.edit().putBoolean(YINLIANG_FANYE, flag).commit();
+	}
+	public boolean isYinLiangFanye(){
+		return sharedPreferences.getBoolean(YINLIANG_FANYE, true);
+	}
 
 
 	/**
