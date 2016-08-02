@@ -18,13 +18,14 @@ import com.ebtang.ebtangebook.view.login.LoginActivity;
 import com.ebtang.ebtangebook.view.setting.AboutActivity;
 import com.ebtang.ebtangebook.view.setting.ChongzhiActivity;
 import com.ebtang.ebtangebook.view.setting.MessageCenterActivity;
+import com.ebtang.ebtangebook.view.setting.MissionActivity;
+import com.ebtang.ebtangebook.view.setting.MySubscribeBookActivity;
 import com.ebtang.ebtangebook.view.setting.MyYinHaoActivity;
 import com.ebtang.ebtangebook.view.setting.SettingActivity;
 import com.ebtang.ebtangebook.widget.myWebView.WebViewActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by fengzongwei on 2016/7/11 0011.
@@ -44,6 +45,11 @@ public class PersenalFragment extends BaseFragment {
     RelativeLayout relativeLayout_setting;
     @Bind(R.id.persenal_about)
     RelativeLayout relativeLayout_about;
+    @Bind(R.id.persenal_subscrib_item)
+    RelativeLayout relativeLayout_dingyue;
+    @Bind(R.id.persenal_mission_item)
+    RelativeLayout relativeLayout_mission;
+
 
     private View rootView;
     @Nullable
@@ -70,6 +76,8 @@ public class PersenalFragment extends BaseFragment {
         textView_chongzhi.setOnClickListener(this);
         relativeLayout_setting.setOnClickListener(this);
         relativeLayout_about.setOnClickListener(this);
+        relativeLayout_dingyue.setOnClickListener(this);
+        relativeLayout_mission.setOnClickListener(this);
     }
 
     @Override
@@ -95,7 +103,7 @@ public class PersenalFragment extends BaseFragment {
             case R.id.persenal_qiandao_item:
                 Intent intent1 = new Intent(getActivity(), WebViewActivity.class);
                 intent1.putExtra(Constants.APP_WEBVIEW_TITLE,"签到");
-                intent1.putExtra(Constants.APP_WEBVIEW_URL,"http://www.baidu.com");
+                intent1.putExtra(Constants.APP_WEBVIEW_URL, "http://www.baidu.com");
                 break;
             case R.id.persenal_wodeyinhao_item:
                 Intent intent3 = new Intent(getActivity(), MyYinHaoActivity.class);
@@ -108,6 +116,14 @@ public class PersenalFragment extends BaseFragment {
             case R.id.persenal_about:
                 Intent intent6 = new Intent(getActivity(), AboutActivity.class);
                 getActivity().startActivity(intent6);
+                break;
+            case R.id.persenal_subscrib_item:
+                Intent intent7 = new Intent(getActivity(), MySubscribeBookActivity.class);
+                getActivity().startActivity(intent7);
+                break;
+            case R.id.persenal_mission_item:
+                Intent intent8 = new Intent(getActivity(), MissionActivity.class);
+                getActivity().startActivity(intent8);
                 break;
         }
     }

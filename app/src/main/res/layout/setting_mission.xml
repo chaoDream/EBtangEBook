@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/top_title_bar_main"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新手任务"
+                android:layout_marginTop="@dimen/dip_size_15"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_size_1"
+                android:layout_marginTop="@dimen/dip_size_3"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:background="@color/db_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dip_size_10"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:paddingBottom="@dimen/dip_size_10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mission_bangding"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/dip_size_5"
+                    android:layout_marginRight="@dimen/dip_size_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="绑定手机号"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+100"
+                            android:textColor="@color/primary_red"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dip_size_2"
+                            android:text="豆奖励"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dip_size_5"
+                    android:text="去绑定"
+                    android:textColor="@color/primary_red"
+                    android:background="@drawable/login_registe_bt_normal"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_size_1"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:background="@color/db_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:paddingTop="@dimen/dip_size_10"
+                android:paddingBottom="@dimen/dip_size_10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mission_ziliao"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/dip_size_5"
+                    android:layout_marginRight="@dimen/dip_size_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="完善资料"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+20"
+                            android:textColor="@color/primary_red"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dip_size_2"
+                            android:text="豆奖励"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dip_size_5"
+                    android:text="去完善"
+                    android:textColor="@color/primary_red"
+                    android:background="@drawable/login_registe_bt_normal"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_size_1"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:background="@color/db_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dip_size_10"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:paddingBottom="@dimen/dip_size_10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mission_share_app"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/dip_size_5"
+                    android:layout_marginRight="@dimen/dip_size_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="分享雁北堂客户端（每月一次）"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+10"
+                            android:textColor="@color/primary_red"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dip_size_2"
+                            android:text="豆奖励"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dip_size_5"
+                    android:text="去分享"
+                    android:textColor="@color/primary_red"
+                    android:background="@drawable/login_registe_bt_normal"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_size_10"
+                android:background="@color/db_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每日任务"
+                android:layout_marginTop="@dimen/dip_size_15"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_size_1"
+                android:layout_marginTop="@dimen/dip_size_3"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:background="@color/db_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dip_size_10"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:paddingBottom="@dimen/dip_size_10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mission_dashang"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/dip_size_5"
+                    android:layout_marginRight="@dimen/dip_size_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="打赏一次"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+5"
+                            android:textColor="@color/primary_red"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dip_size_2"
+                            android:text="豆奖励"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dip_size_5"
+                    android:text="去打赏"
+                    android:textColor="@color/primary_red"
+                    android:background="@drawable/login_registe_bt_normal"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_size_1"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:background="@color/db_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:paddingTop="@dimen/dip_size_10"
+                android:paddingBottom="@dimen/dip_size_10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mission_share_book"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/dip_size_5"
+                    android:layout_marginRight="@dimen/dip_size_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="分享一次图书"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+1"
+                            android:textColor="@color/primary_red"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dip_size_2"
+                            android:text="豆奖励"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dip_size_5"
+                    android:text="去分享"
+                    android:textColor="@color/primary_red"
+                    android:background="@drawable/login_registe_bt_normal"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_size_1"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:background="@color/db_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dip_size_10"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:paddingBottom="@dimen/dip_size_10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mission_dianzan"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/dip_size_5"
+                    android:layout_marginRight="@dimen/dip_size_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="给雁北堂点赞"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+1"
+                            android:textColor="@color/primary_red"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dip_size_2"
+                            android:text="豆奖励"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dip_size_5"
+                    android:text="去点赞"
+                    android:textColor="@color/primary_red"
+                    android:background="@drawable/login_registe_bt_normal"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_size_1"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:background="@color/db_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/dip_size_10"
+                android:layout_marginLeft="@dimen/dip_size_15"
+                android:layout_marginRight="@dimen/dip_size_15"
+                android:paddingBottom="@dimen/dip_size_10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/mission_read"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/dip_size_5"
+                    android:layout_marginRight="@dimen/dip_size_5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="阅读雁北堂图书超过60分钟"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+1"
+                            android:textColor="@color/primary_red"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dip_size_2"
+                            android:text="豆奖励"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dip_size_5"
+                    android:text="去阅读"
+                    android:textColor="@color/primary_red"
+                    android:background="@drawable/login_registe_bt_normal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
