@@ -21,6 +21,7 @@ import com.ebtang.ebtangebook.view.setting.MessageCenterActivity;
 import com.ebtang.ebtangebook.view.setting.MissionActivity;
 import com.ebtang.ebtangebook.view.setting.MySubscribeBookActivity;
 import com.ebtang.ebtangebook.view.setting.MyYinHaoActivity;
+import com.ebtang.ebtangebook.view.setting.ReadHistoryActivity;
 import com.ebtang.ebtangebook.view.setting.SettingActivity;
 import com.ebtang.ebtangebook.widget.myWebView.WebViewActivity;
 
@@ -49,7 +50,8 @@ public class PersenalFragment extends BaseFragment {
     RelativeLayout relativeLayout_dingyue;
     @Bind(R.id.persenal_mission_item)
     RelativeLayout relativeLayout_mission;
-
+    @Bind(R.id.persenal_readhistory_item)
+    RelativeLayout relativeLayout_read_history;
 
     private View rootView;
     @Nullable
@@ -78,6 +80,7 @@ public class PersenalFragment extends BaseFragment {
         relativeLayout_about.setOnClickListener(this);
         relativeLayout_dingyue.setOnClickListener(this);
         relativeLayout_mission.setOnClickListener(this);
+        relativeLayout_read_history.setOnClickListener(this);
     }
 
     @Override
@@ -124,6 +127,10 @@ public class PersenalFragment extends BaseFragment {
             case R.id.persenal_mission_item:
                 Intent intent8 = new Intent(getActivity(), MissionActivity.class);
                 getActivity().startActivity(intent8);
+                break;
+            case R.id.persenal_readhistory_item:
+                Intent intent9 = new Intent(getActivity(), ReadHistoryActivity.class);
+                getActivity().startActivity(intent9);
                 break;
         }
     }
