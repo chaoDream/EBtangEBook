@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="@dimen/dip_size_10">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15260"
+        android:paddingBottom="@dimen/dip_size_10"
+        android:paddingTop="@dimen/dip_size_10"
+        android:paddingLeft="@dimen/dip_size_15"
+        android:background="@color/lite_blue"
+        android:textColor="@color/white"
+        android:paddingRight="@dimen/dip_size_15"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="@dimen/dip_size_10"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@color/black"
+            android:text="悬疑"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:ellipsize="end"
+            android:text="大宗师/湘西赶尸鬼事/微信杀机/猎魔轨迹"/>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dip_size_10"
+        android:src="@drawable/main_found_item_icon_right"/>
+
+</LinearLayout>

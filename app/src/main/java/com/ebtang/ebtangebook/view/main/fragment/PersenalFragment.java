@@ -23,10 +23,12 @@ import com.ebtang.ebtangebook.view.setting.MySubscribeBookActivity;
 import com.ebtang.ebtangebook.view.setting.MyYinHaoActivity;
 import com.ebtang.ebtangebook.view.setting.ReadHistoryActivity;
 import com.ebtang.ebtangebook.view.setting.SettingActivity;
+import com.ebtang.ebtangebook.view.setting.SettingInfoEditActivity;
 import com.ebtang.ebtangebook.widget.myWebView.WebViewActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.http.GET;
 
 /**
  * Created by fengzongwei on 2016/7/11 0011.
@@ -52,6 +54,9 @@ public class PersenalFragment extends BaseFragment {
     RelativeLayout relativeLayout_mission;
     @Bind(R.id.persenal_readhistory_item)
     RelativeLayout relativeLayout_read_history;
+    @Bind(R.id.persenal_feedback_item)
+    RelativeLayout relativeLayout_feedback;
+
 
     private View rootView;
     @Nullable
@@ -71,6 +76,7 @@ public class PersenalFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        relativeLayout_feedback.setOnClickListener(this);
         relativeLayout_message.setOnClickListener(this);
         linearLayout_myYinHao.setOnClickListener(this);
         relativeLayout_qiandao.setOnClickListener(this);
@@ -131,6 +137,10 @@ public class PersenalFragment extends BaseFragment {
             case R.id.persenal_readhistory_item:
                 Intent intent9 = new Intent(getActivity(), ReadHistoryActivity.class);
                 getActivity().startActivity(intent9);
+                break;
+            case R.id.persenal_feedback_item:
+                Intent intent10 = new Intent(getActivity(), SettingInfoEditActivity.class);
+                getActivity().startActivity(intent10);
                 break;
         }
     }
