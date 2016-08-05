@@ -1,10 +1,12 @@
 package com.ebtang.ebtangebook.view.bookinfo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
@@ -30,6 +32,8 @@ public class BookDetailActivity extends BaseActivity{
     ListView listView;
     @Bind(R.id.book_detail_bottom_gv)
     GridView gridView;
+    @Bind(R.id.bookdetail_mulu_bt)
+    RelativeLayout relativeLayout_mulu;
 
     private PingLunAdapter pingLunAdapter;
     private RecommGVAdapter recommGVAdapter;
@@ -50,6 +54,7 @@ public class BookDetailActivity extends BaseActivity{
         textView_title.setText("作品详情");
 
         imageView_back.setOnClickListener(this);
+        relativeLayout_mulu.setOnClickListener(this);
     }
 
     @Override
@@ -78,6 +83,10 @@ public class BookDetailActivity extends BaseActivity{
         switch (v.getId()){
             case R.id.top_title_left:
                 finish();
+                break;
+            case R.id.bookdetail_mulu_bt:
+                Intent intent = new Intent(this,BookLabelActivity.class);
+                startActivity(intent);
                 break;
         }
     }

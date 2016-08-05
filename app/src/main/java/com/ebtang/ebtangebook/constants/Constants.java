@@ -17,4 +17,11 @@ public class Constants {
     public static final int FENLEI_ACTIVITY_TYPE_TEHUI = 2;//半价特惠
     public static final int FENLEI_ACTIVITY_TYPE_RETUI = 3;//分类热推
 
+    public static final int MY_LIST_FRAGMENT_TYPE_MSG = 1;//消息
+    public static final int MY_LIST_FRAGMENT_TYPE_ZHANDUAN = 2;//站短
+    public static final int MY_LIST_FRAGMENT_TYPE_CHONGZHI_MSG = 3;//充值记录
+    public static final int MY_LIST_FRAGMENT_TYPE_XIAOFEI_MSG = 4;//消费记录
+    public static final int MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_MULU = 5;//目录
+    public static final int MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_SHUQIAN = 6;//书签
+    public static final int MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_BIJI = 7;//笔记
 }
