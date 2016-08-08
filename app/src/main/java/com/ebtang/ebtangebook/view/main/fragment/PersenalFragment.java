@@ -109,11 +109,11 @@ public class PersenalFragment extends BaseFragment {
                 Intent intent2 = new Intent(getActivity(), LoginActivity.class);
                 getActivity().startActivity(intent2);
                 break;
-            case R.id.persenal_qiandao_item:
-                Intent intent1 = new Intent(getActivity(), WebViewActivity.class);
-                intent1.putExtra(Constants.APP_WEBVIEW_TITLE,"签到");
-                intent1.putExtra(Constants.APP_WEBVIEW_URL, "http://www.baidu.com");
-                break;
+//            case R.id.persenal_qiandao_item:
+//                Intent intent1 = new Intent(getActivity(), WebViewActivity.class);
+//                intent1.putExtra(Constants.APP_WEBVIEW_TITLE,"签到");
+//                intent1.putExtra(Constants.APP_WEBVIEW_URL, "http://www.baidu.com");
+//                break;
             case R.id.persenal_wodeyinhao_item:
                 Intent intent3 = new Intent(getActivity(), MyYinHaoActivity.class);
                 getActivity().startActivity(intent3);

@@ -3,6 +3,7 @@ package com.ebtang.ebtangebook.view.bookinfo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -13,6 +14,8 @@ import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseActivity;
 import com.ebtang.ebtangebook.view.bookcity.adapter.RecommGVAdapter;
 import com.ebtang.ebtangebook.view.bookinfo.adapter.PingLunAdapter;
+import com.ebtang.ebtangebook.view.recomm.RecommAllActivity;
+import com.ebtang.ebtangebook.view.recomm.RecommDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,8 @@ public class BookDetailActivity extends BaseActivity{
     GridView gridView;
     @Bind(R.id.bookdetail_mulu_bt)
     RelativeLayout relativeLayout_mulu;
+    @Bind(R.id.book_detail_shequ_bt)
+    TextView textView_shequ;
 
     private PingLunAdapter pingLunAdapter;
     private RecommGVAdapter recommGVAdapter;
@@ -55,6 +60,17 @@ public class BookDetailActivity extends BaseActivity{
 
         imageView_back.setOnClickListener(this);
         relativeLayout_mulu.setOnClickListener(this);
+
+        textView_shequ.setOnClickListener(this);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(BookDetailActivity.this, RecommDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -87,6 +103,10 @@ public class BookDetailActivity extends BaseActivity{
             case R.id.bookdetail_mulu_bt:
                 Intent intent = new Intent(this,BookLabelActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.book_detail_shequ_bt:
+                Intent intent1 = new Intent(this,RecommAllActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

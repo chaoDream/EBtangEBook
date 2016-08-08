@@ -1,5 +1,6 @@
 package com.ebtang.ebtangebook.view.main.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -7,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.view.main.adapter.BookCityFragmentAdapter;
+import com.ebtang.ebtangebook.view.search.SearchActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,6 +23,8 @@ import butterknife.ButterKnife;
  * Created by dell on 2016/7/11 0011.
  */
 public class BookCityFragment extends BaseFragment{
+    @Bind(R.id.top_title_right)
+    ImageView imageView_search;
     @Bind(R.id.main_bookcity_vp)
     ViewPager viewPager;
     @Bind(R.id.main_bookcity_title_shizishan)
@@ -74,6 +79,7 @@ public class BookCityFragment extends BaseFragment{
         textView_women.setOnClickListener(this);
         textView_paiahng.setOnClickListener(this);
         textView_free.setOnClickListener(this);
+        imageView_search.setOnClickListener(this);
 
     }
 
@@ -105,6 +111,10 @@ public class BookCityFragment extends BaseFragment{
             case R.id.main_bookcity_title_free:
                 viewPager.setCurrentItem(4);
                 changeTitleTextBg(4);
+                break;
+            case R.id.top_title_right:
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                getActivity().startActivity(intent);
                 break;
         }
     }
