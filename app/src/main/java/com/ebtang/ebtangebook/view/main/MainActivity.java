@@ -43,10 +43,13 @@ public class MainActivity extends BaseFragmentActivity {
             R.drawable.tab_persenal
     };
 
+    private static View rootView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        rootView = getWindow().getDecorView();
         initView();
     }
 
@@ -126,4 +129,13 @@ public class MainActivity extends BaseFragmentActivity {
     public void onClick(View v) {
 
     }
+
+    public static int getWindowWidth() {
+        return rootView.getMeasuredWidth();
+    }
+
+    public static int getWindowHeight() {
+        return rootView.getMeasuredHeight();
+    }
+
 }
