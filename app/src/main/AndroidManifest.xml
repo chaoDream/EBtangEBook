@@ -4,6 +4,7 @@
 
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:name=".app.AppContext"
@@ -84,6 +85,9 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity android:name=".view.search.SearchResultActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".widget.myWebView.WebViewActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
     </application>

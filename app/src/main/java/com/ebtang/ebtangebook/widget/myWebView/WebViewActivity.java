@@ -17,6 +17,7 @@ import com.ebtang.ebtangebook.app.BaseFragmentActivity;
 import com.ebtang.ebtangebook.constants.Constants;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 public class WebViewActivity extends BaseFragmentActivity {
@@ -31,7 +32,7 @@ public class WebViewActivity extends BaseFragmentActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.app_webview);
-
+		ButterKnife.bind(this);
         initView();
 		initData();
 

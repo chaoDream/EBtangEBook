@@ -45,6 +45,8 @@ public class MainActivity extends BaseFragmentActivity {
 
     private static View rootView;
 
+    private BookShelfFragment bookShelfFragment = new BookShelfFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,13 @@ public class MainActivity extends BaseFragmentActivity {
         initView();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mViewPager.getCurrentItem() == 0 && bookShelfFragment.isShowDeleteBt())
+            bookShelfFragment.hideDeleteBt();
+        else
+            super.onBackPressed();
+    }
 
     @Override
     public void initView() {
@@ -60,7 +69,7 @@ public class MainActivity extends BaseFragmentActivity {
 //        mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mViewPager = (MyViewPager) findViewById(R.id.view_pager);
         mFragmentList = new ArrayList<Fragment>();
-        mFragmentList.add(new BookShelfFragment());
+        mFragmentList.add(bookShelfFragment);
         mFragmentList.add(new BookCityFragment());
         mFragmentList.add(new FoundFragment());
         mFragmentList.add(new PersenalFragment());
@@ -94,6 +103,8 @@ public class MainActivity extends BaseFragmentActivity {
         mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
+                bookShelfFragment.hideDeleteBt();
+
                 showView(mTabHost.getCurrentTab());
             }
         });
@@ -137,5 +148,8 @@ public class MainActivity extends BaseFragmentActivity {
     public static int getWindowHeight() {
         return rootView.getMeasuredHeight();
     }
+
+
+
 
 }

@@ -7,13 +7,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.ebtang.ebtangebook.R;
+import com.ebtang.ebtangebook.widget.dragGridView.DragGridListener;
 
 import java.util.List;
 
 /**
  * Created by dell on 2016/8/8 0008.
  */
-public class BookShelfAdapter extends BaseAdapter{
+public class BookShelfAdapter extends BaseAdapter implements DragGridListener{
 
     private Context context;
     private List<Object> list;
@@ -46,5 +47,30 @@ public class BookShelfAdapter extends BaseAdapter{
 
         }
         return convertView;
+    }
+
+    @Override
+    public void reorderItems(int oldPosition, int newPosition) {
+
+    }
+
+    @Override
+    public void setHideItem(int hidePosition) {
+
+    }
+
+    @Override
+    public void removeItem(int deletePosition) {
+
+    }
+
+    @Override
+    public void setItemToFirst(int openPosition) {
+
+    }
+
+    @Override
+    public void nitifyDataRefresh() {
+
     }
 }

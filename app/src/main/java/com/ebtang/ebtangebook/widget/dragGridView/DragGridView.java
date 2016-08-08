@@ -38,7 +38,7 @@ public class DragGridView extends GridView implements View.OnClickListener{
     /**
      * DragGridView的item长按响应的时间， 默认是1000毫秒，也可以自行设置
      */
-    private long dragResponseMS = 1500;
+    private long dragResponseMS = 500;
 
     /**
      * 是否可以拖拽，默认不可以
@@ -186,13 +186,28 @@ public class DragGridView extends GridView implements View.OnClickListener{
                 mDeleteButton = (ImageButton) mGridItemView.findViewById(R.id.item_close_Im);
                 mDeleteButton.setOnClickListener(DragGridView.this);
                 if(mDeleteButton.getVisibility()!=VISIBLE) {
-                 //   mDeleteButton.setVisibility(VISIBLE);
+                    mDeleteButton.setVisibility(VISIBLE);
                 }
 
             }
 
         }
     };
+
+
+    public void hideDeleteBt(){
+        setIsShowDeleteButton(false);
+        for (int i = 0;i < getChildCount();i++) {
+            final View mGridItemView = getChildAt(i);
+            mDeleteButton = (ImageButton) mGridItemView.findViewById(R.id.item_close_Im);
+            mDeleteButton.setOnClickListener(DragGridView.this);
+            if(mDeleteButton.getVisibility() == VISIBLE) {
+                mDeleteButton.setVisibility(GONE);
+            }
+
+        }
+    }
+
 
     @Override
     public void setAdapter(ListAdapter adapter) {

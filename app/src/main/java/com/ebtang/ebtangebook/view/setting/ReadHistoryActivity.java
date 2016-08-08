@@ -65,6 +65,10 @@ public class ReadHistoryActivity extends BaseActivity{
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.top_title_left:
+                finish();
+                break;
+        }
     }
 }

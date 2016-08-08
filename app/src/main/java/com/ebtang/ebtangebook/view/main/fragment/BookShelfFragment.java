@@ -23,8 +23,10 @@ import com.ebtang.ebtangebook.animation.ContentScaleAnimation;
 import com.ebtang.ebtangebook.animation.Rotate3DAnimation;
 import com.ebtang.ebtangebook.app.AppManager;
 import com.ebtang.ebtangebook.app.BaseFragment;
+import com.ebtang.ebtangebook.constants.Constants;
 import com.ebtang.ebtangebook.view.main.MainActivity;
 import com.ebtang.ebtangebook.view.main.adapter.BookShelfAdapter;
+import com.ebtang.ebtangebook.view.search.SearchActivity;
 import com.ebtang.ebtangebook.widget.dragGridView.CommonUtil;
 import com.ebtang.ebtangebook.widget.dragGridView.DragGridView;
 import com.ebtang.ebtangebook.widget.myWebView.WebViewActivity;
@@ -95,25 +97,37 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
 
     @Override
     public void onResume() {
-        DragGridView.setIsShowDeleteButton(false);
+        dragGridView.hideDeleteBt();
         closeBookAnimation();
         super.onResume();
     }
 
     @Override
     public void onStop() {
-        DragGridView.setIsShowDeleteButton(false);
+        dragGridView.hideDeleteBt();
         super.onStop();
     }
 
     @Override
+    public void onPause() {
+        dragGridView.hideDeleteBt();
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
-        DragGridView.setIsShowDeleteButton(false);
+        dragGridView.hideDeleteBt();
         super.onDestroy();
     }
 
     @Override
     public void initView() {
+        imageView_menu.setImageResource(R.drawable.bookshelf_menu);
+        imageView_search.setImageResource(R.drawable.bookshelf_search);
+        imageView_search.setVisibility(View.VISIBLE);
+        imageView_menu.setVisibility(View.VISIBLE);
+        textView_title.setText("书架");
+
         dragGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -162,6 +176,9 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
                 }
             }
         });
+
+        imageView_search.setOnClickListener(this);
+
     }
 
     @Override
@@ -182,7 +199,12 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.top_title_right:
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                getActivity().startActivity(intent);
+                break;
+        }
     }
 
     private WindowManager.LayoutParams getDefaultWindowParams() {
@@ -233,6 +255,8 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
                 mIsOpen = true;
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), WebViewActivity.class);
+                intent.putExtra(Constants.APP_WEBVIEW_TITLE,"阅读");
+                intent.putExtra(Constants.APP_WEBVIEW_URL,"http://www.baidu.com");
                 startActivity(intent);
                 getActivity().overridePendingTransition(android.support.v7.appcompat.R.anim.abc_grow_fade_in_from_bottom, android.support.v7.appcompat.R.anim.abc_shrink_fade_out_from_bottom);
             }
@@ -282,6 +306,12 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
         }
     }
 
+    public boolean isShowDeleteBt(){
+        return dragGridView.getShowDeleteButton();
+    }
 
+    public void hideDeleteBt(){
+        dragGridView.hideDeleteBt();
+    }
 
 }
