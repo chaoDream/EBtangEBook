@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="left"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="160dp"
+        android:layout_height="170dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/dip_size_20"
+        android:background="@drawable/book_shelf_pop">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/book_shelf_menu_local"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/dip_size_20"
+            android:layout_marginLeft="@dimen/dip_size_10"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bookshelf_menu_local"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/dip_size_10"
+                android:text="导入本地书籍"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_size_1"
+            android:layout_marginTop="@dimen/dip_size_10"
+            android:layout_marginBottom="@dimen/dip_size_10"
+            android:background="@color/db_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/book_shelf_menu_buyed"
+            android:layout_marginLeft="@dimen/dip_size_10"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bookshelf_menu_buyed"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/dip_size_10"
+                android:text="查看已购和上传"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_size_1"
+            android:layout_marginTop="@dimen/dip_size_10"
+            android:layout_marginBottom="@dimen/dip_size_10"
+            android:background="@color/db_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/book_shelf_menu_refresh"
+            android:layout_marginLeft="@dimen/dip_size_10"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bookshelf_menu_refresh"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/dip_size_10"
+                android:text="查看更新书籍"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_size_1"
+            android:layout_marginTop="@dimen/dip_size_10"
+            android:layout_marginBottom="@dimen/dip_size_10"
+            android:background="@color/db_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/book_shelf_menu_all"
+            android:layout_marginLeft="@dimen/dip_size_10"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bookshelf_menu_all"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/dip_size_10"
+                android:text="查看全部"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

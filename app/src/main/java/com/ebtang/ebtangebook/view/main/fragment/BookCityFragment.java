@@ -13,7 +13,12 @@ import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
+import com.ebtang.ebtangebook.view.bookcity.fragment.FreeFragment;
+import com.ebtang.ebtangebook.view.bookcity.fragment.ManFragment;
+import com.ebtang.ebtangebook.view.bookcity.fragment.ShizishanFragment;
+import com.ebtang.ebtangebook.view.bookcity.fragment.WomenFragment;
 import com.ebtang.ebtangebook.view.main.adapter.BookCityFragmentAdapter;
+import com.ebtang.ebtangebook.view.main.adapter.BookCityNewFragmentAdapter;
 import com.ebtang.ebtangebook.view.search.SearchActivity;
 
 import butterknife.Bind;
@@ -38,7 +43,8 @@ public class BookCityFragment extends BaseFragment{
     @Bind(R.id.main_bookcity_title_free)
     TextView textView_free;
     private View rootView;
-    private BookCityFragmentAdapter bookCityFragmentAdapter;
+//    private BookCityFragmentAdapter bookCityFragmentAdapter;
+    private BookCityNewFragmentAdapter bookCityNewFragmentAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,10 +89,26 @@ public class BookCityFragment extends BaseFragment{
 
     }
 
+    protected void onSetupTabAdapter(BookCityNewFragmentAdapter adapter) {
+        String[] title = getResources().getStringArray(
+                R.array.general_viewpage_arrays);
+
+        adapter.addTab(title[0], "shizishan", ShizishanFragment.class,
+                null);
+        adapter.addTab(title[1], "man", ManFragment.class,
+                null);
+        adapter.addTab(title[2], "women", WomenFragment.class,
+                null);
+        adapter.addTab(title[3], "paihang", FreeFragment.class,
+                null);
+        adapter.addTab(title[4], "free", FreeFragment.class,
+                null);
+    }
+
     @Override
     public void initData() {
-        bookCityFragmentAdapter = new BookCityFragmentAdapter(getChildFragmentManager());
-        viewPager.setAdapter(bookCityFragmentAdapter);
+        bookCityNewFragmentAdapter = new BookCityNewFragmentAdapter(getChildFragmentManager(),viewPager);
+        onSetupTabAdapter(bookCityNewFragmentAdapter);
     }
 
     @Override

@@ -25,7 +25,9 @@ import com.ebtang.ebtangebook.app.AppManager;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.constants.Constants;
 import com.ebtang.ebtangebook.view.main.MainActivity;
+import com.ebtang.ebtangebook.view.main.NewMainActivity;
 import com.ebtang.ebtangebook.view.main.adapter.BookShelfAdapter;
+import com.ebtang.ebtangebook.view.main.popwindow.BookShelfPopwindow;
 import com.ebtang.ebtangebook.view.search.SearchActivity;
 import com.ebtang.ebtangebook.widget.dragGridView.CommonUtil;
 import com.ebtang.ebtangebook.widget.dragGridView.DragGridView;
@@ -75,6 +77,7 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
 
     private float scaleTimes;
 
+    private BookShelfPopwindow bookShelfPopwindow;
 
     @Nullable
     @Override
@@ -122,6 +125,7 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
 
     @Override
     public void initView() {
+        bookShelfPopwindow = new BookShelfPopwindow(getActivity(),imageView_menu);
         imageView_menu.setImageResource(R.drawable.bookshelf_menu);
         imageView_search.setImageResource(R.drawable.bookshelf_search);
         imageView_search.setVisibility(View.VISIBLE);
@@ -178,6 +182,7 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
         });
 
         imageView_search.setOnClickListener(this);
+        imageView_menu.setOnClickListener(this);
 
     }
 
@@ -204,6 +209,9 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 getActivity().startActivity(intent);
                 break;
+            case R.id.top_title_left:
+                bookShelfPopwindow.showPop();
+                break;
         }
     }
 
@@ -222,8 +230,8 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
     private void initAnimation() {
         AccelerateInterpolator interpolator = new AccelerateInterpolator();
 
-        float scale1 = MainActivity.getWindowWidth() / (float) itemTextView.getMeasuredWidth();
-        float scale2 = MainActivity.getWindowHeight() / (float) itemTextView.getMeasuredHeight();
+        float scale1 = NewMainActivity.getWindowWidth() / (float) itemTextView.getMeasuredWidth();
+        float scale2 = NewMainActivity.getWindowHeight() / (float) itemTextView.getMeasuredHeight();
         scaleTimes = scale1 > scale2 ? scale1 : scale2;  //计算缩放比例
 
         contentAnimation = new ContentScaleAnimation( location[0], location[1],scaleTimes, false);
