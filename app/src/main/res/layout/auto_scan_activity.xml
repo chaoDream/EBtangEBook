@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/top_title_bar_scan"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/auto_scan_none"
+        android:text="暂无内容"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:textSize="@dimen/font_size_xlarge"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:dividerHeight="@dimen/dip_size_1"
+        android:divider="@color/db_gray"
+        android:background="@color/white"
+        android:id="@+id/auto_scan_lv"></ListView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_size_1"
+        android:background="@color/db_gray"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/white"
+        android:padding="@dimen/dip_size_20">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/auto_scan_status"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_large"
+            android:text="扫描中..."/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dip_size_5"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="找到：TXT"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/auto_scan_txt_count"
+                android:text="(0)"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dip_size_5"
+                android:text="EPUB"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/auto_scan_epub_count"
+                android:text="(0)"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/auto_scan_bt"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="导入书架"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textSize="@dimen/font_size_xlarge"
+            android:layout_marginTop="@dimen/dip_size_10"
+            android:background="@drawable/auto_scan_bt_bg"/>
+    </LinearLayout>
+
+</LinearLayout>

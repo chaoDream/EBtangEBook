@@ -1,6 +1,7 @@
 package com.ebtang.ebtangebook.view.main.popwindow;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.ebtang.ebtangebook.R;
+import com.ebtang.ebtangebook.view.scan.ScanFileActivity;
 
 import java.lang.annotation.Target;
 
@@ -78,7 +80,8 @@ public class BookShelfPopwindow implements View.OnClickListener{
                 dissmissPop();
                 break;
             case R.id.book_shelf_menu_local:
-                Toast.makeText(context,"查看本地", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ScanFileActivity.class);
+                context.startActivity(intent);
                 dissmissPop();
                 break;
             case R.id.book_shelf_menu_refresh:

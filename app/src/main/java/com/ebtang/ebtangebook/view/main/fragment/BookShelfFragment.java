@@ -198,6 +198,7 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
         list.add(new Object());
         list.add(new Object());
         list.add(new Object());
+        list.add(new Object());
         bookShelfAdapter = new BookShelfAdapter(getActivity(),list);
         dragGridView.setAdapter(bookShelfAdapter);
     }

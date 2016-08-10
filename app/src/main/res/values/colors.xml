@@ -17,6 +17,7 @@
 
     <color name="read_background_paperYellow">#D4C5A3</color>
 
+    <color name="orange">#ffefa600</color>
     <color name="divider_color">#dce1e9</color>
     <color name="gray_back">#ececec</color>
     <color name="primary_red">#df0a01</color>
