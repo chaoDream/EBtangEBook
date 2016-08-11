@@ -14,6 +14,8 @@ import android.widget.ListView;
 
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
+import com.ebtang.ebtangebook.view.bookcity.DiscountActivity;
+import com.ebtang.ebtangebook.view.bookcity.FreeActivity;
 import com.ebtang.ebtangebook.view.bookcity.adapter.RecommGVAdapter;
 import com.ebtang.ebtangebook.view.bookcity.adapter.RecommLVAdapter;
 import com.ebtang.ebtangebook.view.bookinfo.BookDetailActivity;
@@ -128,11 +130,11 @@ public class ShizishanFragment extends BaseFragment {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.book_city_shizishan_mianfei:
-                Intent intent1 = new Intent(getActivity(), FenleiActivity.class);
+                Intent intent1 = new Intent(getActivity(), FreeActivity.class);
                 getActivity().startActivity(intent1);
                 break;
             case R.id.book_city_shizishan_banjia:
-                Intent intent2 = new Intent(getActivity(), FenleiActivity.class);
+                Intent intent2 = new Intent(getActivity(), DiscountActivity.class);
                 getActivity().startActivity(intent2);
                 break;
             case R.id.book_city_shizishan_retui:

@@ -15,6 +15,7 @@ import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.view.bookcity.fragment.FreeFragment;
 import com.ebtang.ebtangebook.view.bookcity.fragment.ManFragment;
+import com.ebtang.ebtangebook.view.bookcity.fragment.PaiHangFragment;
 import com.ebtang.ebtangebook.view.bookcity.fragment.ShizishanFragment;
 import com.ebtang.ebtangebook.view.bookcity.fragment.WomenFragment;
 import com.ebtang.ebtangebook.view.main.adapter.BookCityFragmentAdapter;
@@ -101,7 +102,7 @@ public class BookCityFragment extends BaseFragment{
                 null);
         adapter.addTab(title[3], "paihang", FreeFragment.class,
                 null);
-        adapter.addTab(title[4], "free", FreeFragment.class,
+        adapter.addTab(title[4], "free", PaiHangFragment.class,
                 null);
     }
 

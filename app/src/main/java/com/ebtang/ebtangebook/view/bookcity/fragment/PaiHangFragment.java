@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.view.bookcity.PaiHangActivity;
-import com.ebtang.ebtangebook.view.bookcity.UserPaiHangActivity;
 import com.ebtang.ebtangebook.view.bookcity.adapter.FreeImgListAdapter;
 import com.ebtang.ebtangebook.view.bookcity.adapter.FreeListAdapter;
 import com.ebtang.ebtangebook.widget.MyScrollListView;
@@ -26,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * Created by fengzongwei on 16/7/20.
  */
-public class FreeFragment extends BaseFragment{
+public class PaiHangFragment extends BaseFragment{
     @Bind(R.id.bookcity_free_paihang_lv)
     MyScrollListView listView;
     @Bind(R.id.bookcity_free_item_bottom_new)
@@ -74,7 +72,7 @@ public class FreeFragment extends BaseFragment{
         linearLayout_more_new.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), UserPaiHangActivity.class);
+                Intent intent = new Intent(getActivity(), PaiHangActivity.class);
                 getActivity().startActivity(intent);
             }
         });
@@ -82,7 +80,7 @@ public class FreeFragment extends BaseFragment{
         linearLayout_more_fans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), UserPaiHangActivity.class);
+                Intent intent = new Intent(getActivity(), PaiHangActivity.class);
                 getActivity().startActivity(intent);
             }
         });

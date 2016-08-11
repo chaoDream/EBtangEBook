@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:id="@+id/bookcity_free_item_more"
         android:paddingTop="@dimen/dip_size_5">
         <TextView
             android:layout_width="0dp"

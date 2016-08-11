@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/top_title_bar_main"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include layout="@layout/discount_top"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dip_size_10"
+                android:background="@color/db_gray"/>
+
+            <com.ebtang.ebtangebook.widget.MyScrollGridView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dip_size_10"
+                android:paddingBottom="@dimen/dip_size_10"
+                android:verticalSpacing="@dimen/dip_size_5"
+                android:id="@+id/discount_gv"
+                android:layout_marginTop="@dimen/dip_size_15"
+                android:background="@color/white"
+                android:numColumns="3">
+            </com.ebtang.ebtangebook.widget.MyScrollGridView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

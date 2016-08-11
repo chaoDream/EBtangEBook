@@ -1,27 +1,26 @@
 package com.ebtang.ebtangebook.view.bookcity.adapter;
 
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
-import com.ebtang.ebtangebook.view.bookcity.PaiHangActivity;
 
 import java.util.List;
 
 /**
- * Created by fengzongwei on 16/7/20.
+ * Created by dell on 2016/8/11 0011.
  */
-public class FreeImgListAdapter extends BaseAdapter {
+public class DiscountGVAdapter extends BaseAdapter{
 
     private Context context;
     private List<Object> list;
 
-    public FreeImgListAdapter(Context context,List<Object> list){
+    public DiscountGVAdapter(Context context,List<Object> list){
         this.context = context;
         this.list = list;
     }
@@ -46,24 +45,20 @@ public class FreeImgListAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if(convertView == null){
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.bookcity_free_item_top,parent,false);
-            viewHolder.linearLayout_more = (LinearLayout)convertView.findViewById(R.id.bookcity_free_item_more);
+            convertView = LayoutInflater.from(context).inflate(R.layout.discount_gv_item,parent,false);
+            viewHolder.textView_old_price = (TextView)convertView.findViewById(R.id.discount_before_price);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
-        viewHolder.linearLayout_more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, PaiHangActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        viewHolder.textView_old_price.getPaint().setAntiAlias(true);//抗锯齿
+        viewHolder.textView_old_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);//中划线
+        viewHolder.textView_old_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);//设置中划线并加清晰
         return convertView;
     }
 
-    class ViewHolder{
-        LinearLayout linearLayout_more;
+    static class ViewHolder{
+        TextView textView_old_price;
     }
 
 }
