@@ -79,9 +79,9 @@ public class LocalFileListFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.local_file_scan,container,false);
         ButterKnife.bind(this,rootView);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE, EXTERNAL_STORAGE_REQ_CODE);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.) {
+//            checkPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE, EXTERNAL_STORAGE_REQ_CODE);
+//        }
         root = Environment.getExternalStorageDirectory();
         initView();
         handledButtonListener();

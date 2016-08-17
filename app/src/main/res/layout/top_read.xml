@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*
+  ~  * Copyright (C) 2015 by  xunice@qq.com
+  ~  *
+  ~  * Licensed under the Apache License, Version 2.0 (the "License");
+  ~  * you may not use this file except in compliance with the License.
+  ~  * You may obtain a copy of the License at
+  ~  *
+  ~  * http://www.apache.org/licenses/LICENSE-2.0
+  ~  *
+  ~  */
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/tab_bg"
+    android:gravity="center_vertical"
+    android:visibility="gone"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/top_title_left"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/back"/>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打赏"
+            android:textColor="@color/orange"
+            android:padding="@dimen/dip_size_5"
+            android:background="@drawable/read_title_orange"
+            android:id="@+id/read_dashang"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订阅"
+            android:textColor="@color/white"
+            android:padding="@dimen/dip_size_5"
+            android:layout_marginLeft="@dimen/dip_size_15"
+            android:layout_marginRight="@dimen/dip_size_15"
+            android:background="@drawable/read_title_gray"
+            android:id="@+id/read_dingyue"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享"
+            android:padding="@dimen/dip_size_5"
+            android:background="@drawable/read_title_gray"
+            android:textColor="@color/white"
+            android:id="@+id/read_fenxiang"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bookshelf_search"
+        android:padding="@dimen/dip_size_10"
+        android:id="@+id/read_search"/>
+    <ImageView
+        android:id="@+id/top_title_right"
+        android:layout_width="wrap_content"
+        android:paddingRight="@dimen/dip_size_20"
+        android:paddingLeft="@dimen/dip_size_20"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/bookshelf_menu"/>
+
+
+</LinearLayout>
