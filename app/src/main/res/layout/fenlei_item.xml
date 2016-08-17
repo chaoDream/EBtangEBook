@@ -13,7 +13,7 @@
         android:paddingBottom="@dimen/dip_size_10"
         android:paddingTop="@dimen/dip_size_10"
         android:paddingLeft="@dimen/dip_size_15"
-        android:background="@color/lite_blue"
+        android:background="@color/afc_border_line_dark"
         android:textColor="@color/white"
         android:paddingRight="@dimen/dip_size_15"/>
 

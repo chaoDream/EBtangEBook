@@ -3,13 +3,15 @@ package com.ebtang.ebtangebook.app;
 
 import android.app.Application;
 
+import org.geometerplus.zlibrary.ui.android.library.ZLAndroidApplication;
+
 /**
  * 
  * Application context
  * @author Xice
  *
  */
-public class MypAppContext  extends Application{
+public class MypAppContext  extends ZLAndroidApplication {
 	private static volatile BaseAppContext baseAppContext;
 
 	@Override

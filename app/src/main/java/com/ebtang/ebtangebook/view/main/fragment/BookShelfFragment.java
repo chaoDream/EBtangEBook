@@ -33,6 +33,8 @@ import com.ebtang.ebtangebook.widget.dragGridView.CommonUtil;
 import com.ebtang.ebtangebook.widget.dragGridView.DragGridView;
 import com.ebtang.ebtangebook.widget.myWebView.WebViewActivity;
 
+import org.geometerplus.android.fbreader.FBReader;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -263,7 +265,8 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
             if (animationCount >= 2) {
                 mIsOpen = true;
                 Intent intent = new Intent();
-                intent.setClass(getActivity(), WebViewActivity.class);
+                intent.setClass(getActivity(), FBReader.class);
+//                intent.setClass(getActivity(), WebViewActivity.class);
                 intent.putExtra(Constants.APP_WEBVIEW_TITLE,"阅读");
                 intent.putExtra(Constants.APP_WEBVIEW_URL,"http://www.baidu.com");
                 startActivity(intent);

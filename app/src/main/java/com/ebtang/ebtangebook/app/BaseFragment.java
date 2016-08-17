@@ -8,9 +8,6 @@ import android.view.View;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import me.drakeet.materialdialog.MaterialDialog;
-
-
 public abstract class BaseFragment extends Fragment  implements View.OnClickListener,FragmentUserVisibleController.UserVisibleCallback {
 
 
@@ -18,8 +15,6 @@ public abstract class BaseFragment extends Fragment  implements View.OnClickList
     protected ProgressDialog progress;
 
     protected ImageLoader imageLoader = ImageLoader.getInstance();
-
-    protected MaterialDialog materialDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

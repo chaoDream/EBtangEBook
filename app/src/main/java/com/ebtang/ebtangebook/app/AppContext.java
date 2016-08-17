@@ -5,6 +5,10 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.yunqing.core.db.DBExecutor;
 
+import org.geometerplus.android.fbreader.config.ConfigShadow;
+import org.geometerplus.zlibrary.ui.android.image.ZLAndroidImageManager;
+import org.geometerplus.zlibrary.ui.android.library.ZLAndroidLibrary;
+
 /**
  * 所有初始化的工作可在这里面进行
  * 
