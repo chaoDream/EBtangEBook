@@ -344,6 +344,7 @@
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:id="@+id/book_detail_dashang"
                         android:padding="@dimen/dip_size_5"
                         android:layout_weight="1">
                         <LinearLayout

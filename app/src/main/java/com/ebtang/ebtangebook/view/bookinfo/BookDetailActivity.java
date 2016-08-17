@@ -39,6 +39,8 @@ public class BookDetailActivity extends BaseActivity{
     RelativeLayout relativeLayout_mulu;
     @Bind(R.id.book_detail_shequ_bt)
     TextView textView_shequ;
+    @Bind(R.id.book_detail_dashang)
+    RelativeLayout relativeLayout_dashang;
 
     private PingLunAdapter pingLunAdapter;
     private RecommGVAdapter recommGVAdapter;
@@ -60,7 +62,7 @@ public class BookDetailActivity extends BaseActivity{
 
         imageView_back.setOnClickListener(this);
         relativeLayout_mulu.setOnClickListener(this);
-
+        relativeLayout_dashang.setOnClickListener(this);
         textView_shequ.setOnClickListener(this);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -107,6 +109,10 @@ public class BookDetailActivity extends BaseActivity{
             case R.id.book_detail_shequ_bt:
                 Intent intent1 = new Intent(this,RecommAllActivity.class);
                 startActivity(intent1);
+                break;
+            case R.id.book_detail_dashang:
+                Intent intent2 = new Intent(this,DaShangActivity.class);
+                startActivity(intent2);
                 break;
         }
     }

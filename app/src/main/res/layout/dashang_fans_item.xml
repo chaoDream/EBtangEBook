@@ -3,6 +3,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:gravity="center_vertical"
+    android:paddingTop="@dimen/dip_size_5"
+    android:paddingBottom="@dimen/dip_size_5"
     android:layout_height="match_parent">
 
     <TextView

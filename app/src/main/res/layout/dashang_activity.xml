@@ -86,7 +86,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <GridView
+            <com.ebtang.ebtangebook.widget.MyScrollGridView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/dashang_gv"
@@ -95,7 +95,7 @@
                 android:layout_marginLeft="@dimen/dip_size_15"
                 android:layout_marginRight="@dimen/dip_size_15"
                 android:scrollbars="none"
-                android:numColumns="3"></GridView>
+                android:numColumns="3"></com.ebtang.ebtangebook.widget.MyScrollGridView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,6 +108,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/dashang_discount"
                     android:src="@drawable/dashang_discount"/>
                 <TextView
                     android:layout_width="0dp"
@@ -115,10 +116,12 @@
                     android:layout_weight="1"
                     android:text="1"
                     android:gravity="center"
-                    android:textColor="@color/primary_red"/>
+                    android:textColor="@color/primary_red"
+                    android:id="@+id/dashang_count"/>
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/dashang_plus"
                     android:src="@drawable/dashang_plus"/>
             </LinearLayout>
             <TextView
@@ -139,6 +142,7 @@
                 android:gravity="center"
                 android:text="打开打上记录"
                 android:layout_marginTop="@dimen/dip_size_10"
+                android:id="@+id/dashang_open_jilu"
                 android:padding="@dimen/dip_size_5"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -193,13 +197,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dip_size_1"
                     android:background="@color/db_gray"/>
-                <ListView
+                <com.ebtang.ebtangebook.widget.MyScrollListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scrollbars="none"
                     android:dividerHeight="@dimen/dip_size_1"
                     android:divider="@color/db_gray"
-                    android:id="@+id/dashang_lv"></ListView>
+                    android:id="@+id/dashang_lv"></com.ebtang.ebtangebook.widget.MyScrollListView>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -223,13 +227,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/dashang_time"/>
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:dividerHeight="@dimen/dip_size_1"
-                        android:divider="@color/db_gray"
-                        android:id="@+id/dashang_lv_bottom"></ListView>
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dip_size_1"
+                    android:background="@color/db_gray"/>
+                <com.ebtang.ebtangebook.widget.MyScrollListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="@dimen/dip_size_1"
+                    android:divider="@color/db_gray"
+                    android:id="@+id/dashang_lv_bottom"></com.ebtang.ebtangebook.widget.MyScrollListView>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
