@@ -2,8 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.0 rc4"
-
+    buildToolsVersion '23.0.2'
+    sourceSets.main.jni.srcDirs = [] //disable automatic ndk-build call
+    sourceSets {
+        main {
+            jniLibs.srcDirs 'src/main/jniLibs'
+        }
+    }
     defaultConfig {
         applicationId "com.ebtang.ebtangebook"
         minSdkVersion 11
@@ -33,4 +38,10 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-scalars:2.0.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile files('libs/db-1.0.jar')
+    compile files('libs/open-dictionary-api-1.2.1.jar')
+    compile files('libs/json-simple-1.1.1.jar')
+    compile files('libs/LingvoIntegration_2.5.2.12.jar')
+    compile files('libs/pdfparse.jar')
+    compile files('libs/nanohttpd-2.0.5.jar')
+    compile files('libs/httpmime-4.2.5.jar')
 }
