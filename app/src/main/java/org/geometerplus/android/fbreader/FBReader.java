@@ -39,10 +39,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ebtang.ebtangebook.R;
+import com.ebtang.ebtangebook.view.read.ReadSetColorFontPop;
+import com.ebtang.ebtangebook.view.read.ReadSettingPopWindow;
 
 import org.geometerplus.android.fbreader.api.ApiListener;
 import org.geometerplus.android.fbreader.api.ApiServerImplementation;
@@ -116,7 +119,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         context.startActivity(intent);
     }
 
-    private FBReaderApp myFBReaderApp;
+    public FBReaderApp myFBReaderApp;
     private volatile Book myBook;
 
     private RelativeLayout myRootView;
@@ -242,11 +245,22 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
     private Animation mAnimSlideInBottom;
     private Animation mAnimSlideOutTop;
     private Animation mAnimSlideOutBottom;
+    @Bind(R.id.top_title_left)
+    ImageView imageView_back;
     @Bind(R.id.read_title)
     LinearLayout linearLayout_top;
+    @Bind(R.id.top_title_right)
+    ImageView imageView_menu;
     @Bind(R.id.read_util_bottom)
     LinearLayout linearLayout_bottom;
+    @Bind(R.id.read_daynight)
+    ImageView imageView_daynight;
     private boolean isShowUtil = false;
+
+    private ReadSettingPopWindow readSettingPopWindow;
+    public ReadSetColorFontPop readSetColorFontPop;
+
+    private boolean isNightMode = false;//当前是否为夜间模式
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -372,6 +386,8 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         }
         /***************自增***********/
         initAnimation();
+        initView();
+        initConfig();
     }
 
     /**
@@ -1146,6 +1162,14 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
                 R.anim.slide_out_bottom);
     }
 
+    private void initView(){
+        readSettingPopWindow = new ReadSettingPopWindow(this,imageView_menu);
+        readSetColorFontPop = new ReadSetColorFontPop(this);
+        imageView_back.setOnClickListener(clickListener);
+        imageView_menu.setOnClickListener(clickListener);
+        imageView_daynight.setOnClickListener(clickListener);
+    }
+
     public void showUtil(){
         if(isShowUtil){
             linearLayout_top.startAnimation(mAnimSlideOutBottom);
@@ -1162,5 +1186,42 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         }
 
     }
+
+    public void initConfig(){
+        isNightMode = myFBReaderApp.ViewOptions.ColorProfileName.getValue().equals(ColorProfile.NIGHT);
+        if(isNightMode)
+            imageView_daynight.setImageResource(R.drawable.read_night);
+        else
+            imageView_daynight.setImageResource(R.drawable.read_day);
+    }
+
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.top_title_left:
+                    myFBReaderApp.closeWindow();
+                    break;
+                case R.id.top_title_right:
+                    readSettingPopWindow.showPop();
+                    break;
+                case R.id.read_daynight:
+                    if(isNightMode){
+                        myFBReaderApp.ViewOptions.ColorProfileName.setValue(ColorProfile.DAY);
+                        myFBReaderApp.getViewWidget().reset();
+                        myFBReaderApp.getViewWidget().repaint();
+                        imageView_daynight.setImageResource(R.drawable.read_day);
+                        isNightMode = false;
+                    }else{
+                        myFBReaderApp.ViewOptions.ColorProfileName.setValue(ColorProfile.NIGHT);
+                        myFBReaderApp.getViewWidget().reset();
+                        myFBReaderApp.getViewWidget().repaint();
+                        imageView_daynight.setImageResource(R.drawable.read_night);
+                        isNightMode = true;
+                    }
+                    break;
+            }
+        }
+    };
 
 }

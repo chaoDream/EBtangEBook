@@ -128,8 +128,8 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
     @Override
     public void initView() {
         bookShelfPopwindow = new BookShelfPopwindow(getActivity(),imageView_menu);
-        imageView_menu.setImageResource(R.drawable.bookshelf_menu);
-        imageView_search.setImageResource(R.drawable.bookshelf_search);
+        imageView_menu.setImageResource(R.drawable.bookshelf_menu_big);
+        imageView_search.setImageResource(R.drawable.bookshelf_menu_search);
         imageView_search.setVisibility(View.VISIBLE);
         imageView_menu.setVisibility(View.VISIBLE);
         textView_title.setText("书架");

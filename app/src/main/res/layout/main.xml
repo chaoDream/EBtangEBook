@@ -15,8 +15,10 @@
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:fadeScrollbars="false"
         />
+    <!--点击menu时出现的上部分的菜单-->
     <include layout="@layout/top_read"
         android:id="@+id/read_title"/>
+    <!--点击menu时出现的下部分的菜单-->
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/read_util_bottom"
@@ -25,7 +27,6 @@
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -40,7 +41,6 @@
                 android:layout_marginRight="@dimen/dip_size_50"
                 android:id="@+id/read_daynight"/>
         </RelativeLayout>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,7 +93,6 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/read_jindu_mulu"/>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -102,7 +101,6 @@
             android:padding="@dimen/dip_size_20"
             android:background="@color/color_primary"
             android:gravity="center_vertical">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,6 +118,6 @@
                 android:textColor="@color/db_gray"
                 android:text="上一章"/>
         </LinearLayout>
-
     </LinearLayout>
+
 </RelativeLayout>
