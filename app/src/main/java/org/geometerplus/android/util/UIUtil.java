@@ -25,9 +25,12 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
+import com.ebtang.ebtangebook.event.OpenBookDone;
+
 import org.fbreader.util.Pair;
 import org.geometerplus.zlibrary.core.application.ZLApplication;
 import org.geometerplus.zlibrary.core.resources.ZLResource;
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -141,6 +144,7 @@ public abstract class UIUtil {
                                         try {
                                             myProgress.dismiss();
                                             myProgress = null;
+                                            EventBus.getDefault().post(new OpenBookDone());
                                         }catch (Exception e) {
                                             e.printStackTrace();
                                         }

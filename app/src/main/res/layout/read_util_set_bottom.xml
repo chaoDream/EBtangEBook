@@ -23,10 +23,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dip_size_20"
+            android:layout_height="@dimen/dip_size_20"
             android:button="@null"
             android:checked="false"
+            android:padding="@dimen/dip_size_5"
             android:background="@drawable/read_liangdu_cb"
             />
         <TextView
@@ -57,6 +58,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/resd_util_set_bottom_img1"
                 android:background="@drawable/read_set_bg_color_niupi"/>
         </LinearLayout>
         <LinearLayout
@@ -69,6 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/read_set_bg_color_select"
+                android:id="@+id/resd_util_set_bottom_img2"
                 android:background="@drawable/read_set_bg_color_niupi"/>
         </LinearLayout>
         <LinearLayout
@@ -80,6 +83,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/resd_util_set_bottom_img3"
                 android:background="@drawable/read_set_bg_color_niupi"/>
         </LinearLayout>
         <LinearLayout
@@ -91,6 +95,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/resd_util_set_bottom_img4"
                 android:background="@drawable/read_set_bg_color_niupi"/>
         </LinearLayout>
         <LinearLayout
@@ -102,6 +107,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/resd_util_set_bottom_img5"
                 android:background="@drawable/read_set_bg_color_niupi"/>
         </LinearLayout>
     </LinearLayout>
@@ -167,6 +173,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dip_size_7"
                 android:layout_centerInParent="true"
+                android:id="@+id/read_util_paiban_four"
                 android:src="@drawable/read_set_paiban_four"
                 />
         </RelativeLayout>
@@ -183,6 +190,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/read_util_paiban_three"
                 android:padding="@dimen/dip_size_7"
                 android:layout_centerInParent="true"
                 android:src="@drawable/read_set_paiban_three"
@@ -201,6 +209,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/read_util_paiban_two"
                 android:padding="@dimen/dip_size_7"
                 android:layout_centerInParent="true"
                 android:src="@drawable/read_set_paiban_two"

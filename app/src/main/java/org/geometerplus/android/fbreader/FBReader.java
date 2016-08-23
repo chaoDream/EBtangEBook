@@ -42,10 +42,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
+import com.ebtang.ebtangebook.event.OpenBookDone;
+import com.ebtang.ebtangebook.event.RegisteSuccess;
 import com.ebtang.ebtangebook.view.read.ReadSetColorFontPop;
 import com.ebtang.ebtangebook.view.read.ReadSettingPopWindow;
+import com.ebtang.ebtangebook.view.read.widget.BatteryView;
 
 import org.geometerplus.android.fbreader.api.ApiListener;
 import org.geometerplus.android.fbreader.api.ApiServerImplementation;
@@ -88,6 +92,8 @@ import org.geometerplus.zlibrary.ui.android.library.ZLAndroidApplication;
 import org.geometerplus.zlibrary.ui.android.library.ZLAndroidLibrary;
 import org.geometerplus.zlibrary.ui.android.view.AndroidFontUtil;
 import org.geometerplus.zlibrary.ui.android.view.ZLAndroidWidget;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -255,6 +261,19 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
     LinearLayout linearLayout_bottom;
     @Bind(R.id.read_daynight)
     ImageView imageView_daynight;
+    @Bind(R.id.read_book_name)
+    TextView textView_book_name;
+    @Bind(R.id.read_current_bookpage)
+    TextView textView_current_bookpage;
+    @Bind(R.id.read_total_bookpage)
+    TextView textView_total_bookpage;
+    @Bind(R.id.read_bookpage_fenge)
+    TextView textView_fenge;
+    @Bind(R.id.read_dianliang)
+    BatteryView batteryView;
+    @Bind(R.id.read_time)
+    TextView textView_time;
+
     private boolean isShowUtil = false;
 
     private ReadSettingPopWindow readSettingPopWindow;
@@ -293,9 +312,14 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
 
         myFBReaderApp = (FBReaderApp) FBReaderApp.Instance();
+
         if (myFBReaderApp == null) {
             myFBReaderApp = new FBReaderApp(Paths.systemInfo(this), new BookCollectionShadow());
         }
+        /******************自增(上下留出来空间)******************/
+        myFBReaderApp.ViewOptions.TopMargin.setValue(35);
+        myFBReaderApp.ViewOptions.BottomMargin.setValue(35);
+
         getCollection().bindToService(this, null);
         myBook = null;
 
@@ -388,6 +412,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         initAnimation();
         initView();
         initConfig();
+        EventBus.getDefault().register(this);
     }
 
     /**
@@ -732,6 +757,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         getCollection().unbind();
         unbindService(DataConnection);
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -1008,6 +1034,8 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
             final ZLAndroidApplication application = (ZLAndroidApplication)getApplication();
             setBatteryLevel(level);
             switchWakeLock(hasWindowFocus() && getZLibrary().BatteryLevelToTurnScreenOffOption.getValue() < level);
+            /*****************************自增*************************/
+            setDianLiang(level);
         }
     };
 
@@ -1223,5 +1251,25 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
             }
         }
     };
+
+    @Subscribe
+    public void onEventMainThread(OpenBookDone event){
+        textView_book_name.setText(myFBReaderApp.getCurrentBook().getTitle());
+        textView_current_bookpage.setText(((ZLTextView)myFBReaderApp.getTextView()).pagePosition().Current+"");
+        textView_total_bookpage.setText(((ZLTextView)myFBReaderApp.getTextView()).pagePosition().Total+"");
+        textView_current_bookpage.setVisibility(View.VISIBLE);
+        textView_total_bookpage.setVisibility(View.VISIBLE);
+        textView_fenge.setVisibility(View.VISIBLE);
+        textView_book_name.setVisibility(View.VISIBLE);
+        batteryView.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 设置电量
+     * @param level
+     */
+    private void setDianLiang(int level){
+        batteryView.setPower(level);
+    }
 
 }

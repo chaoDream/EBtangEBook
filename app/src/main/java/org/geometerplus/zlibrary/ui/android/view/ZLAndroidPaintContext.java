@@ -44,6 +44,9 @@ import org.geometerplus.zlibrary.ui.android.util.ZLAndroidColorUtil;
 
 import java.util.List;
 
+/**
+ * 画出阅读内容的工具
+ */
 public final class ZLAndroidPaintContext extends ZLPaintContext {
 
     public static ZLBooleanOption AntiAliasOption = new ZLBooleanOption("Fonts", "AntiAlias", true);

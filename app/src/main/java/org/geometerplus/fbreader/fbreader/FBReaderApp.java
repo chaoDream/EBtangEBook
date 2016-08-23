@@ -19,6 +19,8 @@
 
 package org.geometerplus.fbreader.fbreader;
 
+import com.ebtang.ebtangebook.event.OpenBookDone;
+
 import org.fbreader.util.ComparisonUtil;
 import org.geometerplus.fbreader.book.Author;
 import org.geometerplus.fbreader.book.Book;
@@ -57,6 +59,7 @@ import org.geometerplus.zlibrary.text.view.ZLTextParagraphCursor;
 import org.geometerplus.zlibrary.text.view.ZLTextPosition;
 import org.geometerplus.zlibrary.text.view.ZLTextView;
 import org.geometerplus.zlibrary.text.view.ZLTextWordCursor;
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Collections;
 import java.util.Date;
@@ -190,6 +193,7 @@ public final class FBReaderApp extends ZLApplication {
     public void openBook(Book book, final Bookmark bookmark, Runnable postAction, Notifier notifier) {
         if (Model != null) {
             if (book == null || bookmark == null && Collection.sameBook(book, Model.Book)) {
+                EventBus.getDefault().post(new OpenBookDone());
                 return;
             }
         }
@@ -203,6 +207,7 @@ public final class FBReaderApp extends ZLApplication {
                 book = Collection.getBookByFile(BookUtil.getHelpFile().getPath());
             }
             if (book == null) {
+                EventBus.getDefault().post(new OpenBookDone());
                 return;
             }
         }
@@ -335,6 +340,12 @@ public final class FBReaderApp extends ZLApplication {
         }
     }
 
+    /**
+     * 从内部打开一本书的方法
+     * @param book
+     * @param bookmark
+     * @param force
+     */
     private synchronized void openBookInternal(final Book book, Bookmark bookmark, boolean force) {
         if (!force && Model != null && Collection.sameBook(book, Model.Book)) {
             if (bookmark != null) {

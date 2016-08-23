@@ -437,6 +437,9 @@ public final class FBView extends ZLTextView {
         return myViewOptions.getColorProfile().HighlightingForegroundOption.getValue();
     }
 
+    /**
+     * 阅读页面底部的信息展示view
+     */
     private abstract class Footer implements ZLView.FooterArea {
 
         private Runnable UpdateTask = new Runnable() {
