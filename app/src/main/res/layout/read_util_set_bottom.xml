@@ -221,6 +221,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="阅读设置"
+            android:id="@+id/read_util_bottom_set"
             android:textColor="@color/db_gray"
             android:paddingTop="@dimen/dip_size_5"
             android:paddingBottom="@dimen/dip_size_5"

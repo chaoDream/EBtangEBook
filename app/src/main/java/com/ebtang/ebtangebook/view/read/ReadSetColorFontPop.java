@@ -1,6 +1,7 @@
 package com.ebtang.ebtangebook.view.read;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.provider.Settings;
 import android.view.Gravity;
@@ -33,7 +34,7 @@ public class ReadSetColorFontPop implements View.OnClickListener{
 
     private PopupWindow popupWindow;
 
-    private TextView textView_fangda,textView_suoxiao;
+    private TextView textView_fangda,textView_suoxiao,textView_set;
 
     private ImageView imageView_bg1,imageView_bg2,imageView_bg3,imageView_bg4,imageView_bg5;
 
@@ -57,6 +58,7 @@ public class ReadSetColorFontPop implements View.OnClickListener{
         if(contentView == null){
             contentView = LayoutInflater.from(context).inflate(R.layout.read_util_set_bottom,null);
             seekBar_liangdu = (SeekBar)contentView.findViewById(R.id.read_system_liangdu);
+            textView_set = (TextView) contentView.findViewById(R.id.read_util_bottom_set);
             checkBox_liangdu = (CheckBox)contentView.findViewById(R.id.read_liangdu_cb);
             textView_fangda = (TextView)contentView.findViewById(R.id.read_set_fangda);
             textView_suoxiao = (TextView)contentView.findViewById(R.id.read_set_suoxiao);
@@ -137,6 +139,7 @@ public class ReadSetColorFontPop implements View.OnClickListener{
             imageView_paiban4.setOnClickListener(this);
             imageView_paiban3.setOnClickListener(this);
             imageView_paiban2.setOnClickListener(this);
+            textView_set.setOnClickListener(this);
         }
     }
 
@@ -210,6 +213,10 @@ public class ReadSetColorFontPop implements View.OnClickListener{
                 context.myFBReaderApp.ViewOptions.getTextStyleCollection().getBaseStyle().LineSpaceOption.setValue(20);
                 context.myFBReaderApp.clearTextCaches();
                 context.myFBReaderApp.getViewWidget().repaint();
+                break;
+            case R.id.read_util_bottom_set:
+                Intent intent = new Intent(context,ReadSettingActivity.class);
+                context.startActivity(intent);
                 break;
         }
     }
