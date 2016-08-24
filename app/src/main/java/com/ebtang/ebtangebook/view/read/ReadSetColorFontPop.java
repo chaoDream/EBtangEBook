@@ -2,15 +2,20 @@ package com.ebtang.ebtangebook.view.read;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.provider.Settings;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
+import com.ebtang.ebtangebook.spf.SharedPrefHelper;
 import com.ebtang.ebtangebook.view.recomm.RecommAllActivity;
 
 import org.geometerplus.android.fbreader.FBReader;
@@ -19,7 +24,7 @@ import org.geometerplus.fbreader.fbreader.ActionCode;
 import org.geometerplus.zlibrary.core.options.ZLIntegerRangeOption;
 
 /**
- * Created by dell on 2016/8/18 0018.
+ * Created by fengzongwei on 2016/8/18 0018.
  */
 public class ReadSetColorFontPop implements View.OnClickListener{
 
@@ -37,6 +42,12 @@ public class ReadSetColorFontPop implements View.OnClickListener{
 
     private ImageView imageView_paiban4,imageView_paiban3,imageView_paiban2;
 
+    private SeekBar seekBar_liangdu;
+
+    private CheckBox checkBox_liangdu;
+
+    private float liangdu;
+
     public ReadSetColorFontPop(FBReader context){
         this.context = context;
         initView();
@@ -45,6 +56,8 @@ public class ReadSetColorFontPop implements View.OnClickListener{
     private void initView(){
         if(contentView == null){
             contentView = LayoutInflater.from(context).inflate(R.layout.read_util_set_bottom,null);
+            seekBar_liangdu = (SeekBar)contentView.findViewById(R.id.read_system_liangdu);
+            checkBox_liangdu = (CheckBox)contentView.findViewById(R.id.read_liangdu_cb);
             textView_fangda = (TextView)contentView.findViewById(R.id.read_set_fangda);
             textView_suoxiao = (TextView)contentView.findViewById(R.id.read_set_suoxiao);
             imageView_bg1 = (ImageView)contentView.findViewById(R.id.resd_util_set_bottom_img1);
@@ -64,6 +77,55 @@ public class ReadSetColorFontPop implements View.OnClickListener{
             // 设置此参数获得焦点，否则无法点击
             popupWindow.setFocusable(true);
             popupWindow.setAnimationStyle(R.style.popwin_anim_style);
+            checkBox_liangdu.setChecked(SharedPrefHelper.getInstance(context).getIsUseSystemLiangdu());
+            checkBox_liangdu.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    SharedPrefHelper.getInstance(context).setIsUseSystemLiangdu(isChecked);
+                    if (isChecked) {
+                        try {
+                            liangdu = SharedPrefHelper.getInstance(context).getScreenLiangdu();
+                            SharedPrefHelper.getInstance(context).setIsUseSystemLiangdu(true);
+                            context.setScreenBrightnessSystem(Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS) / 255.0f);
+                            seekBar_liangdu.setProgress(((int) (Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS) / 255.0f * 100)));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        SharedPrefHelper.getInstance(context).setIsUseSystemLiangdu(false);
+                        seekBar_liangdu.setProgress(((int)(liangdu * 100)));
+//                        context.setScreenBrightnessSystem(SharedPrefHelper.getInstance(context).getScreenLiangdu());
+                    }
+                }
+            });
+            if(!SharedPrefHelper.getInstance(context).getIsUseSystemLiangdu())
+                seekBar_liangdu.setProgress(((int) SharedPrefHelper.getInstance(context).getScreenLiangdu() * 100));
+            else
+            try{
+                seekBar_liangdu.setProgress(((int) (Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS) / 255.0f * 100)));
+            }catch (Exception e){
+
+            }
+            seekBar_liangdu.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                    context.setScreenBrightnessSystem((float)seekBar.getProgress()/10);
+                    if(SharedPrefHelper.getInstance(context).getIsUseSystemLiangdu())
+                        return;
+                    SharedPrefHelper.getInstance(context).setScreenLiangdu((float)seekBar.getProgress()/100);
+                    context.setScreenBrightnessSystem((float)seekBar.getProgress()/100);
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                    String a = "";
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    String a = "";
+                }
+            });
 
             textView_suoxiao.setOnClickListener(this);
             textView_fangda.setOnClickListener(this);

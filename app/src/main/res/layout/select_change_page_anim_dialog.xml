@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:id="@+id/select_change_page_anim_dialog_top">
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_anim_pinghua"
+        android:padding="@dimen/dip_size_15"
+        android:text="平滑"
+        android:background="@color/white"
+        android:textSize="@dimen/font_size_large"
+        android:textColor="@color/black"/>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/db_gray"
+        android:layout_height="@dimen/dip_size_1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_anim_fangzhen"
+        android:padding="@dimen/dip_size_15"
+        android:background="@color/white"
+        android:text="仿真"
+        android:textSize="@dimen/font_size_large"
+        android:textColor="@color/black"/>
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/db_gray"
+        android:layout_height="@dimen/dip_size_1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_anim_fugai"
+        android:padding="@dimen/dip_size_15"
+        android:text="覆盖"
+        android:background="@color/white"
+        android:textSize="@dimen/font_size_large"
+        android:textColor="@color/black"/>
+
+</LinearLayout>

@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
+import com.ebtang.ebtangebook.spf.SharedPrefHelper;
 import com.github.johnpersano.supertoasts.SuperActivityToast;
 
 import org.geometerplus.android.fbreader.dict.DictionaryUtil;
@@ -84,6 +85,7 @@ public abstract class FBReaderMainActivity extends Activity {
      * @param level 是一个0.0-1.0之间的一个float类型数值
      */
     public void setScreenBrightnessSystem(float level) {
+//        SharedPrefHelper.getInstance(this).setScreenLiangdu(level);
         final WindowManager.LayoutParams attrs = getWindow().getAttributes();
         attrs.screenBrightness = level;
         getWindow().setAttributes(attrs);

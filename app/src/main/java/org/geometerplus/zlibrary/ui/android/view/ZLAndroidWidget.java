@@ -29,6 +29,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
+import com.ebtang.ebtangebook.event.OpenBookDone;
+
 import org.geometerplus.android.fbreader.FBReader;
 import org.geometerplus.fbreader.Paths;
 import org.geometerplus.zlibrary.core.application.ZLApplication;
@@ -42,6 +44,7 @@ import org.geometerplus.zlibrary.ui.android.view.animation.NoneAnimationProvider
 import org.geometerplus.zlibrary.ui.android.view.animation.ShiftAnimationProvider;
 import org.geometerplus.zlibrary.ui.android.view.animation.SlideAnimationProvider;
 import org.geometerplus.zlibrary.ui.android.view.animation.SlideOldStyleAnimationProvider;
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -190,6 +193,7 @@ public class ZLAndroidWidget extends MainView implements ZLViewWidget, View.OnLo
         final AnimationProvider animator = getAnimationProvider();
         animator.setup(direction, getWidth(), getMainAreaHeight(), myColorLevel);
         animator.startManualScrolling(x, y);
+        EventBus.getDefault().post(new OpenBookDone());
     }
 
     @Override
@@ -200,6 +204,7 @@ public class ZLAndroidWidget extends MainView implements ZLViewWidget, View.OnLo
             animator.scrollTo(x, y);
             postInvalidate();
         }
+        EventBus.getDefault().post(new OpenBookDone());
     }
 
     @Override
@@ -214,6 +219,7 @@ public class ZLAndroidWidget extends MainView implements ZLViewWidget, View.OnLo
         if (animator.getMode().Auto) {
             postInvalidate();
         }
+        EventBus.getDefault().post(new OpenBookDone());
     }
 
     @Override
@@ -228,6 +234,7 @@ public class ZLAndroidWidget extends MainView implements ZLViewWidget, View.OnLo
         if (animator.getMode().Auto) {
             postInvalidate();
         }
+        EventBus.getDefault().post(new OpenBookDone());
     }
 
     @Override
@@ -240,6 +247,7 @@ public class ZLAndroidWidget extends MainView implements ZLViewWidget, View.OnLo
         }
         animator.startAnimatedScrolling(x, y, speed);
         postInvalidate();
+        EventBus.getDefault().post(new OpenBookDone());
     }
 
     void drawOnBitmap(Bitmap bitmap, ZLView.PageIndex index) {

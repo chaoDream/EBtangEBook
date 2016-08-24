@@ -14,7 +14,7 @@ import com.ebtang.ebtangebook.view.main.popwindow.DensityUtil;
 import org.geometerplus.android.fbreader.FBReader;
 
 /**
- * Created by dell on 2016/8/18 0018.
+ * Created by fengzongwei on 2016/8/18 0018.
  */
 public class ReadSettingPopWindow implements View.OnClickListener{
 

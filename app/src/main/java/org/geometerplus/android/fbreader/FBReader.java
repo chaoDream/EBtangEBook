@@ -31,6 +31,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,13 +43,19 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
+import com.ebtang.ebtangebook.event.AnimStyle;
 import com.ebtang.ebtangebook.event.OpenBookDone;
 import com.ebtang.ebtangebook.event.RegisteSuccess;
+import com.ebtang.ebtangebook.event.TimeChange;
+import com.ebtang.ebtangebook.event.VolumeChangePage;
+import com.ebtang.ebtangebook.spf.SharedPrefHelper;
 import com.ebtang.ebtangebook.view.read.ReadSetColorFontPop;
 import com.ebtang.ebtangebook.view.read.ReadSettingPopWindow;
+import com.ebtang.ebtangebook.view.read.service.MyTimeService;
 import com.ebtang.ebtangebook.view.read.widget.BatteryView;
 
 import org.geometerplus.android.fbreader.api.ApiListener;
@@ -84,6 +91,7 @@ import org.geometerplus.zlibrary.core.filesystem.ZLFile;
 import org.geometerplus.zlibrary.core.library.ZLibrary;
 import org.geometerplus.zlibrary.core.options.Config;
 import org.geometerplus.zlibrary.core.resources.ZLResource;
+import org.geometerplus.zlibrary.core.view.ZLViewEnums;
 import org.geometerplus.zlibrary.core.view.ZLViewWidget;
 import org.geometerplus.zlibrary.text.view.ZLTextRegion;
 import org.geometerplus.zlibrary.text.view.ZLTextView;
@@ -273,7 +281,14 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
     BatteryView batteryView;
     @Bind(R.id.read_time)
     TextView textView_time;
-
+    @Bind(R.id.read_progress_sb)
+    SeekBar seekBar_progress;
+    @Bind(R.id.read_current_page)
+    TextView textView_page_now;
+    @Bind(R.id.read_totle_page)
+    TextView textView_page_all;
+    @Bind(R.id.read_page_bili)
+    TextView textView_progress_bili;
     private boolean isShowUtil = false;
 
     private ReadSettingPopWindow readSettingPopWindow;
@@ -286,7 +301,8 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         super.onCreate(icicle);
 
         bindService(new Intent(this, DataService.class), DataConnection, DataService.BIND_AUTO_CREATE);
-
+        Intent service=new Intent(this, MyTimeService.class);
+        startService(service);
         final Config config = Config.Instance();
         //ConfigShadow
         config.runOnConnect(new Runnable() {
@@ -317,8 +333,9 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
             myFBReaderApp = new FBReaderApp(Paths.systemInfo(this), new BookCollectionShadow());
         }
         /******************自增(上下留出来空间)******************/
-        myFBReaderApp.ViewOptions.TopMargin.setValue(35);
-        myFBReaderApp.ViewOptions.BottomMargin.setValue(35);
+        myFBReaderApp.ViewOptions.TopMargin.setValue(40);
+        myFBReaderApp.ViewOptions.BottomMargin.setValue(40);
+        ZLAndroidLibrary.Instance().getOrientationOption().setValue("portrait");//设置只支持竖屏显示
 
         getCollection().bindToService(this, null);
         myBook = null;
@@ -641,13 +658,23 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
                 //同步数据
                 SyncOperations.enableSync(FBReader.this, myFBReaderApp.SyncOptions);
 
-                final int brightnessLevel = getZLibrary().ScreenBrightnessLevelOption.getValue();
-
-                if (brightnessLevel != 0) {
-                    getViewWidget().setScreenBrightness(brightnessLevel);
-                }else {
-                    setScreenBrightnessAuto();
+//                final int brightnessLevel = getZLibrary().ScreenBrightnessLevelOption.getValue();
+//                if (brightnessLevel != 0) {
+//                    getViewWidget().setScreenBrightness(brightnessLevel);
+//                }else {
+//                    setScreenBrightnessAuto();//设置屏幕亮度
+//                }
+                if(!SharedPrefHelper.getInstance(FBReader.this).getIsUseSystemLiangdu()){
+                    final float brightnessLevel = SharedPrefHelper.getInstance(FBReader.this).getScreenLiangdu();
+                    setScreenBrightnessSystem(brightnessLevel);
+                }else{
+                    try{
+                        setScreenBrightnessSystem(Settings.System.getInt(FBReader.this.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS) / 255.0f);
+                    }catch (Exception e){
+                    }
                 }
+
+//                getViewWidget().setScreenBrightness(brightnessLevel);
                 if (getZLibrary().DisableButtonLightsOption.getValue()) {
                     setButtonLight(false);
                 }
@@ -1196,6 +1223,32 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         imageView_back.setOnClickListener(clickListener);
         imageView_menu.setOnClickListener(clickListener);
         imageView_daynight.setOnClickListener(clickListener);
+        textView_time.setText(ZLibrary.Instance().getCurrentTimeString());
+        seekBar_progress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            private void gotoPage(int page) {
+                final ZLTextView view = myFBReaderApp.getTextView();
+                if (page == 1) {
+                    view.gotoHome();
+                }else {
+                    view.gotoPage(page);
+                }
+                myFBReaderApp.getViewWidget().reset();
+                myFBReaderApp.getViewWidget().repaint();
+                setReadInfo();
+            }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    final int page = ((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total * progress / 100;
+                    gotoPage(page);
+                }
+            }
+        });
     }
 
     public void showUtil(){
@@ -1252,17 +1305,70 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         }
     };
 
+    /**
+     * 一本书加载完成的监听
+     * @param event
+     */
     @Subscribe
     public void onEventMainThread(OpenBookDone event){
         textView_book_name.setText(myFBReaderApp.getCurrentBook().getTitle());
         textView_current_bookpage.setText(((ZLTextView)myFBReaderApp.getTextView()).pagePosition().Current+"");
-        textView_total_bookpage.setText(((ZLTextView)myFBReaderApp.getTextView()).pagePosition().Total+"");
+        textView_total_bookpage.setText(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total + "");
         textView_current_bookpage.setVisibility(View.VISIBLE);
         textView_total_bookpage.setVisibility(View.VISIBLE);
         textView_fenge.setVisibility(View.VISIBLE);
         textView_book_name.setVisibility(View.VISIBLE);
         batteryView.setVisibility(View.VISIBLE);
+        textView_time.setText(ZLibrary.Instance().getCurrentTimeString());
+        seekBar_progress.setProgress(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Current * 100 /
+                ((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total);
+        textView_page_now.setText(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Current + "");
+        textView_page_all.setText(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total + "");
+        textView_progress_bili.setText(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Current * 100 /
+                ((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total  + "%");
+        textView_time.setVisibility(View.VISIBLE);
+        batteryView.setVisibility(View.VISIBLE);
     }
+
+    /**
+     * 系统时间改变的监听
+     * @param timeChange
+     */
+    @Subscribe
+    public void onEventMainThread(TimeChange timeChange){
+        textView_time.setText(ZLibrary.Instance().getCurrentTimeString());
+    }
+
+    /**
+     * 是否允许音量键进行翻页
+     */
+    @Subscribe
+    public void onEventMainThread(VolumeChangePage volumeChangePage){
+        if(volumeChangePage.getIsOpen()){
+            myFBReaderApp.keyBindings().bindKey(KeyEvent.KEYCODE_VOLUME_DOWN, false, ActionCode.VOLUME_KEY_SCROLL_FORWARD);
+            myFBReaderApp.keyBindings().bindKey(KeyEvent.KEYCODE_VOLUME_UP, false, ActionCode.VOLUME_KEY_SCROLL_BACK);
+        }else{
+            myFBReaderApp.keyBindings().bindKey(KeyEvent.KEYCODE_VOLUME_DOWN, false, FBReaderApp.NoAction);
+            myFBReaderApp.keyBindings().bindKey(KeyEvent.KEYCODE_VOLUME_UP, false, FBReaderApp.NoAction);
+        }
+    }
+
+    /**
+     * 翻页动画更改
+     */
+    @Subscribe
+    public void onEventMainThread(AnimStyle animStyle){
+        if(animStyle.equals("none")){
+            myFBReaderApp.PageTurningOptions.Animation.setValue(ZLViewEnums.Animation.none);
+        }else if(animStyle.equals("curl")){
+            myFBReaderApp.PageTurningOptions.Animation.setValue(ZLViewEnums.Animation.curl);
+        }else if(animStyle.equals("slide")){
+            myFBReaderApp.PageTurningOptions.Animation.setValue(ZLViewEnums.Animation.slide);
+        }else {
+            myFBReaderApp.PageTurningOptions.Animation.setValue(ZLViewEnums.Animation.shift);
+        }
+    }
+
 
     /**
      * 设置电量
@@ -1270,6 +1376,22 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
      */
     private void setDianLiang(int level){
         batteryView.setPower(level);
+    }
+
+    /**
+     * 设置相关阅读信息的显示
+     */
+    private void setReadInfo(){
+        textView_book_name.setText(myFBReaderApp.getCurrentBook().getTitle());
+        textView_current_bookpage.setText(((ZLTextView)myFBReaderApp.getTextView()).pagePosition().Current+"");
+        textView_total_bookpage.setText(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total + "");
+        textView_time.setText(ZLibrary.Instance().getCurrentTimeString());
+        seekBar_progress.setProgress(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Current * 100 /
+                ((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total);
+        textView_page_now.setText(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Current + "");
+        textView_page_all.setText(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total + "");
+        textView_progress_bili.setText(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Current * 100 /
+                ((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total + "%");
     }
 
 }

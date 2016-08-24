@@ -44,6 +44,10 @@ public class SharedPrefHelper {
 
 	private static final String YINLIANG_FANYE = "yinliang_fanye";//音量翻页
 
+	private static final String SCREEN_LIANGDU = "screen_liangdu";//屏幕亮度
+
+	private static final String IS_USE_SYSTEM_LIANGDU = "is_use_system_liangdu";//是否使用系统亮度
+
 	public static synchronized SharedPrefHelper getInstance(Context context) {
 		if (null == sharedPrefHelper) {
 			sharedPrefHelper = new SharedPrefHelper(context);
@@ -180,4 +184,25 @@ public class SharedPrefHelper {
 		return sharedPreferences.getString(subjectId+getUserId(),"");
 	}
 
+	/**
+	 * 设置亮度
+	 * @param liangdu
+	 */
+	public void setScreenLiangdu(float liangdu){
+		sharedPreferences.edit().putFloat(SCREEN_LIANGDU,liangdu).commit();
+	}
+	public float getScreenLiangdu(){
+		return sharedPreferences.getFloat(SCREEN_LIANGDU,1.0f);
+	}
+
+	/**
+	 * 是否使用屏幕亮度
+	 * @param flag
+	 */
+	public void setIsUseSystemLiangdu(boolean flag){
+		sharedPreferences.edit().putBoolean(IS_USE_SYSTEM_LIANGDU,flag).commit();
+	}
+	public boolean getIsUseSystemLiangdu(){
+		return sharedPreferences.getBoolean(IS_USE_SYSTEM_LIANGDU,false);
+	}
 }

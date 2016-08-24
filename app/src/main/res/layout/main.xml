@@ -44,6 +44,7 @@
                 android:layout_height="7dp"
                 android:layout_marginRight="@dimen/dip_size_5"
                 android:id="@+id/read_dianliang"
+                android:visibility="gone"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -51,6 +52,7 @@
                 android:id="@+id/read_time"
                 android:text="15:22"
                 android:textSize="@dimen/font_size_small"
+                android:visibility="gone"
                 android:textColor="@color/black"/>
         </LinearLayout>
         <LinearLayout
@@ -179,6 +181,7 @@
                 android:layout_width="0dp"
                 style="@style/Widget.SeekBar.Normal"
                 android:progress="30"
+                android:id="@+id/read_progress_sb"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <TextView

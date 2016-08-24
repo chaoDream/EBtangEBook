@@ -20,11 +20,13 @@
             android:layout_width="0dp"
             style="@style/Widget.SeekBar.Normal"
             android:progress="30"
+            android:id="@+id/read_system_liangdu"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <CheckBox
             android:layout_width="@dimen/dip_size_20"
             android:layout_height="@dimen/dip_size_20"
+            android:id="@+id/read_liangdu_cb"
             android:button="@null"
             android:checked="false"
             android:padding="@dimen/dip_size_5"
