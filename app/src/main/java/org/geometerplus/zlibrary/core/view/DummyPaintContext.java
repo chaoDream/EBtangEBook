@@ -19,6 +19,9 @@
 
 package org.geometerplus.zlibrary.core.view;
 
+import android.graphics.Bitmap;
+import android.graphics.Rect;
+
 import org.geometerplus.zlibrary.core.filesystem.ZLFile;
 import org.geometerplus.zlibrary.core.fonts.FontEntry;
 import org.geometerplus.zlibrary.core.image.ZLImageData;
@@ -144,5 +147,10 @@ final class DummyPaintContext extends ZLPaintContext {
 
     @Override
     public void fillCircle(int x, int y, int radius) {
+    }
+
+    @Override
+    public void fillBitMap(Bitmap bitmap, Rect srcRect, Rect destRect) {
+
     }
 }

@@ -54,9 +54,9 @@ class SelectionPopup extends PopupPanel implements View.OnClickListener {
         myWindow = (SimplePopupWindow)root.findViewById(R.id.selection_panel);
 
         final ZLResource resource = ZLResource.resource("selectionPopup");
-        setupButton(R.id.selection_panel_copy, resource.getResource("copyToClipboard").getValue());
+//        setupButton(R.id.selection_panel_copy, resource.getResource("copyToClipboard").getValue());
         setupButton(R.id.selection_panel_share, resource.getResource("share").getValue());
-        setupButton(R.id.selection_panel_translate, resource.getResource("translate").getValue());
+//        setupButton(R.id.selection_panel_translate, resource.getResource("translate").getValue());
         setupButton(R.id.selection_panel_bookmark, resource.getResource("bookmark").getValue());
         setupButton(R.id.selection_panel_close, resource.getResource("close").getValue());
     }
@@ -72,7 +72,7 @@ class SelectionPopup extends PopupPanel implements View.OnClickListener {
             return;
         }
 
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
         final int verticalPosition;
@@ -95,15 +95,15 @@ class SelectionPopup extends PopupPanel implements View.OnClickListener {
 
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.selection_panel_copy:
-                Application.runAction(ActionCode.SELECTION_COPY_TO_CLIPBOARD);
-                break;
+//            case R.id.selection_panel_copy:
+//                Application.runAction(ActionCode.SELECTION_COPY_TO_CLIPBOARD);
+//                break;
             case R.id.selection_panel_share:
                 Application.runAction(ActionCode.SELECTION_SHARE);
                 break;
-            case R.id.selection_panel_translate:
-                Application.runAction(ActionCode.SELECTION_TRANSLATE);
-                break;
+//            case R.id.selection_panel_translate:
+//                Application.runAction(ActionCode.SELECTION_TRANSLATE);
+//                break;
             case R.id.selection_panel_bookmark:
                 Application.runAction(ActionCode.SELECTION_BOOKMARK);
                 break;

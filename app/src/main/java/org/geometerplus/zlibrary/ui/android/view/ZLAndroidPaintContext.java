@@ -244,6 +244,7 @@ public final class ZLAndroidPaintContext extends ZLPaintContext {
         path.moveTo(xs[last], ys[last]);
         for (int i = 0; i <= last; ++i) {
             path.lineTo(xs[i], ys[i]);
+//            path.lineTo(xs[i], ys[0]);
         }
         myCanvas.drawPath(path, myFillPaint);
     }
@@ -254,6 +255,7 @@ public final class ZLAndroidPaintContext extends ZLPaintContext {
         path.moveTo(xs[last], ys[last]);
         for (int i = 0; i <= last; ++i) {
             path.lineTo(xs[i], ys[i]);
+//            path.lineTo(xs[i], ys[0]);
         }
         myCanvas.drawPath(path, myLinePaint);
     }
@@ -461,10 +463,20 @@ public final class ZLAndroidPaintContext extends ZLPaintContext {
             y0 = swap;
         }
         myCanvas.drawRect(x0, y0, x1 + 1, y1 + 1, myFillPaint);
+//        myCanvas.drawLine(x0, y0, x1 + 1, y1 + 1, myFillPaint);
     }
 
     @Override
     public void fillCircle(int x, int y, int radius) {
         myCanvas.drawCircle(x, y, radius, myFillPaint);
+    }
+
+    /**
+     * 画选中时左右的箭头
+     * @param bitmap
+     */
+    @Override
+    public void fillBitMap(Bitmap bitmap, Rect srcRect, Rect destRect) {
+        myCanvas.drawBitmap(bitmap,srcRect,destRect,myFillPaint);
     }
 }

@@ -19,6 +19,9 @@
 
 package org.geometerplus.zlibrary.core.view;
 
+import android.graphics.Bitmap;
+import android.graphics.Rect;
+
 import org.geometerplus.zlibrary.core.filesystem.ZLFile;
 import org.geometerplus.zlibrary.core.fonts.FontEntry;
 import org.geometerplus.zlibrary.core.image.ZLImageData;
@@ -239,4 +242,7 @@ abstract public class ZLPaintContext {
     abstract public void drawOutline(int[] xs, int[] ys);
 
     abstract public void fillCircle(int x, int y, int radius);
+
+    abstract public void fillBitMap(Bitmap bitmap,Rect srcRect,Rect destRect);
+
 }

@@ -217,6 +217,7 @@ public class ReadSetColorFontPop implements View.OnClickListener{
             case R.id.read_util_bottom_set:
                 Intent intent = new Intent(context,ReadSettingActivity.class);
                 context.startActivity(intent);
+                popupWindow.dismiss();
                 break;
         }
     }

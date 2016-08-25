@@ -19,8 +19,17 @@
 
 package org.geometerplus.zlibrary.core.view;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+
+import com.ebtang.ebtangebook.R;
+
+import org.geometerplus.android.fbreader.FBReader;
+import org.geometerplus.zlibrary.core.application.ZLApplication;
 import org.geometerplus.zlibrary.core.library.ZLibrary;
 import org.geometerplus.zlibrary.core.util.ZLColor;
+import org.geometerplus.zlibrary.ui.android.library.ZLAndroidApplication;
 
 public abstract class SelectionCursor {
 
@@ -34,11 +43,25 @@ public abstract class SelectionCursor {
         final int dpi = ZLibrary.Instance().getDisplayDPI();
         final int unit = dpi / 120;
         final int xCenter = which == Which.Left ? x - unit - 1 : x + unit + 1;
-        context.fillRectangle(xCenter - unit, y + dpi / 8, xCenter + unit, y - dpi / 8);
+        final Bitmap bitmap_left = BitmapFactory.decodeResource(((FBReader)ZLApplication.Instance().getWindow()).getResources(), R.drawable.select_left);
+        final Bitmap bitmap_right = BitmapFactory.decodeResource(((FBReader)ZLApplication.Instance().getWindow()).getResources(), R.drawable.select_right);
+        final Rect srcRect = new Rect(0,0,bitmap_left.getWidth(),bitmap_left.getHeight());
+//        context.fillRectangle(xCenter - unit, y + dpi / 8, xCenter + unit, y - dpi / 8);
         if (which == Which.Left) {
-            context.fillCircle(xCenter, y - dpi / 8, unit * 6);
+//            context.fillCircle(xCenter, y - dpi / 8, unit * 6);
+            // 计算左边位置
+            int left = x - bitmap_left.getWidth() / 2;
+            // 计算上边位置
+            int top = y -  bitmap_left.getHeight();
+            final Rect descRect = new Rect(left,top,left+bitmap_left.getWidth(),top+bitmap_left.getHeight());
+            context.fillBitMap(bitmap_left,srcRect,descRect);
         }else {
-            context.fillCircle(xCenter, y + dpi / 8, unit * 6);
+//            context.fillCircle(xCenter, y + dpi / 8, unit * 6);
+            int left = x - bitmap_left.getWidth() / 2;
+            // 计算上边位置
+            int top = y;
+            final Rect descRect = new Rect(left,top,left+bitmap_left.getWidth(),top+bitmap_left.getHeight());
+            context.fillBitMap(bitmap_right,srcRect,descRect);
         }
     }
 }

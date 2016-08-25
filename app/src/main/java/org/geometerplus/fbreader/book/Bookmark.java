@@ -50,7 +50,7 @@ public final class Bookmark extends ZLTextFixedPosition {
     private Long myAccessTimestamp;
     private ZLTextFixedPosition myEnd;
     private int myLength;
-    private int myStyleId;
+    private int myStyleId;//标记的颜色id
 
     public final String ModelId;
     public final boolean IsVisible;

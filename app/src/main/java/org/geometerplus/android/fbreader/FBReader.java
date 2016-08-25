@@ -48,6 +48,7 @@ import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.event.AnimStyle;
+import com.ebtang.ebtangebook.event.LongClickDrawLine;
 import com.ebtang.ebtangebook.event.OpenBookDone;
 import com.ebtang.ebtangebook.event.RegisteSuccess;
 import com.ebtang.ebtangebook.event.TimeChange;
@@ -83,6 +84,7 @@ import org.geometerplus.fbreader.fbreader.DictionaryHighlighting;
 import org.geometerplus.fbreader.fbreader.FBReaderApp;
 import org.geometerplus.fbreader.fbreader.options.CancelMenuHelper;
 import org.geometerplus.fbreader.fbreader.options.ColorProfile;
+import org.geometerplus.fbreader.fbreader.options.MiscOptions;
 import org.geometerplus.fbreader.formats.ExternalFormatPlugin;
 import org.geometerplus.fbreader.formats.PluginCollection;
 import org.geometerplus.fbreader.tips.TipsManager;
@@ -1354,15 +1356,27 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
     }
 
     /**
+     * 长按是否可以画线
+     * @param longClickDrawLine
+     */
+    @Subscribe
+    public void onEventMainThread(LongClickDrawLine longClickDrawLine){
+        if(longClickDrawLine.isCanDraw())
+            myFBReaderApp.MiscOptions.WordTappingAction.setValue(MiscOptions.WordTappingActionEnum.startSelecting);
+        else
+            myFBReaderApp.MiscOptions.WordTappingAction.setValue(MiscOptions.WordTappingActionEnum.doNothing);
+    }
+
+    /**
      * 翻页动画更改
      */
     @Subscribe
     public void onEventMainThread(AnimStyle animStyle){
-        if(animStyle.equals("none")){
+        if(animStyle.getStyleStr().equals("none")){
             myFBReaderApp.PageTurningOptions.Animation.setValue(ZLViewEnums.Animation.none);
-        }else if(animStyle.equals("curl")){
+        }else if(animStyle.getStyleStr().equals("curl")){
             myFBReaderApp.PageTurningOptions.Animation.setValue(ZLViewEnums.Animation.curl);
-        }else if(animStyle.equals("slide")){
+        }else if(animStyle.getStyleStr().equals("slide")){
             myFBReaderApp.PageTurningOptions.Animation.setValue(ZLViewEnums.Animation.slide);
         }else {
             myFBReaderApp.PageTurningOptions.Animation.setValue(ZLViewEnums.Animation.shift);

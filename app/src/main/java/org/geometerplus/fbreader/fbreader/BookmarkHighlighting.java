@@ -19,6 +19,7 @@
 
 package org.geometerplus.fbreader.fbreader;
 
+import org.geometerplus.fbreader.book.Bookmark;
 import org.geometerplus.fbreader.book.HighlightingStyle;
 import org.geometerplus.fbreader.book.IBookCollection;
 import org.geometerplus.zlibrary.core.util.ZLColor;
@@ -53,8 +54,21 @@ public final class BookmarkHighlighting extends ZLTextSimpleHighlighting {
 
     @Override
     public ZLColor getBackgroundColor() {
-        final HighlightingStyle bmStyle = Collection.getHighlightingStyle(Bookmark.getStyleId());
-        return bmStyle != null ? bmStyle.getBackgroundColor() : null;
+//        final HighlightingStyle bmStyle = Collection.getHighlightingStyle(Bookmark.getStyleId());
+//        return bmStyle != null ? bmStyle.getBackgroundColor() : null;
+        ZLColor zlColor;
+        switch (Bookmark.getStyleId()){
+            case 1:
+                zlColor =  new ZLColor(-541952);
+                break;
+            case 2:
+                zlColor =  new ZLColor(-1166541);
+                break;
+            default:
+                zlColor =  new ZLColor(-10803048);
+                break;
+        }
+        return zlColor;
     }
 
     @Override

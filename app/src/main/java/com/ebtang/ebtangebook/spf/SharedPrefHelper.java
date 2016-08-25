@@ -48,6 +48,10 @@ public class SharedPrefHelper {
 
 	private static final String IS_USE_SYSTEM_LIANGDU = "is_use_system_liangdu";//是否使用系统亮度
 
+	private static final String IS_VOLUME_CHANGE_PAGE = "is_volume_change_page";//是否音量键翻页
+
+	private static final String IS_LONG_CLICK_DRAW = "is_long_click_draw_line";//是否长按划线
+
 	public static synchronized SharedPrefHelper getInstance(Context context) {
 		if (null == sharedPrefHelper) {
 			sharedPrefHelper = new SharedPrefHelper(context);
@@ -204,5 +208,27 @@ public class SharedPrefHelper {
 	}
 	public boolean getIsUseSystemLiangdu(){
 		return sharedPreferences.getBoolean(IS_USE_SYSTEM_LIANGDU,false);
+	}
+
+	/**
+	 * 是否音量键进行翻页
+	 * @param flag
+	 */
+	public void setIsVolumeChangePage(boolean flag){
+		sharedPreferences.edit().putBoolean(IS_VOLUME_CHANGE_PAGE,flag).commit();
+	}
+	public boolean getIsVolumeChangePage(){
+		return sharedPreferences.getBoolean(IS_VOLUME_CHANGE_PAGE,true);
+	}
+
+	/**
+	 * 是否长按进行画线
+	 * @param flag
+	 */
+	public void setIsLongClickDraw(boolean flag){
+		sharedPreferences.edit().putBoolean(IS_LONG_CLICK_DRAW,flag).commit();
+	}
+	public boolean getIsLongClickDraw(){
+		return sharedPreferences.getBoolean(IS_LONG_CLICK_DRAW,true);
 	}
 }

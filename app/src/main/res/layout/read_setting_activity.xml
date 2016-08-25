@@ -29,6 +29,7 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/read_setting_changan_huaxian_cb"
                 android:button="@drawable/setting_cb"/>
         </LinearLayout>
         <View
@@ -54,6 +55,7 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/read_setting_yinliang_fanye_cb"
                 android:button="@drawable/setting_cb"/>
         </LinearLayout>
         <View

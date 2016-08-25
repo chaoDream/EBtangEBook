@@ -127,6 +127,9 @@ public final class FBView extends ZLTextView {
             return;
         }
 
+        /**
+         * 点击书签
+         */
         final ZLTextHighlighting highlighting = findHighlighting(x, y, maxSelectionDistance());
         if (highlighting instanceof BookmarkHighlighting) {
             myReader.runAction(ActionCode.SELECTION_BOOKMARK, ((BookmarkHighlighting)highlighting).Bookmark);
