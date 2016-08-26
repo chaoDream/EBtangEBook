@@ -10,8 +10,13 @@ import android.widget.ListView;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.constants.Constants;
 import com.ebtang.ebtangebook.view.bookinfo.adapter.BookLabelTypeAdapter;
+import com.ebtang.ebtangebook.view.bookinfo.adapter.BookMuluAdapter;
 import com.ebtang.ebtangebook.view.setting.adapter.MessageAdapter;
 import com.ebtang.ebtangebook.view.setting.adapter.YInHaoDataAdapter;
+
+import org.geometerplus.fbreader.bookmodel.TOCTree;
+import org.geometerplus.fbreader.fbreader.FBReaderApp;
+import org.geometerplus.zlibrary.core.application.ZLApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,7 @@ public class MyListFragment extends BaseFragment{
     private MessageAdapter messageAdapter;
     private YInHaoDataAdapter yInHaoDataAdapter;
     private BookLabelTypeAdapter bookLabelTypeAdapter;
+    private BookMuluAdapter bookMuluAdapter;
     private int type;
 
     @Nullable
@@ -52,6 +58,13 @@ public class MyListFragment extends BaseFragment{
             listView.setAdapter(yInHaoDataAdapter);
         }else if(type == Constants.MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_MULU ||
                 type == Constants.MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_SHUQIAN ||
+                type == Constants.MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_BIJI){
+            final FBReaderApp fbreader = (FBReaderApp) ZLApplication.Instance();
+            final TOCTree root = fbreader.Model.TOCTree;
+            TOCTree treeToSelect = fbreader.getCurrentTOCElement();
+            bookMuluAdapter = new BookMuluAdapter(getActivity(),listView,root,treeToSelect);
+            bookMuluAdapter.selectItem(treeToSelect);
+        }else if(type == Constants.MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_SHUQIAN ||
                 type == Constants.MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_BIJI){
             bookLabelTypeAdapter = new BookLabelTypeAdapter(getActivity(),list,type);
             listView.setAdapter(bookLabelTypeAdapter);

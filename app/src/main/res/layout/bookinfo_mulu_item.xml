@@ -2,14 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:padding="@dimen/dip_size_10"
+    android:paddingRight="@dimen/dip_size_10"
+    android:paddingLeft="@dimen/dip_size_10"
+    android:paddingBottom="@dimen/dip_size_15"
+    android:paddingTop="@dimen/dip_size_15"
     android:background="@color/white"
+    android:id="@+id/bookinfo_mulu_item_body"
     android:layout_height="wrap_content">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:id="@+id/bookinfo_mulu_item_num"
+        android:visibility="gone"
         android:text="第一章"/>
 
     <TextView
@@ -17,6 +23,7 @@
         android:layout_weight="1"
         android:layout_marginRight="@dimen/dip_size_10"
         android:layout_height="wrap_content"
+        android:id="@+id/bookinfo_mulu_item_name"
         android:layout_marginLeft="@dimen/dip_size_10"
         android:textColor="@color/black"
         android:text="关于我和三本书"/>
@@ -24,6 +31,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/bookinfo_mulu_item_free"
         android:src="@drawable/icon_free"/>
 
 </LinearLayout>

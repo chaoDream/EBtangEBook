@@ -162,20 +162,23 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/read_jindu_mulu"/>
+                android:src="@drawable/read_jindu_mulu"
+                android:id="@+id/read_set_mulu"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/dip_size_15"
-            android:padding="@dimen/dip_size_20"
+            android:padding="@dimen/dip_size_10"
             android:background="@color/color_primary"
             android:gravity="center_vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/db_gray"
+                android:id="@+id/read_util_lastchapter"
+                android:padding="@dimen/dip_size_10"
                 android:text="上一章"/>
             <SeekBar
                 android:layout_width="0dp"
@@ -188,7 +191,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/db_gray"
-                android:text="上一章"/>
+                android:padding="@dimen/dip_size_10"
+                android:id="@+id/read_util_nextchapter"
+                android:text="下一章"/>
         </LinearLayout>
     </LinearLayout>
 

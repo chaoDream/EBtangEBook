@@ -111,5 +111,12 @@ abstract class PopupPanel extends ZLApplication.PopupPanel {
         myRoot = root;
     }
 
+
     public abstract void createControlPanel(FBReader activity, RelativeLayout root);
+
+    /****************自增**********************/
+    public FBReader getMyActivity(){
+        return myActivity;
+    }
+
 }

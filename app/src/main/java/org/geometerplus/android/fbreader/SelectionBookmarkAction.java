@@ -52,18 +52,18 @@ public class SelectionBookmarkAction extends FBAndroidAction {
             return;
         }
 
-        final SuperActivityToast toast = new SuperActivityToast(BaseActivity, SuperToast.Type.BUTTON);
-        toast.setText(bookmark.getText());
-        toast.setDuration(SuperToast.Duration.EXTRA_LONG);
-        toast.setButtonIcon(android.R.drawable.ic_menu_edit, ZLResource.resource("dialog").getResource("button").getResource("edit").getValue());
-        toast.setOnClickWrapper(new OnClickWrapper("bkmk", new SuperToast.OnClickListener() {
-            @Override
-            public void onClick(View view, Parcelable token) {
-                final Intent intent = new Intent(BaseActivity.getApplicationContext(), EditBookmarkActivity.class);
-                FBReaderIntents.putBookmarkExtra(intent, bookmark);
-                OrientationUtil.startActivity(BaseActivity, intent);
-            }
-        }));
-        BaseActivity.showToast(toast);
+//        final SuperActivityToast toast = new SuperActivityToast(BaseActivity, SuperToast.Type.BUTTON);
+//        toast.setText(bookmark.getText());
+//        toast.setDuration(SuperToast.Duration.EXTRA_LONG);
+//        toast.setButtonIcon(android.R.drawable.ic_menu_edit, ZLResource.resource("dialog").getResource("button").getResource("edit").getValue());
+//        toast.setOnClickWrapper(new OnClickWrapper("bkmk", new SuperToast.OnClickListener() {
+//            @Override
+//            public void onClick(View view, Parcelable token) {
+//                final Intent intent = new Intent(BaseActivity.getApplicationContext(), EditBookmarkActivity.class);
+//                FBReaderIntents.putBookmarkExtra(intent, bookmark);
+//                OrientationUtil.startActivity(BaseActivity, intent);
+//            }
+//        }));
+//        BaseActivity.showToast(toast);
     }
 }

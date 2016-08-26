@@ -106,6 +106,26 @@ public final class FBReaderApp extends ZLApplication {
 
     private final SyncData mySyncData = new SyncData();
 
+    /*************************自增************************/
+    private boolean isLongClickShowSelectPop = true;
+    /**
+     * 设置是否是长按打开popwindow
+     * @param flag
+     */
+    public void setLongClickShowSelectPop(boolean flag){
+        this.isLongClickShowSelectPop = flag;
+    }
+    public boolean isLongClickShowSelectPop(){
+        return isLongClickShowSelectPop;
+    }
+    private Bookmark bookmark;//点击书签位置时的书签对象
+    public void setBookmark(Bookmark bookmark){
+        this.bookmark = bookmark;
+    }
+    public Bookmark getBookmark(){
+        return bookmark;
+    }
+
     public FBReaderApp(SystemInfo systemInfo, final IBookCollection<Book> collection) {
         super(systemInfo);
 
@@ -692,6 +712,10 @@ public final class FBReaderApp extends ZLApplication {
         return new Bookmark(Collection, Model.Book, view.getModel().getId(), new AutoTextSnippet(cursor, maxChars), visible);
     }
 
+    /**
+     * 获取当前章节
+     * @return
+     */
     public TOCTree getCurrentTOCElement() {
         final ZLTextWordCursor cursor = BookTextView.getStartCursor();
         if (Model == null || cursor == null) {

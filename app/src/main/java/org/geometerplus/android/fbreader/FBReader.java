@@ -36,24 +36,29 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.event.AnimStyle;
+import com.ebtang.ebtangebook.event.BookMarkModify;
 import com.ebtang.ebtangebook.event.LongClickDrawLine;
 import com.ebtang.ebtangebook.event.OpenBookDone;
 import com.ebtang.ebtangebook.event.RegisteSuccess;
 import com.ebtang.ebtangebook.event.TimeChange;
 import com.ebtang.ebtangebook.event.VolumeChangePage;
 import com.ebtang.ebtangebook.spf.SharedPrefHelper;
+import com.ebtang.ebtangebook.view.bookinfo.BookLabelActivity;
 import com.ebtang.ebtangebook.view.read.ReadSetColorFontPop;
 import com.ebtang.ebtangebook.view.read.ReadSettingPopWindow;
 import com.ebtang.ebtangebook.view.read.service.MyTimeService;
@@ -79,6 +84,7 @@ import org.geometerplus.fbreader.book.Book;
 import org.geometerplus.fbreader.book.BookUtil;
 import org.geometerplus.fbreader.book.Bookmark;
 import org.geometerplus.fbreader.bookmodel.BookModel;
+import org.geometerplus.fbreader.bookmodel.TOCTree;
 import org.geometerplus.fbreader.fbreader.ActionCode;
 import org.geometerplus.fbreader.fbreader.DictionaryHighlighting;
 import org.geometerplus.fbreader.fbreader.FBReaderApp;
@@ -88,6 +94,7 @@ import org.geometerplus.fbreader.fbreader.options.MiscOptions;
 import org.geometerplus.fbreader.formats.ExternalFormatPlugin;
 import org.geometerplus.fbreader.formats.PluginCollection;
 import org.geometerplus.fbreader.tips.TipsManager;
+import org.geometerplus.zlibrary.core.application.ZLApplication;
 import org.geometerplus.zlibrary.core.application.ZLApplicationWindow;
 import org.geometerplus.zlibrary.core.filesystem.ZLFile;
 import org.geometerplus.zlibrary.core.library.ZLibrary;
@@ -291,12 +298,29 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
     TextView textView_page_all;
     @Bind(R.id.read_page_bili)
     TextView textView_progress_bili;
+    @Bind(R.id.read_set_mulu)
+    ImageView imageView_set_mulu;
+    @Bind(R.id.read_util_lastchapter)
+    TextView textView_lastChapter;
+    @Bind(R.id.read_util_nextchapter)
+    TextView textView_nextchapter;
     private boolean isShowUtil = false;
 
     private ReadSettingPopWindow readSettingPopWindow;
     public ReadSetColorFontPop readSetColorFontPop;
 
     private boolean isNightMode = false;//当前是否为夜间模式
+
+    //本书当前当前章节
+    private TOCTree root;
+    //绑定章节的adapter
+    private CalculateChapterAdapter calculateChapterAdapter;
+
+    private boolean isFiratChapter = false;//当前阅读的是否是第一章
+    private boolean isLastChapter = false;//当前阅读的是否的最后一章
+
+    private int lastChapterNum;//上一章的index
+    private int nextChapterNum;//下一章的Index
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -334,6 +358,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         if (myFBReaderApp == null) {
             myFBReaderApp = new FBReaderApp(Paths.systemInfo(this), new BookCollectionShadow());
         }
+//        checkFirstOrLastChapter();
         /******************自增(上下留出来空间)******************/
         myFBReaderApp.ViewOptions.TopMargin.setValue(40);
         myFBReaderApp.ViewOptions.BottomMargin.setValue(40);
@@ -823,6 +848,9 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         return true;
     }
 
+    /**
+     * 显示长按时候出现的popwindow
+     */
     public void showSelectionPanel() {
         final ZLTextView view = myFBReaderApp.getTextView();
         ((SelectionPopup)myFBReaderApp.getPopupById(SelectionPopup.ID)).move(view.getSelectionStartY(), view.getSelectionEndY());
@@ -1225,19 +1253,23 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         imageView_back.setOnClickListener(clickListener);
         imageView_menu.setOnClickListener(clickListener);
         imageView_daynight.setOnClickListener(clickListener);
+        imageView_set_mulu.setOnClickListener(clickListener);
+        textView_lastChapter.setOnClickListener(clickListener);
+        textView_nextchapter.setOnClickListener(clickListener);
         textView_time.setText(ZLibrary.Instance().getCurrentTimeString());
         seekBar_progress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             private void gotoPage(int page) {
                 final ZLTextView view = myFBReaderApp.getTextView();
                 if (page == 1) {
                     view.gotoHome();
-                }else {
+                } else {
                     view.gotoPage(page);
                 }
                 myFBReaderApp.getViewWidget().reset();
                 myFBReaderApp.getViewWidget().repaint();
                 setReadInfo();
             }
+
             public void onStartTrackingTouch(SeekBar seekBar) {
             }
 
@@ -1253,6 +1285,9 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         });
     }
 
+    /**
+     * 点击阅读页面的打开菜单位置打开初始菜单
+     */
     public void showUtil(){
         if(isShowUtil){
             linearLayout_top.startAnimation(mAnimSlideOutBottom);
@@ -1302,6 +1337,19 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
                         imageView_daynight.setImageResource(R.drawable.read_night);
                         isNightMode = true;
                     }
+                    break;
+                case R.id.read_set_mulu:
+                    showUtil();
+                    Intent intent = new Intent(FBReader.this, BookLabelActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.read_util_lastchapter:
+                    gotoLastChapter();
+                    setReadInfo();
+                    break;
+                case R.id.read_util_nextchapter:
+                    gotoNextChapter();
+                    setReadInfo();
                     break;
             }
         }
@@ -1383,6 +1431,16 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         }
     }
 
+    @Subscribe
+    public void onEventMainThread(final BookMarkModify bookMarkModify){
+        getCollection().bindToService(this, new Runnable() {
+            @Override
+            public void run() {
+                myFBReaderApp.getBookmark().setText(bookMarkModify.getContent());
+                getCollection().saveBookmark(myFBReaderApp.getBookmark());
+            }
+        });
+    }
 
     /**
      * 设置电量
@@ -1406,6 +1464,137 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         textView_page_all.setText(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total + "");
         textView_progress_bili.setText(((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Current * 100 /
                 ((ZLTextView) myFBReaderApp.getTextView()).pagePosition().Total + "%");
+    }
+
+    /**
+     * 设置标签颜色
+     */
+    public void setMarkColor(final int id){
+        getCollection().bindToService(this, new Runnable() {
+            @Override
+            public void run() {
+                myFBReaderApp.getBookmark().setStyleId(id);
+                getCollection().setDefaultHighlightingStyleId(id);
+                getCollection().saveBookmark(myFBReaderApp.getBookmark());
+            }
+        });
+    }
+
+    /**
+     * 删除标签
+     */
+    public void deleteMark(){
+        getCollection().bindToService(this, new Runnable() {
+            @Override
+            public void run() {
+                getCollection().deleteBookmark(myFBReaderApp.getBookmark());
+            }
+        });
+    }
+
+    /**
+     * 判断当前是不是最后一章或者第一章
+     */
+    private void checkFirstOrLastChapter(){
+        int pageCurrent = myFBReaderApp.BookTextView.getStartCursor().getParagraphIndex();
+        int firstPage = ((TOCTree)calculateChapterAdapter.getItem(1)).getReference().ParagraphIndex;
+        int lastPage = ((TOCTree)calculateChapterAdapter.getItem(calculateChapterAdapter.getCount()-1)).getReference().ParagraphIndex;
+        if(pageCurrent < firstPage){
+            isFiratChapter = true;
+        }else{
+            isFiratChapter = false;
+        }
+        if(pageCurrent >=lastPage){
+            isLastChapter = true;
+        }else{
+            isLastChapter = false;
+        }
+        calculateChapterNum(pageCurrent);
+    }
+
+    /**
+     * 计算下一章和上一章的Index
+     */
+    private void calculateChapterNum(int pageCurrent){
+//        if(isFiratChapter){
+//            nextChapterNum = ((TOCTree)calculateChapterAdapter.getItem(1)).getReference().ParagraphIndex;
+//        }else{
+//            if(isLastChapter){
+//                lastChapterNum = ((TOCTree)calculateChapterAdapter.getItem(calculateChapterAdapter.getCount()-2)).getReference().ParagraphIndex;
+//            }
+//        }
+        if(!isFiratChapter && !isLastChapter){
+            for(int i=1;i<calculateChapterAdapter.getCount();i++){
+                if(pageCurrent>=((TOCTree)calculateChapterAdapter.getItem(i)).getReference().ParagraphIndex &&
+                        pageCurrent<((TOCTree)calculateChapterAdapter.getItem(i+1)).getReference().ParagraphIndex){
+                    lastChapterNum = ((TOCTree)calculateChapterAdapter.getItem(i-1)).getReference().ParagraphIndex;
+                    nextChapterNum = ((TOCTree)calculateChapterAdapter.getItem(i+1)).getReference().ParagraphIndex;
+                    break;
+                }
+            }
+        }else if(isFiratChapter){
+            nextChapterNum = ((TOCTree)calculateChapterAdapter.getItem(1)).getReference().ParagraphIndex;
+        }else if(isLastChapter){
+            lastChapterNum = ((TOCTree)calculateChapterAdapter.getItem(calculateChapterAdapter.getCount()-2)).getReference().ParagraphIndex;
+        }
+    }
+
+    /**
+     * 阅读上一章节
+     */
+    public void gotoLastChapter(){
+        initTOCTreeAdapter();
+        checkFirstOrLastChapter();
+        if(isFiratChapter){
+            Toast.makeText(this,"当前已经是第一章节",Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            myFBReaderApp.addInvisibleBookmark();
+            myFBReaderApp.BookTextView.gotoPosition(lastChapterNum, 0, 0);
+            myFBReaderApp.showBookTextView();
+            myFBReaderApp.storePosition();
+        }
+    }
+
+    /**
+     * 阅读下一章节
+     */
+    public void gotoNextChapter(){
+        initTOCTreeAdapter();
+        checkFirstOrLastChapter();
+        if(isLastChapter){
+            Toast.makeText(this,"当前已经是最后章节",Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            myFBReaderApp.addInvisibleBookmark();
+            myFBReaderApp.BookTextView.gotoPosition(nextChapterNum, 0, 0);
+            myFBReaderApp.showBookTextView();
+            myFBReaderApp.storePosition();
+        }
+    }
+
+    /**
+     * 初始化adapter
+     */
+    public void initTOCTreeAdapter(){
+        if(root == null){
+            root = myFBReaderApp.Model.TOCTree;
+            calculateChapterAdapter = new CalculateChapterAdapter(new ListView(this),root);
+        }
+    }
+
+    /**
+     * 用于装载TOCTree，已便于取出其中的TOCTree，来进行相应计算
+     */
+    private class CalculateChapterAdapter extends ZLTreeAdapter{
+
+        CalculateChapterAdapter(ListView listView,TOCTree tocTree){
+            super(listView,tocTree);
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return null;
+        }
     }
 
 }

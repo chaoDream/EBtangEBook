@@ -29,7 +29,10 @@ class SelectionShowPanelAction extends FBAndroidAction {
 
     @Override
     public boolean isEnabled() {
-        return !Reader.getTextView().isSelectionEmpty();
+        if(BaseActivity.myFBReaderApp.isLongClickShowSelectPop())
+            return !Reader.getTextView().isSelectionEmpty();
+        else
+            return  true;
     }
 
     @Override

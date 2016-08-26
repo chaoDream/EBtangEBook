@@ -132,7 +132,10 @@ public final class FBView extends ZLTextView {
          */
         final ZLTextHighlighting highlighting = findHighlighting(x, y, maxSelectionDistance());
         if (highlighting instanceof BookmarkHighlighting) {
-            myReader.runAction(ActionCode.SELECTION_BOOKMARK, ((BookmarkHighlighting)highlighting).Bookmark);
+            myReader.setBookmark(((BookmarkHighlighting) highlighting).Bookmark);
+            myReader.setLongClickShowSelectPop(false);
+//            myReader.runAction(ActionCode.SELECTION_BOOKMARK, ((BookmarkHighlighting)highlighting).Bookmark);
+            myReader.runAction(ActionCode.SELECTION_SHOW_PANEL);
             return;
         }
 
@@ -234,7 +237,7 @@ public final class FBView extends ZLTextView {
     @Override
     public boolean onFingerLongPress(int x, int y) {
         myReader.runAction(ActionCode.HIDE_TOAST);
-
+        myReader.setLongClickShowSelectPop(true);
         final ZLTextRegion region = findRegion(x, y, maxSelectionDistance(), ZLTextRegion.AnyRegionFilter);
         if (region != null) {
             final ZLTextRegion.Soul soul = region.getSoul();
@@ -732,6 +735,7 @@ public final class FBView extends ZLTextView {
     protected void releaseSelectionCursor() {
         super.releaseSelectionCursor();
         if (getCountOfSelectedWords() > 0) {
+            myReader.setLongClickShowSelectPop(true);
             myReader.runAction(ActionCode.SELECTION_SHOW_PANEL);
         }
     }
