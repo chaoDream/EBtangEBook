@@ -161,6 +161,9 @@ public class BookmarksActivity extends Activity implements IBookCollection.Liste
 
     private final Object myBookmarksLock = new Object();
 
+    /**
+     * 加载书的书签
+     */
     private void loadBookmarks() {
         new Thread(new Runnable() {
             public void run() {

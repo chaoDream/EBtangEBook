@@ -20,6 +20,7 @@
 package org.geometerplus.android.fbreader;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -113,6 +114,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.PrintWriter;
+import java.io.Reader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -304,6 +306,8 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
     TextView textView_lastChapter;
     @Bind(R.id.read_util_nextchapter)
     TextView textView_nextchapter;
+    @Bind(R.id.zhanwei_view)
+    View view_zhanwei;
     private boolean isShowUtil = false;
 
     private ReadSettingPopWindow readSettingPopWindow;
@@ -321,6 +325,10 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
 
     private int lastChapterNum;//上一章的index
     private int nextChapterNum;//下一章的Index
+
+    private View statusView;//生成的跟状态栏大小一样的view用于站位
+    private int statusViewHeight;//
+    private boolean isChenjin = false;//当前是否支持沉浸式阅读
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -346,6 +354,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         myShowStatusBarFlag = zlibrary.ShowStatusBarOption.getValue();
         //隐藏标题
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        setStatusBarVisibility(false);
         setContentView(R.layout.main);
         ButterKnife.bind(this);
         myRootView = (RelativeLayout)findViewById(R.id.root_view);
@@ -360,7 +369,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         }
 //        checkFirstOrLastChapter();
         /******************自增(上下留出来空间)******************/
-        myFBReaderApp.ViewOptions.TopMargin.setValue(40);
+        myFBReaderApp.ViewOptions.TopMargin.setValue(45);
         myFBReaderApp.ViewOptions.BottomMargin.setValue(40);
         ZLAndroidLibrary.Instance().getOrientationOption().setValue("portrait");//设置只支持竖屏显示
 
@@ -372,8 +381,12 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
 
         myFBReaderApp.setExternalFileOpener(new ExternalFileOpener(this));
 
-        //取消沉浸式
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, myShowStatusBarFlag ? 0 : WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //沉浸式
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+            isChenjin = true;
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, myShowStatusBarFlag ? 0 : WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            initStatusView(this,getResources().getColor(R.color.primary));
+        }
 
         //添加3个popup到FBreaderApp
         if (myFBReaderApp.getPopupById(TextSearchPopup.ID) == null) {
@@ -390,31 +403,31 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         }
 
         //操作action
-        myFBReaderApp.addAction(ActionCode.SHOW_LIBRARY, new ShowLibraryAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SHOW_PREFERENCES, new ShowPreferencesAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SHOW_BOOK_INFO, new ShowBookInfoAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SHOW_TOC, new ShowTOCAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SHOW_BOOKMARKS, new ShowBookmarksAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SHOW_NETWORK_LIBRARY, new ShowNetworkLibraryAction(this, myFBReaderApp));
+        myFBReaderApp.addAction(ActionCode.SHOW_LIBRARY, new ShowLibraryAction(this, myFBReaderApp));//本地书库
+        myFBReaderApp.addAction(ActionCode.SHOW_PREFERENCES, new ShowPreferencesAction(this, myFBReaderApp));//
+        myFBReaderApp.addAction(ActionCode.SHOW_BOOK_INFO, new ShowBookInfoAction(this, myFBReaderApp));//书籍详情
+        myFBReaderApp.addAction(ActionCode.SHOW_TOC, new ShowTOCAction(this, myFBReaderApp));//目录
+        myFBReaderApp.addAction(ActionCode.SHOW_BOOKMARKS, new ShowBookmarksAction(this, myFBReaderApp));//书签
+        myFBReaderApp.addAction(ActionCode.SHOW_NETWORK_LIBRARY, new ShowNetworkLibraryAction(this, myFBReaderApp));//网络书库
 
-        myFBReaderApp.addAction(ActionCode.SHOW_MENU, new ShowMenuAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SHOW_NAVIGATION, new ShowNavigationAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SEARCH, new SearchAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SHARE_BOOK, new ShareBookAction(this, myFBReaderApp));
+        myFBReaderApp.addAction(ActionCode.SHOW_MENU, new ShowMenuAction(this, myFBReaderApp));//显示菜单
+        myFBReaderApp.addAction(ActionCode.SHOW_NAVIGATION, new ShowNavigationAction(this, myFBReaderApp));//快速翻看
+        myFBReaderApp.addAction(ActionCode.SEARCH, new SearchAction(this, myFBReaderApp));//查找
+        myFBReaderApp.addAction(ActionCode.SHARE_BOOK, new ShareBookAction(this, myFBReaderApp));//分享
 
-        myFBReaderApp.addAction(ActionCode.SELECTION_SHOW_PANEL, new SelectionShowPanelAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SELECTION_HIDE_PANEL, new SelectionHidePanelAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SELECTION_COPY_TO_CLIPBOARD, new SelectionCopyAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SELECTION_SHARE, new SelectionShareAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SELECTION_TRANSLATE, new SelectionTranslateAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.SELECTION_BOOKMARK, new SelectionBookmarkAction(this, myFBReaderApp));
+        myFBReaderApp.addAction(ActionCode.SELECTION_SHOW_PANEL, new SelectionShowPanelAction(this, myFBReaderApp));//显示长按划线pop
+        myFBReaderApp.addAction(ActionCode.SELECTION_HIDE_PANEL, new SelectionHidePanelAction(this, myFBReaderApp));//隐藏划线pop
+        myFBReaderApp.addAction(ActionCode.SELECTION_COPY_TO_CLIPBOARD, new SelectionCopyAction(this, myFBReaderApp));//复制
+        myFBReaderApp.addAction(ActionCode.SELECTION_SHARE, new SelectionShareAction(this, myFBReaderApp));//分享选中文本
+        myFBReaderApp.addAction(ActionCode.SELECTION_TRANSLATE, new SelectionTranslateAction(this, myFBReaderApp));//翻译
+        myFBReaderApp.addAction(ActionCode.SELECTION_BOOKMARK, new SelectionBookmarkAction(this, myFBReaderApp));//点击划线文本弹出窗体
 
         myFBReaderApp.addAction(ActionCode.DISPLAY_BOOK_POPUP, new DisplayBookPopupAction(this, myFBReaderApp));
         myFBReaderApp.addAction(ActionCode.PROCESS_HYPERLINK, new ProcessHyperlinkAction(this, myFBReaderApp));
         myFBReaderApp.addAction(ActionCode.OPEN_VIDEO, new OpenVideoAction(this, myFBReaderApp));
-        myFBReaderApp.addAction(ActionCode.HIDE_TOAST, new HideToastAction(this, myFBReaderApp));
+        myFBReaderApp.addAction(ActionCode.HIDE_TOAST, new HideToastAction(this, myFBReaderApp));//隐藏toast
 
-        myFBReaderApp.addAction(ActionCode.SHOW_CANCEL_MENU, new ShowCancelMenuAction(this, myFBReaderApp));
+        myFBReaderApp.addAction(ActionCode.SHOW_CANCEL_MENU, new ShowCancelMenuAction(this, myFBReaderApp));//取消菜单
         myFBReaderApp.addAction(ActionCode.OPEN_START_SCREEN, new StartScreenAction(this, myFBReaderApp));
 
         myFBReaderApp.addAction(ActionCode.SET_SCREEN_ORIENTATION_SYSTEM, new SetScreenOrientationAction(this, myFBReaderApp, ZLibrary.SCREEN_ORIENTATION_SYSTEM));
@@ -1290,12 +1303,20 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
      */
     public void showUtil(){
         if(isShowUtil){
+            if(isChenjin){
+                setStatusBarVisibility(false);
+//                statusView.setVisibility(View.GONE);
+            }
             linearLayout_top.startAnimation(mAnimSlideOutBottom);
             linearLayout_bottom.startAnimation(mAnimSlideOutTop);
             linearLayout_top.setVisibility(View.GONE);
             linearLayout_bottom.setVisibility(View.GONE);
             isShowUtil = false;
         }else{
+            if(isChenjin){
+//                statusView.setVisibility(View.VISIBLE);
+                setStatusBarVisibility(true);
+            }
             linearLayout_top.setVisibility(View.VISIBLE);
             linearLayout_bottom.setVisibility(View.VISIBLE);
             linearLayout_top.startAnimation(mAnimSlideInBottom);
@@ -1341,6 +1362,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
                 case R.id.read_set_mulu:
                     showUtil();
                     Intent intent = new Intent(FBReader.this, BookLabelActivity.class);
+                    FBReaderIntents.putBookExtra(intent, myFBReaderApp.getCurrentBook());
                     startActivity(intent);
                     break;
                 case R.id.read_util_lastchapter:
@@ -1595,6 +1617,41 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         public View getView(int position, View convertView, ViewGroup parent) {
             return null;
         }
+    }
+
+    /**
+     * 生成站位view
+     */
+    private void initStatusView(Activity activity,int color){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+            //生成一个状态栏大小的矩形
+            statusView = createStatusView(activity,color);
+            statusView.setVisibility(View.GONE);
+            //添加到布局中
+            ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
+            decorView.addView(statusView);
+            //设置根布局参数
+            ViewGroup rootView = (ViewGroup) ((ViewGroup)activity.findViewById(android.R.id.content)).getChildAt(0);
+            rootView.setFitsSystemWindows(true);
+            rootView.setClipToPadding(true);
+        }
+    }
+
+    /**
+     * 生成一个和状态栏一样大小的矩形色块
+     */
+    private View createStatusView(Activity activity,int color){
+        //获得状态栏高度
+        int resourceId = activity.getResources().getIdentifier("status_bar_height","dimen","android");
+        int statusBarHeight = activity.getResources().getDimensionPixelSize(resourceId);
+        //绘制一个和状态栏一样高的矩形
+        View statusView = new View(activity);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                statusBarHeight);
+        statusView.setLayoutParams(params);
+        statusView.setBackgroundColor(color);
+        view_zhanwei.setLayoutParams(params);
+        return statusView;
     }
 
 }

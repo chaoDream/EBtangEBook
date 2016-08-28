@@ -220,24 +220,24 @@ public class LocalFileListFragment extends BaseFragment{
 
     private void checkPermission (Activity thisActivity, String permission, int requestCode) {
         //判断当前Activity是否已经获得了该权限
-        if(ContextCompat.checkSelfPermission(thisActivity, permission) != PackageManager.PERMISSION_GRANTED) {
-            //如果App的权限申请曾经被用户拒绝过，就需要在这里跟用户做出解释
-            if (ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,
-                    permission)) {
-                Toast.makeText(getActivity(), "添加图书需要此权限，请允许", Toast.LENGTH_SHORT).show();
-                //进行权限请求
-                ActivityCompat.requestPermissions(thisActivity,
-                        new String[]{permission},
-                        requestCode);
-            } else {
-                //进行权限请求
-                ActivityCompat.requestPermissions(thisActivity,
-                        new String[]{permission},
-                        requestCode);
-            }
-        } else {
-
-        }
+//        if(ContextCompat.checkSelfPermission(thisActivity, permission) != PackageManager.PERMISSION_GRANTED) {
+//            //如果App的权限申请曾经被用户拒绝过，就需要在这里跟用户做出解释
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,
+//                    permission)) {
+//                Toast.makeText(getActivity(), "添加图书需要此权限，请允许", Toast.LENGTH_SHORT).show();
+//                //进行权限请求
+//                ActivityCompat.requestPermissions(thisActivity,
+//                        new String[]{permission},
+//                        requestCode);
+//            } else {
+//                //进行权限请求
+//                ActivityCompat.requestPermissions(thisActivity,
+//                        new String[]{permission},
+//                        requestCode);
+//            }
+//        } else {
+//
+//        }
     }
 
     private class DrawerItemClickListener implements

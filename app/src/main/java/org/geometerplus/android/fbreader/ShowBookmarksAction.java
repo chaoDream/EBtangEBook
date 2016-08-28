@@ -28,6 +28,9 @@ import org.geometerplus.android.util.OrientationUtil;
 import org.geometerplus.android.util.PackageUtil;
 import org.geometerplus.fbreader.fbreader.FBReaderApp;
 
+/**
+ * 显示我的书签
+ */
 class ShowBookmarksAction extends FBAndroidAction {
 
     ShowBookmarksAction(FBReader baseActivity, FBReaderApp fbreader) {

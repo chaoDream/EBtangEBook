@@ -13,22 +13,26 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/bookinfo_label_point"/>
+            android:id="@+id/book_label_biji_color_circle"
+            android:src="@drawable/bookinfo_label_point_red"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dip_size_5"
+            android:id="@+id/book_label_biji_bili"
             android:text="5"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/book_label_biji_time"
             android:text="2016-08-01 11:11"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/book_label_biji_bookcontent"
         android:lines="2"
         android:ellipsize="end"
         android:textColor="@color/black"
@@ -42,11 +46,13 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/book_label_biji_color"
             android:src="@drawable/bookinfo_label_pen"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dip_size_5"
+            android:id="@+id/book_label_biji_content"
             android:text="测试笔记内容部分。测试笔记内容部分。测试笔记内容部分。测试笔记内容部分。测试笔记内容部分。测试笔记内容部分。测试笔记内容部分。"/>
     </LinearLayout>
 

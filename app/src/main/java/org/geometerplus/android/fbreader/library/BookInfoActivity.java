@@ -65,6 +65,9 @@ import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 
+/**
+ * 书籍详情
+ */
 public class BookInfoActivity extends Activity implements IBookCollection.Listener<Book> {
 
     private static final boolean ENABLE_EXTENDED_FILE_INFO = false;
