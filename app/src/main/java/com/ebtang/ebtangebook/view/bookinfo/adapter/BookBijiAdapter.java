@@ -73,6 +73,8 @@ public class BookBijiAdapter extends BaseAdapter implements AdapterView.OnItemCl
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        viewHolder.textView_bili.setText(myBookmarksList.get(position).getProgress());
+
         if(myBookmarksList.get(position).getStyleId() == 1){
             viewHolder.imageView_biji.setImageResource(R.drawable.bookinfo_label_pen_yellow);
             viewHolder.imageView_circle.setImageResource(R.drawable.bookinfo_label_point_yellow);

@@ -19,6 +19,8 @@
 
 package org.geometerplus.fbreader.fbreader;
 
+import android.graphics.Color;
+
 import org.geometerplus.fbreader.book.Bookmark;
 import org.geometerplus.fbreader.book.HighlightingStyle;
 import org.geometerplus.fbreader.book.IBookCollection;

@@ -51,67 +51,92 @@
             android:layout_height="wrap_content"
             android:textColor="@color/db_gray"
             android:text="面板颜色"/>
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_weight="1"
+            android:id="@+id/resd_util_set_bottom_img1"
             android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/resd_util_set_bottom_img1"
-                android:background="@drawable/read_set_bg_color_niupi"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:gravity="center">
+                android:src="@drawable/read_set_bg_color_niupi"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/read_set_bg_color_select"
-                android:id="@+id/resd_util_set_bottom_img2"
-                android:background="@drawable/read_set_bg_color_niupi"/>
-        </LinearLayout>
-        <LinearLayout
+                android:id="@+id/read_util_set_bottom_select1"/>
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_weight="1"
+            android:id="@+id/resd_util_set_bottom_img2"
             android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/resd_util_set_bottom_img3"
-                android:background="@drawable/read_set_bg_color_niupi"/>
-        </LinearLayout>
-        <LinearLayout
+                android:src="@drawable/read_set_bg_color_niupi"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/read_set_bg_color_select"
+                android:visibility="gone"
+                android:id="@+id/read_util_set_bottom_select2"/>
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_weight="1"
+            android:id="@+id/resd_util_set_bottom_img3"
             android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/resd_util_set_bottom_img4"
-                android:background="@drawable/read_set_bg_color_niupi"/>
-        </LinearLayout>
-        <LinearLayout
+                android:src="@drawable/read_set_bg_color_niupi"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/read_set_bg_color_select"
+                android:visibility="gone"
+                android:id="@+id/read_util_set_bottom_select3"/>
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_weight="1"
+            android:id="@+id/resd_util_set_bottom_img4"
             android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/resd_util_set_bottom_img5"
-                android:background="@drawable/read_set_bg_color_niupi"/>
-        </LinearLayout>
+                android:src="@drawable/read_set_bg_color_niupi"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/read_set_bg_color_select"
+                android:visibility="gone"
+                android:id="@+id/read_util_set_bottom_select4"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:id="@+id/resd_util_set_bottom_img5"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/read_set_bg_color_niupi"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/read_set_bg_color_select"
+                android:visibility="gone"
+                android:id="@+id/read_util_set_bottom_select5"/>
+        </RelativeLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -164,18 +189,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:id="@+id/read_util_paiban_four"
             >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:id="@+id/read_setting_paiban_select4"
                 android:src="@drawable/read_set_paiban_checked"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dip_size_7"
                 android:layout_centerInParent="true"
-                android:id="@+id/read_util_paiban_four"
                 android:src="@drawable/read_set_paiban_four"
                 />
         </RelativeLayout>
@@ -183,16 +209,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:id="@+id/read_util_paiban_three"
             android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:id="@+id/read_setting_paiban_select3"
                 android:src="@drawable/read_set_paiban_unchecked"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/read_util_paiban_three"
                 android:padding="@dimen/dip_size_7"
                 android:layout_centerInParent="true"
                 android:src="@drawable/read_set_paiban_three"
@@ -202,16 +229,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:id="@+id/read_util_paiban_two"
             android:gravity="center">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:id="@+id/read_setting_paiban_select2"
                 android:src="@drawable/read_set_paiban_unchecked"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/read_util_paiban_two"
                 android:padding="@dimen/dip_size_7"
                 android:layout_centerInParent="true"
                 android:src="@drawable/read_set_paiban_two"

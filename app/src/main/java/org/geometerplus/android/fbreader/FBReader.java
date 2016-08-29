@@ -51,6 +51,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ebtang.ebtangebook.R;
+import com.ebtang.ebtangebook.db.read.BookMarkEbt;
+import com.ebtang.ebtangebook.db.read.BookMarkEbtDb;
 import com.ebtang.ebtangebook.event.AnimStyle;
 import com.ebtang.ebtangebook.event.BookMarkModify;
 import com.ebtang.ebtangebook.event.LongClickDrawLine;
@@ -95,7 +97,6 @@ import org.geometerplus.fbreader.fbreader.options.MiscOptions;
 import org.geometerplus.fbreader.formats.ExternalFormatPlugin;
 import org.geometerplus.fbreader.formats.PluginCollection;
 import org.geometerplus.fbreader.tips.TipsManager;
-import org.geometerplus.zlibrary.core.application.ZLApplication;
 import org.geometerplus.zlibrary.core.application.ZLApplicationWindow;
 import org.geometerplus.zlibrary.core.filesystem.ZLFile;
 import org.geometerplus.zlibrary.core.library.ZLibrary;
@@ -114,7 +115,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -308,6 +308,8 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
     TextView textView_nextchapter;
     @Bind(R.id.zhanwei_view)
     View view_zhanwei;
+    @Bind(R.id.read_search)
+    ImageView imageView_search;
     private boolean isShowUtil = false;
 
     private ReadSettingPopWindow readSettingPopWindow;
@@ -330,6 +332,8 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
     private int statusViewHeight;//
     private boolean isChenjin = false;//当前是否支持沉浸式阅读
 
+    private BookMarkEbtDb bookMarkEbtDb;//自定义的书签存储数据库
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -337,6 +341,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         bindService(new Intent(this, DataService.class), DataConnection, DataService.BIND_AUTO_CREATE);
         Intent service=new Intent(this, MyTimeService.class);
         startService(service);
+        bookMarkEbtDb = new BookMarkEbtDb(this);
         final Config config = Config.Instance();
         //ConfigShadow
         config.runOnConnect(new Runnable() {
@@ -1109,7 +1114,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         }
     };
 
-    private BookCollectionShadow getCollection() {
+    public BookCollectionShadow getCollection() {
         return (BookCollectionShadow)myFBReaderApp.Collection;
     }
 
@@ -1269,6 +1274,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         imageView_set_mulu.setOnClickListener(clickListener);
         textView_lastChapter.setOnClickListener(clickListener);
         textView_nextchapter.setOnClickListener(clickListener);
+        imageView_search.setOnClickListener(clickListener);
         textView_time.setText(ZLibrary.Instance().getCurrentTimeString());
         seekBar_progress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             private void gotoPage(int page) {
@@ -1338,6 +1344,10 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         @Override
         public void onClick(View v) {
             switch (v.getId()){
+                case R.id.read_search:
+                    showUtil();
+                    onSearchRequested();
+                    break;
                 case R.id.top_title_left:
                     myFBReaderApp.closeWindow();
                     break;
@@ -1510,8 +1520,12 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
             @Override
             public void run() {
                 getCollection().deleteBookmark(myFBReaderApp.getBookmark());
+                bookMarkEbtDb.delete(myFBReaderApp.getBookmark().BookId,myFBReaderApp.getBookmark().ParagraphIndex,
+                        myFBReaderApp.getBookmark().ElementIndex);
             }
         });
+        myFBReaderApp.getViewWidget().reset();
+        myFBReaderApp.getViewWidget().repaint();
     }
 
     /**

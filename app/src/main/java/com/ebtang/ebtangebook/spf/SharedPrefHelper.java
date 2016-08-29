@@ -52,6 +52,9 @@ public class SharedPrefHelper {
 
 	private static final String IS_LONG_CLICK_DRAW = "is_long_click_draw_line";//是否长按划线
 
+	private static final String READ_BACKGROUD_PAPER = "read_background_paper";//阅读页面背景图样式
+	private static final String READ_SETTING_PAIBAN = "read_setting_paiban";//阅读排版格式
+
 	public static synchronized SharedPrefHelper getInstance(Context context) {
 		if (null == sharedPrefHelper) {
 			sharedPrefHelper = new SharedPrefHelper(context);
@@ -230,5 +233,27 @@ public class SharedPrefHelper {
 	}
 	public boolean getIsLongClickDraw(){
 		return sharedPreferences.getBoolean(IS_LONG_CLICK_DRAW,true);
+	}
+
+	/**
+	 * 阅读背景图样式
+	 * @param type
+	 */
+	public void setReadBackgroudPaper(int type){
+		sharedPreferences.edit().putInt(READ_BACKGROUD_PAPER,type).commit();
+	}
+	public int getReadBackgroudPaper(){
+		return sharedPreferences.getInt(READ_BACKGROUD_PAPER,1);
+	}
+
+	/**
+	 * 阅读页面排版样式
+	 * @param type
+	 */
+	public void setReadSettingPaiban(int type){
+		sharedPreferences.edit().putInt(READ_SETTING_PAIBAN,type).commit();
+	}
+	public int getReadSettingPaiban(){
+		return sharedPreferences.getInt(READ_SETTING_PAIBAN,4);
 	}
 }

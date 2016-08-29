@@ -10,4 +10,7 @@ public interface IntentConfig {
 
     public static String BOOK_MARK_CONTENT = "book_mark_content";//书签的内容
 
+    public static String BOOK_LABEL_SHQIAN = "book_label_shuqian";//直接打开书签
+
+
 }

@@ -55,6 +55,11 @@ public final class Bookmark extends ZLTextFixedPosition {
     public final String ModelId;
     public final boolean IsVisible;
 
+    /**
+     * 自增
+     */
+    private String progress;//当前书签在书中的进度
+
     // used for migration only
     private Bookmark(long bookId, Bookmark original) {
         super(original);
@@ -246,5 +251,13 @@ public final class Bookmark extends ZLTextFixedPosition {
             return uid;
         }
         throw new RuntimeException("INVALID UUID: " + uid);
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
     }
 }
