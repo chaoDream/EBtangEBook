@@ -24,6 +24,8 @@ import com.ebtang.ebtangebook.animation.Rotate3DAnimation;
 import com.ebtang.ebtangebook.app.AppManager;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.constants.Constants;
+import com.ebtang.ebtangebook.db.read.LocalFile;
+import com.ebtang.ebtangebook.db.read.LocalFileDb;
 import com.ebtang.ebtangebook.view.main.MainActivity;
 import com.ebtang.ebtangebook.view.main.NewMainActivity;
 import com.ebtang.ebtangebook.view.main.adapter.BookShelfAdapter;
@@ -81,6 +83,9 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
 
     private BookShelfPopwindow bookShelfPopwindow;
 
+    private LocalFileDb localFileDb;
+    private List<LocalFile> localFileList = new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -94,14 +99,16 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
         mWindowManager = (WindowManager)getActivity().getSystemService(Context.WINDOW_SERVICE);
         wmRootView = new AbsoluteLayout(getActivity());
         typeface = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(), "font/QH.ttf");
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
+        localFileDb = new LocalFileDb(getActivity());
         initView();
-        initData();
+//        initData();
         return rootView;
     }
 
     @Override
     public void onResume() {
+        initData();
         dragGridView.hideDeleteBt();
         closeBookAnimation();
         super.onResume();
@@ -190,6 +197,9 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
 
     @Override
     public void initData() {
+        localFileList.clear();
+        if(localFileDb.findAllBook()!=null)
+            localFileList.addAll(localFileDb.findAllBook());
         list = new ArrayList<>();
         list.add(new Object());
         list.add(new Object());
@@ -201,7 +211,7 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
         list.add(new Object());
         list.add(new Object());
         list.add(new Object());
-        bookShelfAdapter = new BookShelfAdapter(getActivity(),list);
+        bookShelfAdapter = new BookShelfAdapter(getActivity(),localFileList);
         dragGridView.setAdapter(bookShelfAdapter);
     }
 

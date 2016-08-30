@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
+import com.ebtang.ebtangebook.db.read.LocalFileDb;
 import com.ebtang.ebtangebook.view.scan.bean.BookList;
 import com.ebtang.ebtangebook.view.scan.fragment.LocalFileListFragment;
 import com.ebtang.ebtangebook.view.scan.util.Fileutil;
@@ -47,6 +48,8 @@ public  class  FileAdapter extends BaseAdapter {
         this.context = context;
     }
 
+    private LocalFileDb localFileDb;
+
     public FileAdapter(Context context, List<File> files) {
         this.context = context;
         this.files = files;
@@ -56,6 +59,7 @@ public  class  FileAdapter extends BaseAdapter {
         this.context = context;
         this.files = files;
         this.isSelected = isSelected;
+        localFileDb = new LocalFileDb(context);
     }
 
     @Override
@@ -92,6 +96,8 @@ public  class  FileAdapter extends BaseAdapter {
                     .findViewById(R.id.local_file_icon);
             viewHolder.checkBox = (CheckBox) convertView
                     .findViewById(R.id.local_file_image);
+            viewHolder.textView_imported = (TextView)convertView
+                    .findViewById(R.id.local_file_imported);
             viewHolder.linearLayout = (LinearLayout) convertView
                     .findViewById(R.id.local_file_lin);
             convertView.setTag(viewHolder);
@@ -106,6 +112,14 @@ public  class  FileAdapter extends BaseAdapter {
         } else {
             viewHolder.textView.setSelected(false);
             viewHolder.linearLayout.setBackgroundColor(Color.TRANSPARENT);
+        }
+
+        if(localFileDb.find(files.get(position).getPath(),files.get(position).getName()) != null){
+            viewHolder.textView_imported.setVisibility(View.VISIBLE);
+            viewHolder.checkBox.setVisibility(View.GONE);
+        }else{
+            viewHolder.textView_imported.setVisibility(View.GONE);
+            viewHolder.checkBox.setVisibility(View.VISIBLE);
         }
 
         viewHolder.textView.setText(files.get(position).getName());//设置文件名
@@ -147,8 +161,9 @@ public  class  FileAdapter extends BaseAdapter {
         } else {
             if(files.get(position).getName().contains(".txt"))
                 viewHolder.fileIcon.setImageResource(R.drawable.file_type_txt);
-            else
-
+            else if(files.get(position).getName().contains(".epub")){
+                viewHolder.fileIcon.setImageResource(R.drawable.file_type_epub);
+            }
             viewHolder.checkBox.setVisibility(View.VISIBLE);
             viewHolder.checkBox.setChecked(LocalFileListFragment.getIsSelected().get(position));
             viewHolder.textSize.setText(Fileutil.formatFileSize(files.get(position).length()));
@@ -164,6 +179,7 @@ public  class  FileAdapter extends BaseAdapter {
         ImageView fileIcon;
         CheckBox checkBox;
         LinearLayout linearLayout;
+        TextView textView_imported;
     }
 
     public int getSelectedPosition() {

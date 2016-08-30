@@ -29,7 +29,7 @@ import org.geometerplus.fbreader.book.SerializerUtil;
 
 public abstract class FBReaderIntents {
 
-    public static final String DEFAULT_PACKAGE = "org.geometerplus.zlibrary.ui.android";
+    public static final String DEFAULT_PACKAGE = "com.ebtang.ebtangebook";//com.ebtang.ebtangebook org.geometerplus.zlibrary.ui.android
 
     public interface Action {
 

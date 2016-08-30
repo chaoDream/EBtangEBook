@@ -1,16 +1,26 @@
 package com.ebtang.ebtangebook.view.scan;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ebtang.ebtangebook.R;
-import com.ebtang.ebtangebook.app.BaseActivity;
 import com.ebtang.ebtangebook.app.BaseFragmentActivity;
 import com.ebtang.ebtangebook.view.scan.adapter.ScanFileAdapter;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
+
+import org.geometerplus.android.fbreader.api.FBReaderIntents;
+import org.geometerplus.android.fbreader.dict.DictionaryUtil;
+import org.geometerplus.android.fbreader.libraryService.BookCollectionShadow;
+import org.geometerplus.fbreader.Paths;
+import org.geometerplus.fbreader.fbreader.FBReaderApp;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +41,8 @@ public class ScanFileActivity extends BaseFragmentActivity{
 
     private ScanFileAdapter scanFileAdapter;
 
+    private FBReaderApp myFBReaderApp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +50,26 @@ public class ScanFileActivity extends BaseFragmentActivity{
         ButterKnife.bind(this);
         initView();
         initData();
+        myFBReaderApp = (FBReaderApp) FBReaderApp.Instance();
+        if (myFBReaderApp == null) {
+            myFBReaderApp = new FBReaderApp(Paths.systemInfo(this), new BookCollectionShadow());
+        }
+    }
+
+    @Override
+    public void onStart() {
+        getCollection().bindToService(this, null);
+        super.onStart();
+    }
+
+    @Override
+    public void onDestroy() {
+        ((BookCollectionShadow)myFBReaderApp.Collection).unbind();
+        super.onDestroy();
+    }
+
+    public BookCollectionShadow getCollection() {
+        return (BookCollectionShadow)myFBReaderApp.Collection;
     }
 
     @Override
@@ -64,4 +96,18 @@ public class ScanFileActivity extends BaseFragmentActivity{
                 break;
         }
     }
+
+    private ServiceConnection conn = new ServiceConnection() {
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            // TODO Auto-generated method stub
+        }
+    };
+
 }

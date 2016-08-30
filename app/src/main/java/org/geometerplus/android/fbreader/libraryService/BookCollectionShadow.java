@@ -201,6 +201,7 @@ public class BookCollectionShadow extends AbstractBookCollection<Book> implement
         try {
             return SerializerUtil.deserializeBook(myInterface.getBookByFile(path), this);
         }catch (RemoteException e) {
+            e.printStackTrace();
             return null;
         }
     }

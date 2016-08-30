@@ -637,7 +637,7 @@ public class DragGridView extends GridView implements View.OnClickListener{
         int dockHightPanding = (int) CommonUtil.convertDpToPixel(mcontext,3);
         int count = getChildCount();
         int top = count > 0 ? getChildAt(0).getTop() : 0;
-        int bottom = getChildAt(0).getBottom();
+//        int bottom = getChildAt(0).getBottom();
         int backgroundWidth = background.getWidth();
         int backgroundHeight = background.getHeight()-backgroundHeightPanding;
         int dockWith = bookshelf_dock.getWidth();
@@ -655,8 +655,10 @@ public class DragGridView extends GridView implements View.OnClickListener{
         }
         if(i == 1) {
             firtView = getChildAt(0);
-            firstItemTextView = (TextView) firtView.findViewById(R.id.imageView1);
-            firstItemTextView.getLocationInWindow(firstLocation);
+            if(firtView!=null){
+                firstItemTextView = (TextView) firtView.findViewById(R.id.imageView1);
+                firstItemTextView.getLocationInWindow(firstLocation);
+            }
         }
 
         super.dispatchDraw(canvas);

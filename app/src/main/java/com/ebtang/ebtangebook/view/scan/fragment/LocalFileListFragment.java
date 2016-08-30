@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -25,10 +27,21 @@ import android.widget.Toast;
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.constants.Constants;
+import com.ebtang.ebtangebook.db.read.LocalFile;
+import com.ebtang.ebtangebook.db.read.LocalFileDb;
+import com.ebtang.ebtangebook.view.scan.ScanFileActivity;
 import com.ebtang.ebtangebook.view.scan.adapter.FileAdapter;
 import com.ebtang.ebtangebook.view.scan.bean.BookList;
 import com.ebtang.ebtangebook.view.scan.util.Fileutil;
 import com.ebtang.ebtangebook.widget.myWebView.WebViewActivity;
+
+import org.geometerplus.android.fbreader.FBReader;
+import org.geometerplus.android.fbreader.libraryService.BookCollectionShadow;
+import org.geometerplus.fbreader.Paths;
+import org.geometerplus.fbreader.book.Book;
+import org.geometerplus.fbreader.fbreader.FBReaderApp;
+import org.geometerplus.zlibrary.core.application.ZLApplication;
+import org.geometerplus.zlibrary.core.filesystem.ZLFile;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -74,11 +87,32 @@ public class LocalFileListFragment extends BaseFragment{
 
     private View rootView;
 
+    private LocalFileDb localFileDb;
+
+    private Book book ;
+
+    private ZLFile zlFile;
+
+    private ScanFileActivity scanFileActivity;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case 1:
+                    FBReader.openBookActivity(getActivity(),book,null);
+                    break;
+            }
+        }
+    };
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.local_file_scan,container,false);
         ButterKnife.bind(this,rootView);
+        scanFileActivity = (ScanFileActivity)getActivity();
+        localFileDb = new LocalFileDb(getActivity());
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.) {
 //            checkPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE, EXTERNAL_STORAGE_REQ_CODE);
 //        }
@@ -96,11 +130,16 @@ public class LocalFileListFragment extends BaseFragment{
         adapter = new FileAdapter(getActivity(), listFile, isSelected);
         listView.setAdapter(adapter);
         map = new HashMap<String, String>();
-        listView.setOnItemClickListener(new DrawerItemClickListener());
+//        listView.setOnItemClickListener(new DrawerItemClickListener());
         listView.setOnItemLongClickListener(new DrawerItemClickListener());//
 
         searchData(root.getAbsolutePath());
         addPath(root.getAbsolutePath());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -172,6 +211,23 @@ public class LocalFileListFragment extends BaseFragment{
         addfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(mapin.size()==0){
+                    return;
+                }
+                for(String key : mapin.keySet()){
+                    String lastName = key.substring(key.lastIndexOf("/")+1);
+                    String title = lastName.substring(0, lastName.lastIndexOf("."));
+                    int type = lastName.contains("txt")? 1 : 2 ;
+                    if(localFileDb.find(key,title) == null){
+                        LocalFile localFile = new LocalFile();
+                        localFile.setPath(key);
+                        localFile.setType(type);
+                        localFile.setName(title);
+                        localFileDb.insert(localFile);
+                    }
+                }
+                Toast.makeText(getActivity(),"导入成功",Toast.LENGTH_SHORT).show();
+                adapter.notifyDataSetChanged();
 //                Map<String, Integer> map = mapin;
 //
 //                int addNum = FileAdapter.CheckNum(LocalFileListFragment.getIsSelected());
@@ -330,7 +386,7 @@ public class LocalFileListFragment extends BaseFragment{
      */
     private void selectItem(int position) {
         BookList bookList = new BookList();
-        String filePath = adapter.getFiles().get(position).getAbsolutePath();
+        final String filePath = adapter.getFiles().get(position).getAbsolutePath();
         String fileName = adapter.getFiles().get(position).getName();
 
         if (adapter.getFiles().get(position).isDirectory()) {
@@ -340,11 +396,90 @@ public class LocalFileListFragment extends BaseFragment{
             searchData(filePath);
             addPath(filePath);
         } else if (adapter.getFiles().get(position).isFile()) {
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), WebViewActivity.class);
-            intent.putExtra(Constants.APP_WEBVIEW_TITLE, "阅读");
-            intent.putExtra(Constants.APP_WEBVIEW_URL,"http://www.jd.com/");
-            startActivity(intent);
+            zlFile = ZLFile.createFileByPath(filePath);
+            book = createBookForFile(zlFile);
+            String lastName = filePath.substring(filePath.lastIndexOf("/")+1);
+            String title = lastName.substring(0, lastName.lastIndexOf("."));
+            if(localFileDb.find(filePath,title)==null){
+                LocalFile localFile = new LocalFile();
+                localFile.setPath(filePath);
+                localFile.setName(title);
+                localFileDb.insert(localFile);
+            }
+            FBReader.openBookActivity(getActivity(),book,null);
+//            scanFileActivity.getCollection().bindToService(scanFileActivity, new Runnable() {
+//                @Override
+//                public void run() {
+//                    book = scanFileActivity.getCollection().getBookByFile(filePath);
+//                    handler.sendEmptyMessage(1);
+//                }
+//            });
+//            Book book = new Book(localFile_in_db.getDbId(),filePath,title,null,null);
+//            myCollection.bindToService(getActivity(), new Runnable() {
+//                @Override
+//                public void run() {
+//                    book  = myCollection.getBookByFile(filePath);
+//                }
+//            });
+//            Intent intent = new Intent();
+//            intent.setClass(getActivity(), WebViewActivity.class);
+//            intent.putExtra(Constants.APP_WEBVIEW_TITLE, "阅读");
+//            intent.putExtra(Constants.APP_WEBVIEW_URL,"http://www.jd.com/");
+//            startActivity(intent);
+        }
+    }
+
+    private Book createBookForFile(ZLFile file) {
+        if (file == null) {
+            return null;
+        }
+        Book book = scanFileActivity.getCollection().getBookByFile(file.getPath());
+        if (book != null) {
+            return book;
+        }
+        if (file.isArchive()) {
+            for (ZLFile child : file.children()) {
+                book = scanFileActivity.getCollection().getBookByFile(child.getPath());
+                if (book != null) {
+                    return book;
+                }
+            }
+        }
+        return null;
+    }
+
+//    private Book createBookForFile(final ZLFile file) {
+//        if (file == null) {
+//            return null;
+//        }
+//        scanFileActivity.getCollection().bindToService(scanFileActivity, new Runnable() {
+//            @Override
+//            public void run() {
+//                book = scanFileActivity.getCollection().getBookByFile(file.getPath());
+//                if(book!=null){
+//                    handler.sendEmptyMessage(1);
+//                }else{
+//                    handler.sendEmptyMessage(2);
+//                }
+//            }
+//        });
+//
+//        return null;
+//    }
+
+    private void createBookSecend(){
+        if (zlFile.isArchive()) {
+            for (final ZLFile child : zlFile.children()) {
+                scanFileActivity.getCollection().bindToService(scanFileActivity, new Runnable() {
+                    @Override
+                    public void run() {
+                        book = scanFileActivity.getCollection().getBookByFile(child.getPath());
+                        if(book!=null){
+                            handler.sendEmptyMessage(1);
+                        }
+                    }
+                });
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.ebtang.ebtangebook.db.read;
 
+import com.yunqing.core.db.annotations.Id;
 import com.yunqing.core.db.annotations.Table;
 
 /**
@@ -8,7 +9,7 @@ import com.yunqing.core.db.annotations.Table;
  */
 @Table(name="t_read_book_chapter")
 public class BookChapter {
-
+    @Id
     private int bookId;//书id
     private String chapterId;//章节Id
     private String name;//章节名称

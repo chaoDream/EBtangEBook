@@ -5,8 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
+import com.ebtang.ebtangebook.db.read.LocalFile;
+import com.ebtang.ebtangebook.db.read.LocalFileDb;
 import com.ebtang.ebtangebook.widget.dragGridView.DragGridListener;
 
 import java.util.List;
@@ -17,9 +20,9 @@ import java.util.List;
 public class BookShelfAdapter extends BaseAdapter implements DragGridListener{
 
     private Context context;
-    private List<Object> list;
+    private List<LocalFile> list;
 
-    public BookShelfAdapter(Context context,List<Object> list){
+    public BookShelfAdapter(Context context,List<LocalFile> list){
         this.context = context;
         this.list = list;
     }
@@ -41,12 +44,22 @@ public class BookShelfAdapter extends BaseAdapter implements DragGridListener{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder = null;
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.shelfitem,parent,false);
+            viewHolder = new ViewHolder();
+            viewHolder.textView_name = (TextView)convertView.findViewById(R.id.imageView1);
+            convertView.setTag(viewHolder);
         }else{
-
+            viewHolder = (ViewHolder)convertView.getTag();
         }
+
+        viewHolder.textView_name.setText(list.get(position).getName());
         return convertView;
+    }
+
+    class ViewHolder{
+        TextView textView_name;
     }
 
     @Override
