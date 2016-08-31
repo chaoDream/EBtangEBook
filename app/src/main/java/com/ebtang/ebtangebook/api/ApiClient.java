@@ -15,7 +15,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public final class ApiClient {
 
     public static String USER_AGENT = "android-phone/2.4.0 (http://loopj.com/android-async-http)";
-    private static final String API_HOST = "http://192.168.0.199:8180/app/api/v1/";//172.16.200.91
+    public static final String API_HOST = "http://test.ebtang.com/api/";//172.16.200.91
     private static final int TIME_OUT = 12;
     private static ApiService apiService ;
 

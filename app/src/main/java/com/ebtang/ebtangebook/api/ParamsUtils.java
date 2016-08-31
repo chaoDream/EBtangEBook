@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.ebtang.ebtangebook.spf.SharedPrefHelper;
 import com.ebtang.ebtangebook.utils.CryptoUtil;
 import com.ebtang.ebtangebook.utils.SystemUtils;
+import com.ebtang.ebtangebook.utils.UUIDUtil;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -29,21 +30,19 @@ public class ParamsUtils {
 
     public static HashMap<String, String> commonURL() {
 
-        String appName = "da-kaoqian-app"; //app名字，应该不会变得
+        String appName = "ebtang-app-ebook"; //app名字，应该不会变得
         String deviceType = "1"; //标示为android phone
         String app = SystemUtils.getPackageName(context);
-        String uniqueId = SharedPrefHelper.getInstance(context).getUniqureId();
+        String uniqueId = UUIDUtil.getDeviceUUID(context);
         String version = SystemUtils.getVersion(context);
         //添加mobileAccessToken
-        String mobileAccessToken = SharedPrefHelper.getInstance(context).getAccessToken();
         String timeStamp = System.currentTimeMillis()+"";
-        String random = System.currentTimeMillis() + new Random().nextInt(100)+"";
 
         if (app == null) {
-            app = "com.dongao.mainclient.phone";
+            app = "com.ebtang.ebtangebook";
         }
         if (uniqueId == null || uniqueId.equals("")) {
-            uniqueId = "dongao_123456789";
+            uniqueId = "ebtang_123456789";
         }
         if (version == null) {
             version = "1.0.0";
@@ -58,17 +57,15 @@ public class ParamsUtils {
         params.put("appName", appName);
         params.put("version", version);
         params.put("uniqueId", uniqueId);
+        params.put("phoneOsType","android");
         params.put("timeStamp", timeStamp);
-        params.put("random", CryptoUtil.md5HexDigest(random, null));
-        if(mobileAccessToken!=null && !mobileAccessToken.equals("")){
-            params.put("mobileAccessToken",mobileAccessToken);
-        }
+        params.put("appId","com.ebtang.ebook");
         //params.put("sign", SignUtils.sign(params));
         return  params;
     }
 
     public static String commonURLStr(){
-        String appName = "da-kaoqian-app"; //app名字，应该不会变得
+        String appName = "ebtang-app-ebook"; //app名字，应该不会变得
         String deviceType = "1"; //标示为android phone
         String app = SystemUtils.getPackageName(context);
         String uniqueId = SharedPrefHelper.getInstance(context).getUniqureId();
@@ -78,10 +75,10 @@ public class ParamsUtils {
         String timeStamp = System.currentTimeMillis()+"";
         String random = System.currentTimeMillis() + new Random().nextInt(100)+"";
         if (app == null) {
-            app = "com.dongao.mainclient.phone";
+            app = "com.ebtang.ebtangebook";
         }
         if (uniqueId == null || uniqueId.equals("")) {
-            uniqueId = "dongao_123456789";
+            uniqueId = "ebtang_123456789";
         }
         if (version == null) {
             version = "1.0.0";
@@ -103,5 +100,14 @@ public class ParamsUtils {
         return parmas;
     }
 
+
+    /**
+     * 获取验证码图片
+     * @return
+     */
+    public static HashMap<String,String> getCheckImg(){
+        HashMap<String,String> parmas = commonURL();
+        return parmas;
+    }
 
 }

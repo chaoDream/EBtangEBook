@@ -1,5 +1,6 @@
 package com.ebtang.ebtangebook.view.registe;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseActivity;
 import com.ebtang.ebtangebook.event.RegisteSuccess;
+import com.ebtang.ebtangebook.mvpView.RegistFirstView;
+import com.ebtang.ebtangebook.persenter.RegisteFirstPersenter;
 import com.ebtang.ebtangebook.view.registe.utils.Code;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * Created by fengzongwei on 2016/7/12 0012.
  */
-public class RegiteFirstActivity extends BaseActivity{
+public class RegiteFirstActivity extends BaseActivity implements RegistFirstView{
 
     @Bind(R.id.top_title_text)
     TextView textView_title;
@@ -34,13 +37,18 @@ public class RegiteFirstActivity extends BaseActivity{
     Button button;
 
     private String validStr;
+
+    private RegisteFirstPersenter registeFirstPersenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regite_first);
         ButterKnife.bind(this);
-        initView();
         EventBus.getDefault().register(this);
+        registeFirstPersenter = new RegisteFirstPersenter();
+        registeFirstPersenter.attachView(this);
+        initView();
+        initData();
     }
 
     @Override
@@ -48,7 +56,7 @@ public class RegiteFirstActivity extends BaseActivity{
         imageView_left.setImageResource(R.drawable.back);
         imageView_left.setVisibility(View.VISIBLE);
         textView_title.setText("账号注册");
-        imageView_valid.setImageBitmap(Code.getInstance().createBitmap());
+//        imageView_valid.setImageBitmap(Code.getInstance().createBitmap());
         validStr = Code.getInstance().getCode().toLowerCase();
 
         imageView_left.setOnClickListener(this);
@@ -59,7 +67,7 @@ public class RegiteFirstActivity extends BaseActivity{
 
     @Override
     public void initData() {
-
+        registeFirstPersenter.getData();
     }
 
     @Override
@@ -69,8 +77,9 @@ public class RegiteFirstActivity extends BaseActivity{
                 finish();
                 break;
             case R.id.registe_first_valid_img:
-                imageView_valid.setImageBitmap(Code.getInstance().createBitmap());
-                validStr = Code.getInstance().getCode().toLowerCase();
+//                imageView_valid.setImageBitmap(Code.getInstance().createBitmap());
+//                validStr = Code.getInstance().getCode().toLowerCase();
+                registeFirstPersenter.getData();
                 break;
             case R.id.registe_first_bt:
                 Intent intent = new Intent(this,RegiteSecendActivity.class);
@@ -88,5 +97,40 @@ public class RegiteFirstActivity extends BaseActivity{
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showRetry() {
+
+    }
+
+    @Override
+    public void hideRetry() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public Context context() {
+        return this;
+    }
+
+    @Override
+    public ImageView getImageView() {
+        return imageView_valid;
     }
 }

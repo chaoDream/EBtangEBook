@@ -22,6 +22,8 @@ import retrofit2.http.Url;
  */
 public interface ApiService {
 
+    public final static String GET_CHECK_IMG = "validateCodeServlet";//获取验证码图片
+
     //登录
     public final static String LOGIN = "mobile/appLogin";
 
@@ -170,6 +172,9 @@ public interface ApiService {
 
     //获取课堂答疑数字
     public static  final String COURSE_ANSWER_NUM = "mobile/qasCount";
+
+    @GET(GET_CHECK_IMG)
+    Call<String> getCheckImg(@QueryMap Map<String, String> options);
 
     @Headers("Cache-Control: public, max-age=3600") //设置缓存
     @GET(COURSE_LIST)
