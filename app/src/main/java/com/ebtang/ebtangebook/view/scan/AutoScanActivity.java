@@ -9,9 +9,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseActivity;
+import com.ebtang.ebtangebook.db.read.LocalFile;
+import com.ebtang.ebtangebook.db.read.LocalFileDb;
 import com.ebtang.ebtangebook.view.scan.adapter.AutoScanAdapter;
 import com.ebtang.ebtangebook.view.scan.adapter.FileAdapter;
 import com.ebtang.ebtangebook.view.scan.fragment.LocalFileListFragment;
@@ -61,6 +64,7 @@ public class AutoScanActivity extends BaseActivity{
     private int epub_count = 0;
 
     private boolean isSelectAll = true;//当前title右按钮是不是全选
+    private LocalFileDb localFileDb;
 
     private Handler handler = new Handler(){
         @Override
@@ -91,6 +95,7 @@ public class AutoScanActivity extends BaseActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.auto_scan_activity);
+        localFileDb = new LocalFileDb(this);
         fileList = new ArrayList<File>();
         root = Environment.getExternalStorageDirectory();
         ButterKnife.bind(this);
@@ -100,9 +105,11 @@ public class AutoScanActivity extends BaseActivity{
 
     @Override
     public void initView() {
+        textView_title.setText("本地文件扫描");
         textView_bt = (TextView)findViewById(R.id.auto_scan_bt);
         imageView_back.setOnClickListener(this);
         textView_select.setOnClickListener(this);
+        textView_bt.setOnClickListener(this);
     }
 
     @Override
@@ -136,6 +143,28 @@ public class AutoScanActivity extends BaseActivity{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.auto_scan_bt:
+                if(mapin.size()==0){
+                    Toast.makeText(AutoScanActivity.this,"请选择你要导入的文件",Toast.LENGTH_SHORT).show();
+                }else{
+                    for(String key : mapin.keySet()){
+                        String lastName = key.substring(key.lastIndexOf("/")+1);
+                        String title = lastName.substring(0, lastName.lastIndexOf("."));
+                        int type = lastName.contains("txt")? 1 : 2 ;
+                        if(localFileDb.find(key,title) == null){
+                            LocalFile localFile = new LocalFile();
+                            localFile.setPath(key);
+                            localFile.setType(type);
+                            localFile.setName(title);
+                            localFile.setTime(System.currentTimeMillis());
+                            localFile.setLocalBook(1);
+                            localFileDb.insert(localFile);
+                        }
+                    }
+                    Toast.makeText(AutoScanActivity.this,"导入成功",Toast.LENGTH_SHORT).show();
+                    adapter.notifyDataSetChanged();
+                }
+                break;
             case R.id.top_title_left:
                 finish();
                 break;
@@ -143,13 +172,36 @@ public class AutoScanActivity extends BaseActivity{
                 if(fileList.size()>0){
                     if(isSelectAll){
                         for(int i=0;i<fileList.size();i++){
-                            isSelected.put(i,true);
+                            String p =AutoScanActivity.paths.get(i);//减去文件夹的数量
+                            String lastName = p.substring(p.lastIndexOf("/") + 1);
+                            String title = lastName.substring(0, lastName.lastIndexOf("."));
+                            if(localFileDb.find(p,title) != null) {
+                                //把num 与position 对应起来
+                                isSelected.put(i,false);
+                                if (AutoScanActivity.mapin.containsKey(p)) {
+                                    AutoScanActivity.mapin.remove(p);
+                                }
+                            }else{
+                                //把num 与position 对应起来
+                                isSelected.put(i,true);
+                                if (!AutoScanActivity.mapin.containsKey(p)) {
+                                    AutoScanActivity.mapin.put(p,i);
+                                }
+                            }
                         }
                         isSelectAll = false;
-                        textView_select.setText("撤销");
+                        if(mapin.size()>0)
+                            textView_select.setText("撤销");
+                        else
+                            Toast.makeText(AutoScanActivity.this,"已全部导入",Toast.LENGTH_SHORT).show();
                     }else{
                         for(int i=0;i<fileList.size();i++){
                             isSelected.put(i,false);
+                            String p =AutoScanActivity.paths.get(i);//减去文件夹的数量
+                            //把num 与position 对应起来
+                            if (!AutoScanActivity.mapin.containsKey(p)) {
+                                AutoScanActivity.mapin.put(p,i);
+                            }
                         }
                         isSelectAll = true;
                         textView_select.setText("全选");
@@ -170,7 +222,8 @@ public class AutoScanActivity extends BaseActivity{
         adapter.notifyDataSetChanged();
         // TextView显示最新的选中数目
         textView_bt.setText("导入书架(" + checkNum1 + ")项");
-        if(checkNum1 == fileList.size()){
+        List<LocalFile> localFiles = localFileDb.findAllBook();
+        if(checkNum1+localFiles.size() == fileList.size()){
             isSelectAll = false;
             textView_select.setText("撤销");
         }else {

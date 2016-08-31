@@ -36,6 +36,9 @@ import com.ebtang.ebtangebook.widget.dragGridView.DragGridView;
 import com.ebtang.ebtangebook.widget.myWebView.WebViewActivity;
 
 import org.geometerplus.android.fbreader.FBReader;
+import org.geometerplus.android.fbreader.libraryService.BookCollectionShadow;
+import org.geometerplus.fbreader.book.Book;
+import org.geometerplus.zlibrary.core.filesystem.ZLFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +74,6 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
     private static Rotate3DAnimation coverAnimation;
 
     private BookShelfAdapter bookShelfAdapter;
-    private List<Object> list;
 
     private static TextView cover;
     private TextView itemTextView;
@@ -86,6 +88,10 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
     private LocalFileDb localFileDb;
     private List<LocalFile> localFileList = new ArrayList<>();
 
+    private NewMainActivity newMainActivity;
+
+    private Book book;//点击item将要打开的书
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -96,6 +102,7 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
         if (parent != null) {
             parent.removeView(rootView);
         }
+        newMainActivity = (NewMainActivity)getActivity();
         mWindowManager = (WindowManager)getActivity().getSystemService(Context.WINDOW_SERVICE);
         wmRootView = new AbsoluteLayout(getActivity());
         typeface = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(), "font/QH.ttf");
@@ -144,8 +151,13 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
         dragGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (list.size() > position) {
-                    String bookname = "盗墓笔记";
+                if (localFileList.size() > position) {
+                    LocalFile localFile = localFileList.get(position);
+                    localFile.setTime(System.currentTimeMillis());
+                    localFileDb.update(localFile);
+                    ZLFile zlFile = ZLFile.createFileByPath(localFileList.get(position).getPath());
+                    book = createBookForFile(zlFile);
+                    String bookname = localFileList.get(position).getName();
                     itemTextView = (TextView) view.findViewById(R.id.imageView1);
                     itemTextView.getLocationInWindow(location);
 
@@ -198,19 +210,10 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
     @Override
     public void initData() {
         localFileList.clear();
-        if(localFileDb.findAllBook()!=null)
-            localFileList.addAll(localFileDb.findAllBook());
-        list = new ArrayList<>();
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
+        if(localFileDb.findAllBook()!=null){
+            List<LocalFile> localFiles = localFileDb.findAllBook();
+            localFileList.addAll(localFiles);
+        }
         bookShelfAdapter = new BookShelfAdapter(getActivity(),localFileList);
         dragGridView.setAdapter(bookShelfAdapter);
     }
@@ -274,13 +277,13 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
             animationCount++;
             if (animationCount >= 2) {
                 mIsOpen = true;
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), FBReader.class);
-//                intent.setClass(getActivity(), WebViewActivity.class);
-                intent.putExtra(Constants.APP_WEBVIEW_TITLE,"阅读");
-                intent.putExtra(Constants.APP_WEBVIEW_URL,"http://www.baidu.com");
-                startActivity(intent);
-                getActivity().overridePendingTransition(android.support.v7.appcompat.R.anim.abc_grow_fade_in_from_bottom, android.support.v7.appcompat.R.anim.abc_shrink_fade_out_from_bottom);
+//                Intent intent = new Intent();
+//                intent.setClass(getActivity(), FBReader.class);
+////                intent.setClass(getActivity(), WebViewActivity.class);
+//                intent.putExtra(Constants.APP_WEBVIEW_TITLE,"阅读");
+//                intent.putExtra(Constants.APP_WEBVIEW_URL,"http://www.baidu.com");
+//                startActivity(intent);
+                FBReader.openBookActivity(getActivity(),book,null);
             }
 
         } else {
@@ -334,6 +337,37 @@ public class BookShelfFragment extends BaseFragment implements Animation.Animati
 
     public void hideDeleteBt(){
         dragGridView.hideDeleteBt();
+    }
+
+
+    private org.geometerplus.fbreader.book.Book createBookForFile(final ZLFile file) {
+        if (file == null) {
+            return null;
+        }
+        newMainActivity.getCollection().bindToService(newMainActivity, new Runnable() {
+            @Override
+            public void run() {
+                book = newMainActivity.getCollection().getBookByFile(file.getPath());
+            }
+        });
+
+        if (book != null) {
+            return book;
+        }
+        if (file.isArchive()) {
+            for (final ZLFile child : file.children()) {
+                newMainActivity.getCollection().bindToService(newMainActivity, new Runnable() {
+                    @Override
+                    public void run() {
+                        book = newMainActivity.getCollection().getBookByFile(child.getPath());
+                    }
+                });
+                if (book != null) {
+                    return book;
+                }
+            }
+        }
+        return null;
     }
 
 }

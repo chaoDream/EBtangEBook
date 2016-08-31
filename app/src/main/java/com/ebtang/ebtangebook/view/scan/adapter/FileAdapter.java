@@ -114,14 +114,6 @@ public  class  FileAdapter extends BaseAdapter {
             viewHolder.linearLayout.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        if(localFileDb.find(files.get(position).getPath(),files.get(position).getName()) != null){
-            viewHolder.textView_imported.setVisibility(View.VISIBLE);
-            viewHolder.checkBox.setVisibility(View.GONE);
-        }else{
-            viewHolder.textView_imported.setVisibility(View.GONE);
-            viewHolder.checkBox.setVisibility(View.VISIBLE);
-        }
-
         viewHolder.textView.setText(files.get(position).getName());//设置文件名
         //CheckBox状态变化监听
         viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -137,8 +129,8 @@ public  class  FileAdapter extends BaseAdapter {
                 if (viewHolder.checkBox.isChecked() == true) {
 
                     if (!LocalFileListFragment.mapin.containsKey(p)) {
-
-                        LocalFileListFragment.mapin.put(p,position- Fileutil.folderNum);
+                        if(position>Fileutil.folderNum)
+                            LocalFileListFragment.mapin.put(p,position- Fileutil.folderNum);
                     }
 
                 }else if (viewHolder.checkBox.isChecked() == false) {
@@ -159,12 +151,18 @@ public  class  FileAdapter extends BaseAdapter {
             viewHolder.textSize.setText("项");
 
         } else {
+            if(localFileDb.find(files.get(position).getPath(),files.get(position).getName().substring(0, files.get(position).getName().lastIndexOf("."))) != null){
+                viewHolder.textView_imported.setVisibility(View.VISIBLE);
+                viewHolder.checkBox.setVisibility(View.GONE);
+            }else{
+                viewHolder.textView_imported.setVisibility(View.GONE);
+                viewHolder.checkBox.setVisibility(View.VISIBLE);
+            }
             if(files.get(position).getName().contains(".txt"))
                 viewHolder.fileIcon.setImageResource(R.drawable.file_type_txt);
             else if(files.get(position).getName().contains(".epub")){
                 viewHolder.fileIcon.setImageResource(R.drawable.file_type_epub);
             }
-            viewHolder.checkBox.setVisibility(View.VISIBLE);
             viewHolder.checkBox.setChecked(LocalFileListFragment.getIsSelected().get(position));
             viewHolder.textSize.setText(Fileutil.formatFileSize(files.get(position).length()));
 

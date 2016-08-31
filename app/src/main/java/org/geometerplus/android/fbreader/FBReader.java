@@ -378,7 +378,6 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
         myFBReaderApp.ViewOptions.BottomMargin.setValue(40);
         ZLAndroidLibrary.Instance().getOrientationOption().setValue("portrait");//设置只支持竖屏显示
 
-        getCollection().bindToService(this, null);
         myBook = null;
 
         myFBReaderApp.setWindow(this);
@@ -609,8 +608,8 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
 
     @Override
     protected void onStart() {
+        getCollection().bindToService(this, null);
         super.onStart();
-
         getCollection().bindToService(this, new Runnable() {
             public void run() {
                 new Thread() {
@@ -794,6 +793,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
 
     @Override
     protected void onPause() {
+        getCollection().unbind();
         SyncOperations.quickSync(this, myFBReaderApp.SyncOptions);
 
         IsPaused = true;
@@ -826,7 +826,7 @@ public final class FBReader extends FBReaderMainActivity implements ZLApplicatio
 
     @Override
     protected void onDestroy() {
-        getCollection().unbind();
+//        getCollection().unbind();
         unbindService(DataConnection);
         super.onDestroy();
         EventBus.getDefault().unregister(this);

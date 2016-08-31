@@ -39,8 +39,12 @@ public class LocalFileDb {
      */
     public List<LocalFile> findAllBook(){
         sql = SqlFactory.find(LocalFile.class).
-                where("flag=?", new Object[]{1});
+                where("flag=?", new Object[]{1}).orderBy("time",true);
         return dbExecutor.executeQuery(sql);
+    }
+
+    public void update(LocalFile localFile){
+        dbExecutor.updateById(localFile);
     }
 
 }

@@ -116,6 +116,7 @@ public class BookCollectionShadow extends AbstractBookCollection<Book> implement
         }
     }
 
+
     public synchronized void reset(boolean force) {
         if (myInterface != null) {
             try {

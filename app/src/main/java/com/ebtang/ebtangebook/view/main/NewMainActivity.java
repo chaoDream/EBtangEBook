@@ -14,6 +14,10 @@ import com.ebtang.ebtangebook.view.main.fragment.BookShelfFragment;
 import com.ebtang.ebtangebook.view.main.widget.MainTab;
 import com.ebtang.ebtangebook.view.main.widget.MyFragmentTabHost;
 
+import org.geometerplus.android.fbreader.libraryService.BookCollectionShadow;
+import org.geometerplus.fbreader.Paths;
+import org.geometerplus.fbreader.fbreader.FBReaderApp;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -27,12 +31,39 @@ public class NewMainActivity extends BaseFragmentActivity{
 
     private static View rootView;
 
+    private FBReaderApp myFBReaderApp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new);
         ButterKnife.bind(this);
         initView();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        myFBReaderApp = (FBReaderApp) FBReaderApp.Instance();
+        if (myFBReaderApp == null) {
+            myFBReaderApp = new FBReaderApp(Paths.systemInfo(this), new BookCollectionShadow());
+        }
+        getCollection().bindToService(this, null);
+    }
+
+    @Override
+    protected void onPause() {
+        getCollection().unbind();
+        super.onPause();
+    }
+
+    public BookCollectionShadow getCollection(){
+        return (BookCollectionShadow)myFBReaderApp.Collection;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override

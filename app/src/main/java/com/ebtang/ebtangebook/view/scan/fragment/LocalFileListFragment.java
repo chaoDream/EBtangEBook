@@ -223,6 +223,8 @@ public class LocalFileListFragment extends BaseFragment{
                         localFile.setPath(key);
                         localFile.setType(type);
                         localFile.setName(title);
+                        localFile.setLocalBook(1);
+                        localFile.setTime(System.currentTimeMillis());
                         localFileDb.insert(localFile);
                     }
                 }
@@ -396,8 +398,8 @@ public class LocalFileListFragment extends BaseFragment{
             searchData(filePath);
             addPath(filePath);
         } else if (adapter.getFiles().get(position).isFile()) {
-            zlFile = ZLFile.createFileByPath(filePath);
-            book = createBookForFile(zlFile);
+//            zlFile = ZLFile.createFileByPath(filePath);
+//            book = createBookForFile(zlFile);
             String lastName = filePath.substring(filePath.lastIndexOf("/")+1);
             String title = lastName.substring(0, lastName.lastIndexOf("."));
             if(localFileDb.find(filePath,title)==null){
@@ -433,13 +435,13 @@ public class LocalFileListFragment extends BaseFragment{
         if (file == null) {
             return null;
         }
-        Book book = scanFileActivity.getCollection().getBookByFile(file.getPath());
+//        Book book = scanFileActivity.getCollection().getBookByFile(file.getPath());
         if (book != null) {
             return book;
         }
         if (file.isArchive()) {
             for (ZLFile child : file.children()) {
-                book = scanFileActivity.getCollection().getBookByFile(child.getPath());
+//                book = scanFileActivity.getCollection().getBookByFile(child.getPath());
                 if (book != null) {
                     return book;
                 }
@@ -470,15 +472,15 @@ public class LocalFileListFragment extends BaseFragment{
     private void createBookSecend(){
         if (zlFile.isArchive()) {
             for (final ZLFile child : zlFile.children()) {
-                scanFileActivity.getCollection().bindToService(scanFileActivity, new Runnable() {
-                    @Override
-                    public void run() {
-                        book = scanFileActivity.getCollection().getBookByFile(child.getPath());
-                        if(book!=null){
-                            handler.sendEmptyMessage(1);
-                        }
-                    }
-                });
+//                scanFileActivity.getCollection().bindToService(scanFileActivity, new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        book = scanFileActivity.getCollection().getBookByFile(child.getPath());
+//                        if(book!=null){
+//                            handler.sendEmptyMessage(1);
+//                        }
+//                    }
+//                });
             }
         }
     }

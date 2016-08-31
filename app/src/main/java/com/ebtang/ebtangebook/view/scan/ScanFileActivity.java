@@ -41,8 +41,6 @@ public class ScanFileActivity extends BaseFragmentActivity{
 
     private ScanFileAdapter scanFileAdapter;
 
-    private FBReaderApp myFBReaderApp;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,26 +48,16 @@ public class ScanFileActivity extends BaseFragmentActivity{
         ButterKnife.bind(this);
         initView();
         initData();
-        myFBReaderApp = (FBReaderApp) FBReaderApp.Instance();
-        if (myFBReaderApp == null) {
-            myFBReaderApp = new FBReaderApp(Paths.systemInfo(this), new BookCollectionShadow());
-        }
     }
 
     @Override
     public void onStart() {
-        getCollection().bindToService(this, null);
         super.onStart();
     }
 
     @Override
     public void onDestroy() {
-        ((BookCollectionShadow)myFBReaderApp.Collection).unbind();
         super.onDestroy();
-    }
-
-    public BookCollectionShadow getCollection() {
-        return (BookCollectionShadow)myFBReaderApp.Collection;
     }
 
     @Override

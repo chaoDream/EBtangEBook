@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
+import com.ebtang.ebtangebook.db.read.LocalFileDb;
 import com.ebtang.ebtangebook.view.scan.AutoScanActivity;
 import com.ebtang.ebtangebook.view.scan.bean.BookList;
 import com.ebtang.ebtangebook.view.scan.fragment.LocalFileListFragment;
@@ -38,6 +39,8 @@ public  class AutoScanAdapter extends BaseAdapter {
 
     public static int checkNum = 0; // 记录选中的条目数量
 
+    private LocalFileDb localFileDb;
+
     private  HashMap<Integer,Boolean> isSelected;
 
     public static List<BookList> bookLists = new ArrayList<>();
@@ -57,6 +60,7 @@ public  class AutoScanAdapter extends BaseAdapter {
         this.context = context;
         this.files = files;
         this.isSelected = isSelected;
+        localFileDb = new LocalFileDb(context);
     }
 
     @Override
@@ -95,6 +99,8 @@ public  class AutoScanAdapter extends BaseAdapter {
                     .findViewById(R.id.local_file_image);
             viewHolder.linearLayout = (LinearLayout) convertView
                     .findViewById(R.id.local_file_lin);
+            viewHolder.textView_imported = (TextView)convertView
+                    .findViewById(R.id.local_file_imported);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -138,6 +144,14 @@ public  class AutoScanAdapter extends BaseAdapter {
             }
         });
 
+        if(localFileDb.find(files.get(position).getPath(),files.get(position).getName().substring(0, files.get(position).getName().lastIndexOf("."))) != null){
+            viewHolder.textView_imported.setVisibility(View.VISIBLE);
+            viewHolder.checkBox.setVisibility(View.GONE);
+        }else{
+            viewHolder.textView_imported.setVisibility(View.GONE);
+            viewHolder.checkBox.setVisibility(View.VISIBLE);
+        }
+
         //文件夹和文件逻辑判断
         if (files.get(position).isDirectory()) {
             viewHolder.fileIcon.setImageResource(R.drawable.folder);
@@ -150,7 +164,6 @@ public  class AutoScanAdapter extends BaseAdapter {
                 viewHolder.fileIcon.setImageResource(R.drawable.file_type_txt);
             else
                 viewHolder.fileIcon.setImageResource(R.drawable.file_type_epub);
-            viewHolder.checkBox.setVisibility(View.VISIBLE);
             viewHolder.checkBox.setChecked(isSelected.get(position));
             viewHolder.textSize.setText(Fileutil.formatFileSize(files.get(position).length()));
         }
@@ -163,6 +176,7 @@ public  class AutoScanAdapter extends BaseAdapter {
         TextView textSize;
         ImageView fileIcon;
         CheckBox checkBox;
+        TextView textView_imported;
         LinearLayout linearLayout;
     }
 
