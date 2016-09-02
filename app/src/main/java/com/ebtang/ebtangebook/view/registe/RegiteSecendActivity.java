@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseActivity;
 import com.ebtang.ebtangebook.event.RegisteSuccess;
+import com.ebtang.ebtangebook.intent.IntentConfig;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,10 +29,16 @@ public class RegiteSecendActivity extends BaseActivity {
     ImageView imageView_left;
     @Bind(R.id.registe_secend_bt)
     Button button;
+    @Bind(R.id.registe_secend_show_phone)
+    TextView textView_showPhone;
+
+    String phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registe_secend);
+        phone = getIntent().getStringExtra(IntentConfig.REGISTE_PHONE);
         ButterKnife.bind(this);
         initView();
         EventBus.getDefault().register(this);
@@ -39,6 +46,8 @@ public class RegiteSecendActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        String textShow = phone.substring(0,3) + "******" + phone.substring(phone.length()-3);
+        textView_showPhone.setText(textShow);
         imageView_left.setImageResource(R.drawable.back);
         imageView_left.setVisibility(View.VISIBLE);
         textView_title.setText("账号注册");

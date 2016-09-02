@@ -36,6 +36,7 @@ public class SharedPrefHelper {
 	private static final String IS_LOGIN = "isLogin";// 是否登录
 	private static final String LOGIN_USERNAME = "login_username";// 登录用户名
 	private static final String LOGIN_PASSWORD = "login_password";// 登录密码
+	private static final String USER_TOUXIANG_IMG = "user_touxiang_img";//用户头像地址
     private static final String ACCESSTOKEN = "AccessToken";
     private static final String LOGIN_USERID = "Login_Userid";
 
@@ -255,5 +256,16 @@ public class SharedPrefHelper {
 	}
 	public int getReadSettingPaiban(){
 		return sharedPreferences.getInt(READ_SETTING_PAIBAN,4);
+	}
+
+	/**
+	 * 设置用户的头像地址
+	 * @param imgUrl
+	 */
+	public void setUserTouxiangImg(String imgUrl){
+		sharedPreferences.edit().putString(USER_TOUXIANG_IMG,imgUrl).commit();
+	}
+	public String getUserTouxiangImg(){
+		return  sharedPreferences.getString(USER_TOUXIANG_IMG,"");
 	}
 }

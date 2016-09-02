@@ -54,6 +54,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/registe_secend_show_phone"
                 android:textColor="@color/primary_red"
                 android:text="135******55"/>
         </LinearLayout>

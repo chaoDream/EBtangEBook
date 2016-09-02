@@ -1,6 +1,8 @@
 package com.ebtang.ebtangebook.app;
 
 import android.content.Context;
+
+import com.ebtang.ebtangebook.api.ParamsUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.yunqing.core.db.DBExecutor;
@@ -26,6 +28,7 @@ public class AppContext extends MypAppContext{
 		super.onCreate();
         dbExecutor = DBExecutor.getInstance(this);
         initImageLoader(getApplicationContext());
+        ParamsUtils.getInstance(this);
 	}
 
     public void initImageLoader(Context context) {

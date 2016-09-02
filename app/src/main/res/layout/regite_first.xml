@@ -32,7 +32,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:id="@+id/registe_first_phone_et"
+            android:hint="请输入您的手机号"
             android:background="@null"
+            android:inputType="number"
             android:singleLine="true"
             android:padding="@dimen/dip_size_5"/>
     </LinearLayout>
@@ -68,8 +71,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:id="@+id/registe_first_code_et"
                 android:background="@null"
                 android:singleLine="true"
+                android:hint="验证码"
                 android:padding="@dimen/dip_size_5"/>
         </LinearLayout>
 

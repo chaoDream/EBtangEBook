@@ -10,4 +10,7 @@ import com.ebtang.ebtangebook.mvp.MvpView;
  */
 public interface RegistFirstView extends MvpView{
     ImageView getImageView();
+    String getPhoneNum();//手机号
+    String getCheckCode();//验证码
+    void gotoNext();//验证成功，进入下一页
 }

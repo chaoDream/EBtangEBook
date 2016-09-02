@@ -8,6 +8,7 @@ import com.ebtang.ebtangebook.spf.SharedPrefHelper;
 import com.ebtang.ebtangebook.utils.CryptoUtil;
 import com.ebtang.ebtangebook.utils.SystemUtils;
 import com.ebtang.ebtangebook.utils.UUIDUtil;
+import com.ebtang.ebtangebook.view.scan.ScanFileActivity;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -19,6 +20,10 @@ public class ParamsUtils {
 
     private static ParamsUtils paramsUtils;
     private static Context context;
+
+    private ParamsUtils(){
+
+    }
 
     public static synchronized ParamsUtils getInstance(Context context) {
         if (null == paramsUtils) {
@@ -107,6 +112,57 @@ public class ParamsUtils {
      */
     public static HashMap<String,String> getCheckImg(){
         HashMap<String,String> parmas = commonURL();
+        return parmas;
+    }
+
+    /**
+     * 验证手机号是否注册过
+     */
+    public static HashMap<String,String> checkPhoneNum(String checkCode,String phoneNum){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("randomCode",checkCode);
+        parmas.put("mobilePhone",phoneNum);
+        return parmas;
+    }
+
+    /**
+     * 获取手机验证码
+     * @param mobilePhone
+     * @return
+     */
+    public static HashMap<String,String> getCheckCode(String mobilePhone){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("mobilePhone",mobilePhone);
+        return parmas;
+    }
+
+    /**
+     * 注册
+     * @param mobilePhone
+     * @param password
+     * @param dynamicCode
+     * @return
+     */
+    public static HashMap<String,String> registe(String mobilePhone,String password,String dynamicCode){
+        String pwd = CryptoUtil.md5HexDigest(password, null);
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("mobilePhone",mobilePhone);
+        parmas.put("password",pwd);
+        parmas.put("dynamicCode",dynamicCode);
+        return parmas;
+    }
+
+    /**
+     * 登录
+     * @param name
+     * @param password
+     * @return
+     */
+    public static HashMap<String,String> login(String name,String password){
+        String pwd = CryptoUtil.md5HexDigest(password, null);
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("password",pwd);
+        parmas.put("name",name);
         return parmas;
     }
 

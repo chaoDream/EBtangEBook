@@ -12,5 +12,5 @@ public interface IntentConfig {
 
     public static String BOOK_LABEL_SHQIAN = "book_label_shuqian";//直接打开书签
 
-
+    public static String REGISTE_PHONE = "registe_phone";//注册时候使用的手机号
 }

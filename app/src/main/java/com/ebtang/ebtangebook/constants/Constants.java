@@ -27,4 +27,6 @@ public class Constants {
     public static final int MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_BIJI = 7;//笔记
 
 
+    public static final String NET_RESULT_CODE_SUCCESS = "0";//接口返回数据正确
+    public static final String NET_RESULT_CODE_FAIL = "1";//接口返回数据错误
 }

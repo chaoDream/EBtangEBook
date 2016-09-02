@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSON;
 import com.ebtang.ebtangebook.api.ApiClient;
 import com.ebtang.ebtangebook.api.ApiService;
 import com.ebtang.ebtangebook.api.ParamsUtils;
+import com.ebtang.ebtangebook.constants.Constants;
 import com.ebtang.ebtangebook.mvp.BasePersenter;
 import com.ebtang.ebtangebook.mvpView.RegistFirstView;
 import com.ebtang.ebtangebook.utils.NetworkUtil;
@@ -30,18 +31,23 @@ import okhttp3.Response;
  */
 public class RegisteFirstPersenter extends BasePersenter<RegistFirstView>{
 
-    private OkHttpClient client;
+    private boolean isGetDataNow = false;//防止多次点击调用接口
 
     @Override
     public void attachView(RegistFirstView mvpView) {
         super.attachView(mvpView);
-        client = new OkHttpClient();
     }
 
     @Override
     public void getData() {
-//        if(NetworkUtil.isNetworkAvailable(getMvpView().context()))
-//            apiModel.getData(ApiClient.getClient().getCheckImg(ParamsUtils.getCheckImg()));
+        if(!isGetDataNow){
+            isGetDataNow = true;
+            apiModel.getData(ApiClient.getClient().checkPhone
+                    (ParamsUtils.checkPhoneNum(getMvpView().getCheckCode(), getMvpView().getPhoneNum())));
+        }
+    }
+
+    public void getCheckImg(){
         String imgUrl = ApiClient.API_HOST + ApiService.GET_CHECK_IMG + "?uniqueId=" + UUIDUtil.getDeviceUUID(getMvpView().context());
         OkHttpUtils
                 .get()//
@@ -65,17 +71,32 @@ public class RegisteFirstPersenter extends BasePersenter<RegistFirstView>{
                         getMvpView().getImageView().setImageBitmap(bitmap);
                     }
                 });
-//        else
-//            Toast.makeText(getMvpView().context(),"请检查网络",Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void setData(String obj) {
+        isGetDataNow = false;
         try{
             JSONObject object = new JSONObject(obj);
+            if(object.getString("code").equals(Constants.NET_RESULT_CODE_SUCCESS)){
+                JSONObject object1 = object.getJSONObject("body");
+                if(!object1.getBoolean("isRegister")){
+                    getMvpView().gotoNext();
+                }else{
+                    getMvpView().showError(object.getString("手机号已注册"));
+                }
+            }else{
+                getMvpView().showError(object.getString("msg"));
+            }
         }catch (Exception e){
             e.printStackTrace();
             getMvpView().showError("加载数据失败");
         }
+    }
+
+    @Override
+    public void onError(Exception e) {
+        super.onError(e);
+        isGetDataNow = false;
     }
 }

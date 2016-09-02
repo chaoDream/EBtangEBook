@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.constants.Constants;
+import com.ebtang.ebtangebook.spf.SharedPrefHelper;
 import com.ebtang.ebtangebook.view.login.LoginActivity;
 import com.ebtang.ebtangebook.view.setting.AboutActivity;
 import com.ebtang.ebtangebook.view.setting.ChongzhiActivity;
@@ -25,6 +26,7 @@ import com.ebtang.ebtangebook.view.setting.ReadHistoryActivity;
 import com.ebtang.ebtangebook.view.setting.SettingActivity;
 import com.ebtang.ebtangebook.view.setting.SettingInfoEditActivity;
 import com.ebtang.ebtangebook.widget.myWebView.WebViewActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -56,9 +58,11 @@ public class PersenalFragment extends BaseFragment {
     RelativeLayout relativeLayout_read_history;
     @Bind(R.id.persenal_feedback_item)
     RelativeLayout relativeLayout_feedback;
-
+    @Bind(R.id.persenal_name)
+    TextView textView_name;
 
     private View rootView;
+    private ImageLoader imageLoader;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,7 +75,17 @@ public class PersenalFragment extends BaseFragment {
         }
         ButterKnife.bind(this,rootView);
         initView();
+        imageLoader = ImageLoader.getInstance();
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(SharedPrefHelper.getInstance(getActivity()).isLogin()){
+            imageLoader.displayImage(SharedPrefHelper.getInstance(getActivity()).getUserTouxiangImg(),imageView_persenal_icon);
+            textView_name.setText(SharedPrefHelper.getInstance(getActivity()).getLoginUsername());
+        }
     }
 
     @Override
@@ -106,6 +120,8 @@ public class PersenalFragment extends BaseFragment {
                 getActivity().startActivity(intent);
                 break;
             case R.id.persenal_icon:
+                if(SharedPrefHelper.getInstance(getActivity()).isLogin())
+                    return;
                 Intent intent2 = new Intent(getActivity(), LoginActivity.class);
                 getActivity().startActivity(intent2);
                 break;
