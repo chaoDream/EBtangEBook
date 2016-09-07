@@ -58,8 +58,8 @@ public class SearchResultActivity extends BaseActivity{
         list.add(new Object());
         list.add(new Object());
         list.add(new Object());
-        recommLVAdapter = new RecommLVAdapter(this,list);
-        listView.setAdapter(recommLVAdapter);
+//        recommLVAdapter = new RecommLVAdapter(this,list);
+//        listView.setAdapter(recommLVAdapter);
     }
 
     @Override

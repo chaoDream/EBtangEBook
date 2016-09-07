@@ -49,8 +49,8 @@ public class PaiHangListFragment extends BaseFragment{
         list.add(new Object());
         list.add(new Object());
         list.add(new Object());
-        recommLVAdapter = new RecommLVAdapter(getActivity(),list);
-        listView.setAdapter(recommLVAdapter);
+//        recommLVAdapter = new RecommLVAdapter(getActivity(),list);
+//        listView.setAdapter(recommLVAdapter);
     }
 
     @Override

@@ -28,6 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:id="@+id/setting_myyinhao_shengyu"
             android:textColor="@color/primary_red"
             android:layout_marginLeft="@dimen/dip_size_10"
             android:text="90豆"/>

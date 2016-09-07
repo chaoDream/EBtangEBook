@@ -65,10 +65,10 @@ public class ManFragment extends BaseFragment{
         list.add(new Object());
         list.add(new Object());
         list.add(new Object());
-        recommGVAdapter = new RecommGVAdapter(getActivity(),list);
-        recommLVAdapter = new RecommLVAdapter(getActivity(),list);
-        gridView.setAdapter(recommGVAdapter);
-        listView.setAdapter(recommLVAdapter);
+//        recommGVAdapter = new RecommGVAdapter(getActivity(),list);
+//        recommLVAdapter = new RecommLVAdapter(getActivity(),list);
+//        gridView.setAdapter(recommGVAdapter);
+//        listView.setAdapter(recommLVAdapter);
     }
 
     @Override

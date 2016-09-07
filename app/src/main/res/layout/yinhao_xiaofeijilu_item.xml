@@ -23,6 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/yinhao_consume_item_type"
                 android:text="订阅"/>
         </LinearLayout>
         <LinearLayout
@@ -36,6 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/yinhao_consume_item_name"
                 android:textColor="@color/primary_red"
                 android:lines="1"
                 android:ellipsize="end"
@@ -59,6 +61,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/yinhao_consume_item_money"
                 android:textColor="@color/primary_red"
                 android:text="50"/>
         </LinearLayout>
@@ -74,6 +77,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/yinhao_consume_item_time"
                 android:textColor="@color/black"
                 android:lines="1"
                 android:ellipsize="end"

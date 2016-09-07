@@ -1,5 +1,6 @@
 package com.ebtang.ebtangebook.view.setting;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,7 +9,10 @@ import android.widget.TextView;
 
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseActivity;
+import com.ebtang.ebtangebook.mvpView.MySubscribeView;
+import com.ebtang.ebtangebook.persenter.MySubscribePersenter;
 import com.ebtang.ebtangebook.view.bookcity.adapter.RecommLVAdapter;
+import com.ebtang.ebtangebook.view.setting.bean.MySubscribBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by fengzongwei on 2016/8/2 0002.
  * 自动订阅
  */
-public class MySubscribeBookActivity extends BaseActivity{
+public class MySubscribeBookActivity extends BaseActivity implements MySubscribeView{
     @Bind(R.id.top_title_text)
     TextView textView_title;
     @Bind(R.id.top_title_left)
@@ -29,11 +33,16 @@ public class MySubscribeBookActivity extends BaseActivity{
     ListView listView;
 
     RecommLVAdapter recommLVAdapter;
+
+    MySubscribePersenter mySubscribePersenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.persenal_subscribe);
         ButterKnife.bind(this);
+        mySubscribePersenter = new MySubscribePersenter();
+        mySubscribePersenter.attachView(this);
         initView();
         initData();
     }
@@ -50,18 +59,7 @@ public class MySubscribeBookActivity extends BaseActivity{
 
     @Override
     public void initData() {
-        List<Object> list = new ArrayList<>();
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        list.add(new Object());
-        recommLVAdapter = new RecommLVAdapter(this,list);
-        listView.setAdapter(recommLVAdapter);
+        mySubscribePersenter.getData();
     }
 
     @Override
@@ -71,5 +69,42 @@ public class MySubscribeBookActivity extends BaseActivity{
                 finish();
                 break;
         }
+    }
+
+
+    @Override
+    public void showData(List<MySubscribBean> mySubscribBeanList) {
+        recommLVAdapter = new RecommLVAdapter(this,mySubscribBeanList);
+        listView.setAdapter(recommLVAdapter);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showRetry() {
+
+    }
+
+    @Override
+    public void hideRetry() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public Context context() {
+        return this;
     }
 }

@@ -166,4 +166,44 @@ public class ParamsUtils {
         return parmas;
     }
 
+    /**
+     * 获取自动订阅
+     */
+    public static HashMap<String,String> mySubscribe(String userId){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        return parmas;
+    }
+
+    /**
+     * 我的银号
+     * @return
+     */
+    public static HashMap<String,String> myYinHao(String userId){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        return parmas;
+    }
+
+    /**
+     * 我的银号--充值记录
+     * @return
+     */
+    public static HashMap<String,String> myYinHaoRecharge(String userId){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        return parmas;
+    }
+
+    /**
+     * 我的银号--消费记录
+     * @return
+     */
+    public static HashMap<String,String> myYinHaoConsume(String userId){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        return parmas;
+    }
+
+
 }

@@ -78,11 +78,11 @@ public class ShizishanFragment extends BaseFragment {
         recommGVAdapter_top = new RecommGVAdapter(getActivity(),list);
         recommGVAdapter_man = new RecommGVAdapter(getActivity(),list);
         recommGVAdapter_women = new RecommGVAdapter(getActivity(),list);
-        recommLVAdapter = new RecommLVAdapter(getActivity(),list);
+//        recommLVAdapter = new RecommLVAdapter(getActivity(),list);
         gridView_top.setAdapter(recommGVAdapter_top);
         gridView_man.setAdapter(recommGVAdapter_man);
         gridView_women.setAdapter(recommGVAdapter_women);
-        listView.setAdapter(recommLVAdapter);
+//        listView.setAdapter(recommLVAdapter);
     }
 
     @Override

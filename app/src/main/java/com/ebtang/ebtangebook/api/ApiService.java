@@ -32,6 +32,14 @@ public interface ApiService {
 
     public final static String LOGIN = "V1_0/login";//登录
 
+    public final static String MY_SUBSCRIVE = "V1_0/user/rss_list";//自动订阅
+
+    public final static String MY_YINHAO = "V1_0/user/wallet";//我的银号
+
+    public final static String CONSUME_HISTORY =  "V1_0/user/consumption_record";//消费记录
+
+    public final static String RECHARGE_HISTORY = "V1_0/user/recharge_record";//充值记录
+
     public final static String COURSE_LIST = "getUserSubjects";
 
     //提交图片
@@ -48,6 +56,21 @@ public interface ApiService {
 
     @GET(LOGIN)
     Call<String> login(@QueryMap Map<String, String> options);
+
+    @GET(MY_SUBSCRIVE)
+    Call<String> mySubscribe(@QueryMap Map<String, String> options);
+
+    @GET(MY_YINHAO)
+    Call<String> myYinHao(@QueryMap Map<String, String> options);
+
+    @GET(CONSUME_HISTORY)
+    Call<String> myYinHaoConsume(@QueryMap Map<String, String> options);
+
+    @GET(RECHARGE_HISTORY)
+    Call<String> myYinHaoRecharge(@QueryMap Map<String, String> options);
+
+
+    /*******************************************/
 
     @Headers("Cache-Control: public, max-age=3600") //设置缓存
     @GET(COURSE_LIST)

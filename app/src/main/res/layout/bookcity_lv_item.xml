@@ -16,7 +16,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="110dp"
-            android:scaleType="fitXY"
+            android:id="@+id/book_item_bookImag"
+            android:scaleType="center"
             android:src="@drawable/icon_book_img"/>
 
         <LinearLayout
@@ -27,11 +28,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/book_item_bookName"
                 android:text="武魂古树"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:id="@+id/book_item_introduce"
                 android:text="一次偶然的遭遇让我成了鼓师,"
                 android:layout_marginTop="@dimen/dip_size_10"
                 android:layout_marginBottom="@dimen/dip_size_10"
@@ -44,11 +47,13 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/book_item_autherImg"
                     android:src="@drawable/icon_editor_touxiang"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:id="@+id/book_item_autherName"
                     android:text="绕指柔"
                     android:layout_marginLeft="@dimen/dip_size_5"/>
                 <ImageView
