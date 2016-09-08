@@ -205,5 +205,17 @@ public class ParamsUtils {
         return parmas;
     }
 
+    /**
+     * 意见反馈
+     * @param userId 用户ID
+     * @param feedback 反馈内容
+     * @return
+     */
+    public static HashMap<String,String> feedBack(String userId,String feedback){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        parmas.put("feedback",feedback);
+        return parmas;
+    }
 
 }

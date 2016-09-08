@@ -1,5 +1,6 @@
 package com.ebtang.ebtangebook.view.bookcity.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -11,15 +12,19 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
+import com.ebtang.ebtangebook.mvpView.ShizishanView;
 import com.ebtang.ebtangebook.view.bookcity.DiscountActivity;
 import com.ebtang.ebtangebook.view.bookcity.FreeActivity;
 import com.ebtang.ebtangebook.view.bookcity.adapter.RecommGVAdapter;
 import com.ebtang.ebtangebook.view.bookcity.adapter.RecommLVAdapter;
 import com.ebtang.ebtangebook.view.bookinfo.BookDetailActivity;
 import com.ebtang.ebtangebook.view.bookinfo.FenleiActivity;
+import com.ebtang.ebtangebook.view.read.bean.EbtangBook;
+import com.ebtang.ebtangebook.widget.banner.Banner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +35,18 @@ import butterknife.ButterKnife;
 /**
  * Created by fengzongwei on 16/7/18.
  */
-public class ShizishanFragment extends BaseFragment {
+public class ShizishanFragment extends BaseFragment implements ShizishanView{
+    //顶部
+    @Bind(R.id.book_city_shizishan_banner)
+    Banner banner;
+    @Bind(R.id.book_city_shizishan_gv1)
+    GridView  gridView_top;
+    //男频
+
     @Bind(R.id.book_city_shizicheng_tuijian_man)
     LinearLayout linearLayout_man;
     @Bind(R.id.book_city_shizicheng_tuijian_women)
     LinearLayout linearLayout_women;
-    @Bind(R.id.book_city_shizishan_gv1)
-    GridView  gridView_top;
     @Bind(R.id.bookcity_shizishan_lv)
     ListView listView;
     @Bind(R.id.book_city_shizishan_mianfei)
@@ -50,6 +60,10 @@ public class ShizishanFragment extends BaseFragment {
     private GridView gridView_man,gridView_women;
     private RecommGVAdapter recommGVAdapter_top,recommGVAdapter_man,recommGVAdapter_women;
     private RecommLVAdapter recommLVAdapter;
+
+    //数据
+    private List<EbtangBook> bannerBookList;//banner显示的数据
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -144,4 +158,84 @@ public class ShizishanFragment extends BaseFragment {
         }
     }
 
+
+    @Override
+    public void showBannerData(List<EbtangBook> bannerBookList) {
+
+    }
+
+    @Override
+    public void showTopSixBookData(List<EbtangBook> topSixBookList) {
+
+    }
+
+    @Override
+    public void showMaleOneBook(EbtangBook maleOneBook) {
+
+    }
+
+    @Override
+    public void showMaleSixBook(List<EbtangBook> maleSixBookList) {
+
+    }
+
+    @Override
+    public void showMaleEightBook(List<EbtangBook> maleEightBookList) {
+
+    }
+
+    @Override
+    public void showAdBook(EbtangBook abBook) {
+
+    }
+
+    @Override
+    public void showFemalOneBook(EbtangBook femalOneBook) {
+
+    }
+
+    @Override
+    public void showFemalSixBook(List<EbtangBook> femalSixBookList) {
+
+    }
+
+    @Override
+    public void showFemalEightBook(List<EbtangBook> femalEightBookList) {
+
+    }
+
+    @Override
+    public void showRecommListBook(List<EbtangBook> recommList) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showRetry() {
+
+    }
+
+    @Override
+    public void hideRetry() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+        Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context context() {
+        return getActivity();
+    }
 }

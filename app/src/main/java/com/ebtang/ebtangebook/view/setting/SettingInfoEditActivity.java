@@ -1,5 +1,6 @@
 package com.ebtang.ebtangebook.view.setting;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,8 @@ import com.ebtang.ebtangebook.app.BaseActivity;
 import com.ebtang.ebtangebook.constants.Constants;
 import com.ebtang.ebtangebook.event.BookMarkModify;
 import com.ebtang.ebtangebook.intent.IntentConfig;
+import com.ebtang.ebtangebook.mvpView.SettingInfoEditView;
+import com.ebtang.ebtangebook.persenter.SettingInfoEditPersenter;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -22,7 +25,7 @@ import butterknife.ButterKnife;
 /**
  * Created by fengzongwei on 16/7/23.
  */
-public class SettingInfoEditActivity extends BaseActivity {
+public class SettingInfoEditActivity extends BaseActivity implements SettingInfoEditView{
 
     @Bind(R.id.top_title_left)
     ImageView imageView_back;
@@ -34,11 +37,15 @@ public class SettingInfoEditActivity extends BaseActivity {
     Button button;
     private int type;
 
+    private SettingInfoEditPersenter settingInfoEditPersenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_info_edit);
         ButterKnife.bind(this);
+        settingInfoEditPersenter = new SettingInfoEditPersenter();
+        settingInfoEditPersenter.attachView(this);
         type = getIntent().getIntExtra(IntentConfig.SETTING_INFO_EDIT_TYPE,-1);
         initView();
     }
@@ -105,9 +112,53 @@ public class SettingInfoEditActivity extends BaseActivity {
                 }
                 break;
             default:
-                Toast.makeText(SettingInfoEditActivity.this,"提交反馈",Toast.LENGTH_SHORT).show();
+                if(editText.getText().toString() == null || editText.getText().toString().equals("")){
+                    Toast.makeText(this,"请输入您的反馈信息，然后再提交",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                settingInfoEditPersenter.getData();
                 break;
         }
     }
 
+
+    @Override
+    public int getInputType() {
+        return type;
+    }
+
+    @Override
+    public String getInputContent() {
+        return editText.getText().toString();
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showRetry() {
+
+    }
+
+    @Override
+    public void hideRetry() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public Context context() {
+        return this;
+    }
 }

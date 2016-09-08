@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.constants.Constants;
+import com.ebtang.ebtangebook.intent.IntentConfig;
 import com.ebtang.ebtangebook.spf.SharedPrefHelper;
 import com.ebtang.ebtangebook.view.login.LoginActivity;
 import com.ebtang.ebtangebook.view.setting.AboutActivity;
@@ -156,6 +157,7 @@ public class PersenalFragment extends BaseFragment {
                 break;
             case R.id.persenal_feedback_item:
                 Intent intent10 = new Intent(getActivity(), SettingInfoEditActivity.class);
+                intent10.putExtra(IntentConfig.SETTING_INFO_EDIT_TYPE,Constants.SETTING_EDIT_MODE_FEEDBACK);
                 getActivity().startActivity(intent10);
                 break;
         }

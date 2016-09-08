@@ -45,4 +45,5 @@ dependencies {
     compile files('libs/pdfparse.jar')
     compile files('libs/nanohttpd-2.0.5.jar')
     compile files('libs/httpmime-4.2.5.jar')
+    compile 'com.github.bumptech.glide:glide:3.6.1'
 }

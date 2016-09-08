@@ -40,6 +40,8 @@ public interface ApiService {
 
     public final static String RECHARGE_HISTORY = "V1_0/user/recharge_record";//充值记录
 
+    public final static String FEED_BACK =  "V1_0/user/feedback";//意见反馈
+
     public final static String COURSE_LIST = "getUserSubjects";
 
     //提交图片
@@ -69,6 +71,8 @@ public interface ApiService {
     @GET(RECHARGE_HISTORY)
     Call<String> myYinHaoRecharge(@QueryMap Map<String, String> options);
 
+    @GET(FEED_BACK)
+    Call<String> feedBack(@QueryMap Map<String, String> options);
 
     /*******************************************/
 

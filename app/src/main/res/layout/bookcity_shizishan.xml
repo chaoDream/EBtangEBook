@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,12 +11,12 @@
         android:orientation="vertical"
         android:background="@color/gray_back">
 
-        <ImageView
+        <com.ebtang.ebtangebook.widget.banner.Banner
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/bookcity_shizishan_banner_bg"/>
-
+            android:layout_height="200dp"
+            android:id="@+id/book_city_shizishan_banner"
+            app:indicator_drawable_selected="@drawable/selected_radius" />
+        <!--三个按钮-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,7 +83,7 @@
 
 
         </LinearLayout>
-
+        <!--top的gridview-->
         <!--com.ebtang.ebtangebook.widget.MyScrollGridView-->
         <com.ebtang.ebtangebook.widget.MyScrollGridView
             android:layout_width="match_parent"

@@ -13,6 +13,7 @@ public class Constants {
     public static final int SETTING_EDIT_MODE_QIANMING = 2;//设置签名
     public static final int SETTING_EDIT_MODE_XINGMING = 3;//设置实名认证
     public static final int SETTING_EDIT_MODE_BOOKMARK = 4;//书签笔记
+    public static final int SETTING_EDIT_MODE_FEEDBACK = 5;//意见反馈
 
     public static final int FENLEI_ACTIVITY_TYPE_MIANFEI = 1;//限时免费
     public static final int FENLEI_ACTIVITY_TYPE_TEHUI = 2;//半价特惠
