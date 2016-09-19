@@ -92,6 +92,30 @@ public class SettingInfoEditActivity extends BaseActivity implements SettingInfo
                     editText.setSelection(getIntent().getStringExtra(IntentConfig.BOOK_MARK_CONTENT).length());
                 }
                 break;
+            case Constants.SETTING_EDIT_MODE_NICHENG:
+                textView_title.setText("修改昵称");
+                editText.setHint("昵称只能修改一次~");
+                break;
+            case Constants.SETTING_EDIT_MODE_QIANMING:
+                textView_title.setText("修改签名");
+                if(getIntent().getStringExtra(IntentConfig.USER_INFO_QIANMING) == null ||
+                        getIntent().getStringExtra(IntentConfig.USER_INFO_QIANMING).equals(""))
+                    editText.setHint("编辑个性签名,让更多人了解你");
+                else{
+                    editText.setText(getIntent().getStringExtra(IntentConfig.USER_INFO_QIANMING));
+                    editText.setSelection(getIntent().getStringExtra(IntentConfig.USER_INFO_QIANMING).length());
+                }
+                break;
+            case Constants.SETTING_EDIT_MODE_XINGMING:
+                textView_title.setText("实名认证");
+                if(getIntent().getStringExtra(IntentConfig.USER_INFO_REALNAME) == null ||
+                        getIntent().getStringExtra(IntentConfig.USER_INFO_REALNAME).equals(""))
+                    editText.setHint("请输入您的真实姓名~");
+                else{
+                    editText.setText(getIntent().getStringExtra(IntentConfig.USER_INFO_REALNAME));
+                    editText.setSelection(getIntent().getStringExtra(IntentConfig.USER_INFO_REALNAME).length());
+                }
+                break;
             default:
                 textView_title.setText("意见反馈");
                 break;
@@ -110,6 +134,27 @@ public class SettingInfoEditActivity extends BaseActivity implements SettingInfo
                     EventBus.getDefault().post(new BookMarkModify(editText.getText().toString()));
                     finish();
                 }
+                break;
+            case Constants.SETTING_EDIT_MODE_NICHENG:
+                if(editText.getText().toString() == null || editText.getText().toString().equals("")){
+                    Toast.makeText(this,"请输入您的昵称，然后再提交",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                settingInfoEditPersenter.getData();
+                break;
+            case Constants.SETTING_EDIT_MODE_QIANMING:
+                if(editText.getText().toString() == null || editText.getText().toString().equals("")){
+                    Toast.makeText(this,"请输入您的个性签名，然后再提交",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                settingInfoEditPersenter.getData();
+                break;
+            case Constants.SETTING_EDIT_MODE_XINGMING:
+                if(editText.getText().toString() == null || editText.getText().toString().equals("")){
+                    Toast.makeText(this,"请输入您的真实姓名，然后再提交",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                settingInfoEditPersenter.getData();
                 break;
             default:
                 if(editText.getText().toString() == null || editText.getText().toString().equals("")){
@@ -160,5 +205,10 @@ public class SettingInfoEditActivity extends BaseActivity implements SettingInfo
     @Override
     public Context context() {
         return this;
+    }
+
+    @Override
+    public void commitSuccess() {
+        finish();
     }
 }

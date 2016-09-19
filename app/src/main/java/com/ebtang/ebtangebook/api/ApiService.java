@@ -42,6 +42,15 @@ public interface ApiService {
 
     public final static String FEED_BACK =  "V1_0/user/feedback";//意见反馈
 
+    public final static String USER_INFO = "V1_0/user";//个人信息
+
+    public final static String USER_MODIY_REALNAME = "V1_0/user/real_name";
+
+    public final static String USER_MODIY_QIANMING = "V1_0/user/signature";
+
+    public final static String USER_MODIY_NICHENG = "V1_0/user/nick";
+
+
     public final static String COURSE_LIST = "getUserSubjects";
 
     //提交图片
@@ -73,6 +82,19 @@ public interface ApiService {
 
     @GET(FEED_BACK)
     Call<String> feedBack(@QueryMap Map<String, String> options);
+
+    @GET(USER_INFO)
+    Call<String> userInfo(@QueryMap Map<String, String> options);
+
+    @GET(USER_MODIY_NICHENG)
+    Call<String> modifyNIck(@QueryMap Map<String, String> options);
+
+    @GET(USER_MODIY_QIANMING)
+    Call<String> modifyQianming(@QueryMap Map<String, String> options);
+
+    @GET(USER_MODIY_REALNAME)
+    Call<String> modifyRealName(@QueryMap Map<String, String> options);
+
 
     /*******************************************/
 

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,8 +27,12 @@ import com.ebtang.ebtangebook.view.setting.MyYinHaoActivity;
 import com.ebtang.ebtangebook.view.setting.ReadHistoryActivity;
 import com.ebtang.ebtangebook.view.setting.SettingActivity;
 import com.ebtang.ebtangebook.view.setting.SettingInfoEditActivity;
+import com.ebtang.ebtangebook.view.setting.UserInfoSettingActivity;
 import com.ebtang.ebtangebook.widget.myWebView.WebViewActivity;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -64,6 +69,13 @@ public class PersenalFragment extends BaseFragment {
 
     private View rootView;
     private ImageLoader imageLoader;
+
+    private DisplayImageOptions options = new DisplayImageOptions.Builder()
+            .cacheInMemory(true)
+            .cacheOnDisk(true)
+            .displayer(new CircleBitmapDisplayer(70))
+            .build();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,8 +96,14 @@ public class PersenalFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         if(SharedPrefHelper.getInstance(getActivity()).isLogin()){
-            imageLoader.displayImage(SharedPrefHelper.getInstance(getActivity()).getUserTouxiangImg(),imageView_persenal_icon);
+            imageLoader.displayImage(
+                    SharedPrefHelper.getInstance(getActivity()).getUserTouxiangImg(),
+                    imageView_persenal_icon,
+                    options);
             textView_name.setText(SharedPrefHelper.getInstance(getActivity()).getLoginUsername());
+        }else{
+            imageView_persenal_icon.setImageResource(R.drawable.persenal_unlogin);
+            textView_name.setText("登录/注册");
         }
     }
 
@@ -102,6 +120,7 @@ public class PersenalFragment extends BaseFragment {
         relativeLayout_dingyue.setOnClickListener(this);
         relativeLayout_mission.setOnClickListener(this);
         relativeLayout_read_history.setOnClickListener(this);
+
     }
 
     @Override
@@ -121,10 +140,13 @@ public class PersenalFragment extends BaseFragment {
                 getActivity().startActivity(intent);
                 break;
             case R.id.persenal_icon:
-                if(SharedPrefHelper.getInstance(getActivity()).isLogin())
-                    return;
-                Intent intent2 = new Intent(getActivity(), LoginActivity.class);
-                getActivity().startActivity(intent2);
+                if(SharedPrefHelper.getInstance(getActivity()).isLogin()){
+                    Intent intent_userInfo = new Intent(getActivity(), UserInfoSettingActivity.class);
+                    getActivity().startActivity(intent_userInfo);
+                }else{
+                    Intent intent2 = new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivity(intent2);
+                }
                 break;
 //            case R.id.persenal_qiandao_item:
 //                Intent intent1 = new Intent(getActivity(), WebViewActivity.class);

@@ -218,4 +218,55 @@ public class ParamsUtils {
         return parmas;
     }
 
+    /**
+     * 个人信息
+     * @param userId
+     * @return
+     */
+    public static HashMap<String,String> userInfo(String userId){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        return parmas;
+    }
+
+    /**
+     * 修改昵称
+     * @param userId
+     * @param nick
+     * @return
+     */
+    public static HashMap<String,String> modifyNick(String userId,String nick){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        parmas.put("nick",nick);
+        return parmas;
+    }
+
+
+    /**
+     * 修改签名
+     * @param userId
+     * @param signature
+     * @return
+     */
+    public static HashMap<String,String> modifySignature(String userId,String signature){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        parmas.put("signature",signature);
+        return parmas;
+    }
+
+    /**
+     * 实名认证
+     * @param userId
+     * @return
+     */
+    public static HashMap<String,String> modifyRealName(String userId,String realName){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        parmas.put("realName",realName);
+        return parmas;
+    }
+
+
 }

@@ -9,4 +9,5 @@ public interface SettingInfoEditView extends MvpView{
 
     int getInputType();//获取本页的作用类型
     String getInputContent();//输入的内容
+    void commitSuccess();//提交成功
 }
