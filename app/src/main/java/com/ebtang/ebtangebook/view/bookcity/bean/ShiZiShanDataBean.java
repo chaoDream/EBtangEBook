@@ -7,6 +7,11 @@ import java.util.List;
 /**
  * Created by fengzongwei on 2016/9/8 0008.
  *狮子山数据
+ * 页面数据结构
+ * lunbo  1  6
+ * 1  6  8  recomm
+ * 1 6
+ * list
  */
 public class ShiZiShanDataBean {
 
@@ -14,19 +19,19 @@ public class ShiZiShanDataBean {
     private List<EbtangBook> app_szs_two_sixbook;//紧接着下面的六本书
     private List<EbtangBook> app_szs_three_onebook;//
     private List<EbtangBook> app_szs_four_sixbook;//
-    private List<EbtangBook> app_szs_five_eightbook;
+    private List<EbtangBook> app_szs_five_eightbook;//狮子山不用
 
-    private List<EbtangBook> app_male_one_lunbo;
+    private List<EbtangBook> app_male_one_lunbo;//狮子山不用
     private List<EbtangBook> app_male_two_onebook;
     private List<EbtangBook> app_male_three_sixbook;
     private List<EbtangBook> app_male_four_eightbook;
-    private List<EbtangBook> app_male_five_recommend;
+    private List<EbtangBook> app_male_five_recommend;//男频下面推荐的一本书
 
-    private List<EbtangBook> app_female_one_lunbo;
+    private List<EbtangBook> app_female_one_lunbo;//狮子山不用
     private List<EbtangBook> app_female_two_onebook;
     private List<EbtangBook> app_female_three_sixbook;
     private List<EbtangBook> app_female_four_eightbook;
-    private List<EbtangBook> app_female_five_recommend;
+    private List<EbtangBook> app_female_five_recommend;//狮子山不用
 
     public List<EbtangBook> getApp_szs_one_lunbo() {
         return app_szs_one_lunbo;
