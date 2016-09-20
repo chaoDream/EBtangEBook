@@ -8,4 +8,5 @@ import com.ebtang.ebtangebook.view.setting.bean.UserInfoBean;
  */
 public interface UserInfoView extends MvpView{
     void showUserInfo(UserInfoBean userInfoBean);//显示个人信息
+//    void commitImgSuccess();//头像上传成功
 }

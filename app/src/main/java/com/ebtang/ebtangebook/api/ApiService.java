@@ -44,12 +44,14 @@ public interface ApiService {
 
     public final static String USER_INFO = "V1_0/user";//个人信息
 
-    public final static String USER_MODIY_REALNAME = "V1_0/user/real_name";
+    public final static String USER_MODIY_REALNAME = "V1_0/user/real_name";//实名认证
 
-    public final static String USER_MODIY_QIANMING = "V1_0/user/signature";
+    public final static String USER_MODIY_QIANMING = "V1_0/user/signature";//设置签名
 
-    public final static String USER_MODIY_NICHENG = "V1_0/user/nick";
+    public final static String USER_MODIY_NICHENG = "V1_0/user/nick";//设置昵称
 
+//    public final static String POST_USER_IMG = "http://172.16.199.105:8080/api/V1_0/user/headImageUpload";//上传头像
+public final static String POST_USER_IMG = "http://test.ebtang.com/api/V1_0/user/headImageUpload";//上传头像
 
     public final static String COURSE_LIST = "getUserSubjects";
 
@@ -95,6 +97,12 @@ public interface ApiService {
     @GET(USER_MODIY_REALNAME)
     Call<String> modifyRealName(@QueryMap Map<String, String> options);
 
+    @Multipart
+    @POST(POST_USER_IMG)
+    Call<String> postUserImg(@PartMap Map<String,RequestBody> options);
+//    @FormUrlEncoded
+//    @POST(POST_USER_IMG)
+//    Call<String> postUserImg(@FieldMap Map<String,String> options);
 
     /*******************************************/
 
