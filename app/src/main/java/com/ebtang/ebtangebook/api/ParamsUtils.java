@@ -268,5 +268,13 @@ public class ParamsUtils {
         return parmas;
     }
 
+    /**
+     * 我的vip信息
+     */
+    public static HashMap<String,String> myVipLevel(String userId){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        return parmas;
+    }
 
 }

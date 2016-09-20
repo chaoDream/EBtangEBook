@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <include layout="@layout/top_title_bar_main"/>
@@ -14,6 +15,7 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:id="@+id/my_vip_level_img"
             android:src="@drawable/persenal_unlogin"
             android:scaleType="fitXY"/>
         <LinearLayout
@@ -24,12 +26,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/my_vip_level_nick"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_size_large"
                 android:text="凤舞肖月"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/my_vip_level_account"
                 android:layout_marginTop="@dimen/dip_size_2"
                 android:text="账户：137*****6666"/>
         </LinearLayout>
@@ -50,7 +54,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的VIP等级："
-            android:textSize="@dimen/font_size_large"
             android:textColor="@color/black"/>
         <RelativeLayout
             android:layout_width="0dp"
@@ -59,6 +62,7 @@
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
+                android:id="@+id/my_vip_level_pb"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:progressDrawable="@drawable/my_ebtang_progress_bar"
                 android:max="100"
@@ -66,6 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/my_vip_level_progress_tv"
                 android:layout_centerInParent="true"
                 android:text="222/555"
                 android:textColor="@color/orange"/>
@@ -73,9 +78,192 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/my_vip_level_level_img"
             android:layout_marginLeft="@dimen/dip_size_10"
             android:layout_marginRight="@dimen/dip_size_20"
             android:src="@drawable/vip_level3"/>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_size_1"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:background="@color/db_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/dip_size_15"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_vip_Level_viprule"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="VIP会员尊享:"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/primary_red"
+            android:text="保底金票 看书打折"
+            android:lines="1"
+            android:layout_marginLeft="@dimen/dip_size_5"
+            android:ellipsize="end"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_small"
+            android:text="VIP等级规则"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/main_found_item_icon_right"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_size_1"
+        android:layout_marginLeft="@dimen/dip_size_15"
+        android:layout_marginRight="@dimen/dip_size_15"
+        android:background="@color/db_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/dip_size_15"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_vip_Level_fansrule"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="我的粉丝总值:"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/my_vip_level_fansvalue"
+            android:textColor="@color/primary_red"
+            android:text="88888"
+            android:lines="1"
+            android:layout_marginLeft="@dimen/dip_size_5"
+            android:ellipsize="end"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_small"
+            android:text="详细粉丝值"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/main_found_item_icon_right"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dip_size_10"
+        android:background="@color/db_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/dip_size_15">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="尊享特权"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dip_size_1"
+            android:layout_marginTop="@dimen/dip_size_2"
+            android:background="@color/db_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dip_size_10"
+            android:paddingTop="@dimen/dip_size_10"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/vip_ico_gold"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="保底金票"
+                android:layout_marginLeft="@dimen/dip_size_5"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的保底金票"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_vip_level_gold_count"
+                android:layout_marginLeft="@dimen/dip_size_5"
+                android:textColor="@color/primary_red"
+                android:text="2"
+                android:layout_marginRight="@dimen/dip_size_5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/db_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dip_size_10"
+            android:paddingTop="@dimen/dip_size_10"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/vip_ico_bookmark"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="看书打折"
+                android:layout_marginLeft="@dimen/dip_size_5"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我的看书折扣"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_vip_level_discount"
+                android:layout_marginLeft="@dimen/dip_size_5"
+                android:textColor="@color/primary_red"
+                android:text="8"
+                android:layout_marginRight="@dimen/dip_size_5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="折"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/db_gray"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

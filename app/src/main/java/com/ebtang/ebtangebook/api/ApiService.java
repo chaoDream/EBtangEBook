@@ -50,6 +50,8 @@ public interface ApiService {
 
     public final static String USER_MODIY_NICHENG = "V1_0/user/nick";//设置昵称
 
+    public final static String USER_VIP_LEVEL = "V1_0/user/vip";//我的vip信息
+
 //    public final static String POST_USER_IMG = "http://172.16.199.105:8080/api/V1_0/user/headImageUpload";//上传头像
 public final static String POST_USER_IMG = "http://test.ebtang.com/api/V1_0/user/headImageUpload";//上传头像
 
@@ -103,6 +105,9 @@ public final static String POST_USER_IMG = "http://test.ebtang.com/api/V1_0/user
 //    @FormUrlEncoded
 //    @POST(POST_USER_IMG)
 //    Call<String> postUserImg(@FieldMap Map<String,String> options);
+
+    @GET(USER_VIP_LEVEL)
+    Call<String> myVipLevel(@QueryMap Map<String, String> options);
 
     /*******************************************/
 

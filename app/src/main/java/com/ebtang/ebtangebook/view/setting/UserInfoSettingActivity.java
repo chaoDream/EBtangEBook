@@ -130,8 +130,8 @@ public class UserInfoSettingActivity extends BaseActivity implements UserInfoVie
         String permission2 = "android.permission.WRITE_EXTERNAL_STORAGE";
         String permission3 = "android.permission.READ_EXTERNAL_STORAGE";
         String[] permissionArray  = {permission1, permission2, permission3};
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(permissionArray, 123);
+        if (Build.VERSION.SDK_INT >= 23) {
+//            requestPermissions(permissionArray, 123);
         }
     }
 
@@ -178,6 +178,9 @@ public class UserInfoSettingActivity extends BaseActivity implements UserInfoVie
                 startActivity(intent_nicheng);
                 break;
             case R.id.user_info_setting_vip_body:
+                Intent intent_vip = new Intent(this,MyVipLevelActivity.class);
+                intent_vip.putExtra("phone",userInfoBean.getMobile());
+                startActivity(intent_vip);
                 break;
             case R.id.user_info_setting_qianming_body:
                 Intent intent_qianming = new Intent(this,SettingInfoEditActivity.class);
@@ -247,6 +250,7 @@ public class UserInfoSettingActivity extends BaseActivity implements UserInfoVie
     @Override
     public void showUserInfo(UserInfoBean userInfoBean) {
         this.userInfoBean = userInfoBean;
+        SharedPrefHelper.getInstance(this).setUserTouxiangImg(userInfoBean.getUserpic());
         ImageLoader.getInstance().displayImage(userInfoBean.getUserpic(),imageView,options);
         textView_id.setText(userInfoBean.getId()+"");
         textView_nicheng.setText(userInfoBean.getNick());
