@@ -135,11 +135,28 @@
                         android:padding="@dimen/dip_size_15"
                         android:gravity="center_vertical"
                         >
-                        <ImageView
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/icon_qiandao"
-                            />
+                            android:orientation="vertical">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_qiandao"
+                                android:id="@+id/persenal_msg_img"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/persenal_unread_msg_count"
+                                android:background="@color/primary_red"
+                                android:textColor="@color/white"
+                                android:layout_gravity="right"
+                                android:padding="@dimen/dip_size_2"
+                                android:textSize="@dimen/font_size_small"
+                                android:text="15"
+                                android:layout_alignRight="@+id/persenal_msg_img"/>
+                        </RelativeLayout>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

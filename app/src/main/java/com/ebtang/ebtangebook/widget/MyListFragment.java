@@ -21,8 +21,11 @@ import com.ebtang.ebtangebook.view.bookinfo.adapter.BookMuluAdapter;
 import com.ebtang.ebtangebook.view.setting.adapter.MessageAdapter;
 import com.ebtang.ebtangebook.view.setting.adapter.YInHaoConsumeAdapter;
 import com.ebtang.ebtangebook.view.setting.adapter.YinHaoRechargeAdapter;
+import com.ebtang.ebtangebook.view.setting.bean.MyMsgBean;
+import com.ebtang.ebtangebook.view.setting.bean.MyMsgListBean;
 import com.ebtang.ebtangebook.view.setting.bean.MyYinHaoConsumeBean;
 import com.ebtang.ebtangebook.view.setting.bean.MyYinHaoRechargeBean;
+import com.ebtang.ebtangebook.widget.pullToRefresh.XListView;
 
 import org.geometerplus.android.fbreader.api.FBReaderIntents;
 import org.geometerplus.android.fbreader.libraryService.BookCollectionShadow;
@@ -41,13 +44,13 @@ import java.util.List;
  * Created by fengzongwei on 2016/7/28 0028.
  * 列表数据展示页面
  */
-public class MyListFragment extends BaseFragment implements YinHaoView{
+public class MyListFragment extends BaseFragment implements YinHaoView,XListView.IXListViewListener{
 
-    private ListView listView;
+    private XListView listView;
 
     private List<Object> list = new ArrayList<>();
 
-    private MessageAdapter messageAdapter;
+    private MessageAdapter messageAdapter;//消息中心
     private YInHaoConsumeAdapter yInHaoDataAdapter;//消费记录
     private YinHaoRechargeAdapter yinHaoRechargeAdapter;//充值记录
     private BookLabelTypeAdapter bookLabelTypeAdapter;
@@ -86,10 +89,15 @@ public class MyListFragment extends BaseFragment implements YinHaoView{
     private YinHaoConsumePersenter yinHaoConsumePersenter;//消费记录
     private YinHaoRechargePersenter yinHaoRechargePersenter;//充值记录
 
+    private int pageSize;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        listView = new ListView(getActivity());
+        listView = new XListView(getActivity());
+        listView.setPullLoadEnable(false);
+        listView.setPullRefreshEnable(false);
+        listView.setXListViewListener(this);
         list.add(new Object());
         list.add(new Object());
         list.add(new Object());
@@ -100,8 +108,8 @@ public class MyListFragment extends BaseFragment implements YinHaoView{
         list.add(new Object());
         type = getArguments().getInt("type");
         if(type == Constants.MY_LIST_FRAGMENT_TYPE_MSG || type == Constants.MY_LIST_FRAGMENT_TYPE_ZHANDUAN){//消息中心
-            messageAdapter = new MessageAdapter(getActivity(),list,type);
-            listView.setAdapter(messageAdapter);
+            listView.setPullLoadEnable(true);
+            listView.setPullRefreshEnable(true);
         }else if(type == Constants.MY_LIST_FRAGMENT_TYPE_XIAOFEI_MSG  ){//消费记录
             yinHaoConsumePersenter = new YinHaoConsumePersenter();
             yinHaoConsumePersenter.attachView(this);
@@ -134,18 +142,7 @@ public class MyListFragment extends BaseFragment implements YinHaoView{
     @Override
     public void onStart() {
         super.onStart();
-        if(type == Constants.MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_BIJI ||
-                type == Constants.MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_SHUQIAN ){
-            myCollection.bindToService(getActivity(), new Runnable() {
-                public void run() {
-                    loadBookmarks();
-                }
-            });
-        }else if(type == Constants.MY_LIST_FRAGMENT_TYPE_CHONGZHI_MSG){//充值记录
-            yinHaoRechargePersenter.getData();
-        }else if(type == Constants.MY_LIST_FRAGMENT_TYPE_XIAOFEI_MSG){
-            yinHaoConsumePersenter.getData();
-        }
+        initData();
     }
 
     @Override
@@ -155,7 +152,20 @@ public class MyListFragment extends BaseFragment implements YinHaoView{
 
     @Override
     public void initData() {
+        if(type == Constants.MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_BIJI ||
+                type == Constants.MY_LIST_FRAGMENT_TYPE_BOOK_LABEL_SHUQIAN ){
+            myCollection.bindToService(getActivity(), new Runnable() {
+                public void run() {
+                    loadBookmarks();
+                }
+            });
+        }else if(type == Constants.MY_LIST_FRAGMENT_TYPE_CHONGZHI_MSG){//充值记录
+            yinHaoRechargePersenter.getData();
+        }else if(type == Constants.MY_LIST_FRAGMENT_TYPE_XIAOFEI_MSG){//消费记录
+            yinHaoConsumePersenter.getData();
+        }else if(type == Constants.MY_LIST_FRAGMENT_TYPE_MSG ){
 
+        }
     }
 
     @Override
@@ -248,5 +258,23 @@ public class MyListFragment extends BaseFragment implements YinHaoView{
     public void showRechargeData(List<MyYinHaoRechargeBean> myYinHaoRechargeBeanList) {
         yinHaoRechargeAdapter = new YinHaoRechargeAdapter(getActivity(),myYinHaoRechargeBeanList);
         listView.setAdapter(yinHaoRechargeAdapter);
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+
+    @Override
+    public void onLoadMore() {
+
+    }
+
+    @Override
+    public void showMsgList(MyMsgListBean myMsgListBean) {
+        pageSize = myMsgListBean.getPageSize();
+        if(myMsgListBean.getList().size()<pageSize){
+            listView.setPullLoadEnable(false);
+        }
     }
 }

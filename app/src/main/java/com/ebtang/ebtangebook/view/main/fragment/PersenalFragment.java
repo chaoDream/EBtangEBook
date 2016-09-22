@@ -1,5 +1,6 @@
 package com.ebtang.ebtangebook.view.main.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import com.ebtang.ebtangebook.R;
 import com.ebtang.ebtangebook.app.BaseFragment;
 import com.ebtang.ebtangebook.constants.Constants;
 import com.ebtang.ebtangebook.intent.IntentConfig;
+import com.ebtang.ebtangebook.mvpView.PersenalView;
 import com.ebtang.ebtangebook.spf.SharedPrefHelper;
 import com.ebtang.ebtangebook.view.login.LoginActivity;
 import com.ebtang.ebtangebook.view.setting.AboutActivity;
@@ -41,7 +43,7 @@ import retrofit2.http.GET;
 /**
  * Created by fengzongwei on 2016/7/11 0011.
  */
-public class PersenalFragment extends BaseFragment {
+public class PersenalFragment extends BaseFragment implements PersenalView{
     @Bind(R.id.persenal_icon)
     ImageView imageView_persenal_icon;
     @Bind(R.id.persenal_message_item)
@@ -66,6 +68,8 @@ public class PersenalFragment extends BaseFragment {
     RelativeLayout relativeLayout_feedback;
     @Bind(R.id.persenal_name)
     TextView textView_name;
+    @Bind(R.id.persenal_unread_msg_count)
+    TextView textView_unread_msg_count;
 
     private View rootView;
     private ImageLoader imageLoader;
@@ -183,5 +187,43 @@ public class PersenalFragment extends BaseFragment {
                 getActivity().startActivity(intent10);
                 break;
         }
+    }
+
+    @Override
+    public void showUnReadCount(int count) {
+        if(count>0)
+            textView_unread_msg_count.setText(count+"");
+        else
+            textView_unread_msg_count.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showRetry() {
+
+    }
+
+    @Override
+    public void hideRetry() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public Context context() {
+        return null;
     }
 }

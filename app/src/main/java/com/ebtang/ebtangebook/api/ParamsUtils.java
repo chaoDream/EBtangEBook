@@ -277,4 +277,13 @@ public class ParamsUtils {
         return parmas;
     }
 
+    /**
+     * 我的未读消息
+     */
+    public static HashMap<String,String> myUnreadMsg(String userId){
+        HashMap<String,String> parmas = commonURL();
+        parmas.put("userId",userId);
+        return parmas;
+    }
+
 }
